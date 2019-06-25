@@ -1,0 +1,17 @@
+.header {
+  background-color: #C9C9C9;
+}
+.header.mainTitle {
+  color: red;
+}
+
+.calendar {
+  background-color: #A9A9A9;
+  display: flex;
+}
+.calendar.card-day {
+  border: 1px solid black;
+  padding: 10px;
+}
+
+/*# sourceMappingURL=main.css.map */
