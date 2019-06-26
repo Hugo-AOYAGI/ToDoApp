@@ -4,10 +4,10 @@ body {
   display: grid;
   padding: 0px;
   margin: 0px;
-  background-color: #3a3835;
+  background-color: #54504C;
   font-family: "Calibri", serif;
   height: 100vh;
-  grid-template: "head head" 1fr "nav  main" 4fr "nav  foot" 1fr / 1fr 5fr;
+  grid-template: "head head" 2fr "nav  main" 12fr "nav  foot" 1fr / 1fr 5fr;
 }
 
 .header {
@@ -31,7 +31,8 @@ body {
 }
 
 .header {
-  background: #282726;
+  background-color: #86817C;
+  background: linear-gradient(130deg, rgba(134, 129, 124, 0.5), rgba(58, 56, 53, 0.5) 125%);
   padding: 0px;
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
@@ -46,19 +47,34 @@ body {
   width: -moz-fit-content;
   width: fit-content;
   font-size: 4em;
-  color: #D6CAB0;
+  color: #282726;
   font-weight: 100;
   text-transform: uppercase;
   margin-left: 2em;
   padding-left: 0.3em;
   border-left: 1px solid #54504C;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+}
+
+.header .__mainTitle:hover {
+  font-weight: 300;
+  -webkit-transform: skew(-15deg);
+          transform: skew(-15deg);
 }
 
 .header .__date {
   color: #D6CAB0;
   margin-left: 4em;
+  font-weight: 100;
   font-size: 3em;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
   text-transform: uppercase;
+}
+
+.header .__date:hover {
+  font-size: 3.1em;
 }
 
 .day-selection-bar {
@@ -78,14 +94,14 @@ body {
   -webkit-box-shadow: 1px 0px 1px 1px #4040400d;
           box-shadow: 1px 0px 1px 1px #4040400d;
   text-align: center;
-  background: linear-gradient(110deg, #282726, #54504C);
+  background: linear-gradient(110deg, #54504C, #86817C);
   -webkit-transition: all 0.2s;
   transition: all 0.2s;
   height: 14%;
 }
 
 .day-selection-bar .__day-button:hover {
-  background: linear-gradient(110deg, #54504C, #282726);
+  background: linear-gradient(110deg, #86817C, #54504C);
 }
 
 .day-selection-bar .__day-button:active {
@@ -96,16 +112,17 @@ body {
 }
 
 .day-card {
-  background-color: #282726;
+  background-color: #86817C;
   border-radius: 0.5em;
   margin: 1em;
 }
 
 .day-card .__day-title {
-  font-size: 7em;
+  font-size: 3em;
   color: #D6CAB0;
   font-weight: 100;
-  margin-left: 1em;
+  padding-top: 3em;
+  margin: 1em;
 }
 
 .day-card .__tasks-to-display {

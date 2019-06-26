@@ -4,11 +4,11 @@ body {
   display: grid;
   padding: 0px;
   margin: 0px;
-  background-color: $dark-grey-3;
+  background-color: $dark-grey-2;
   font-family: "Calibri", serif;
   height: 100vh;
-  grid-template: "head head" 1fr
-                 "nav  main" 4fr
+  grid-template: "head head" 2fr
+                 "nav  main" 12fr
                  "nav  foot" 1fr
                  / 1fr 5fr;
 }

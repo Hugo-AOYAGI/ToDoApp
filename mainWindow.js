@@ -32,7 +32,7 @@ reloadDate = () => {
   let d = new Date();
   let txt_date = `${leadingZero(d.getDate())} /
                   ${leadingZero(d.getMonth()+1)} /
-                  ${leadingZero(d.getFullYear())} ,    
+                  ${leadingZero(d.getFullYear())} <br>
                   ${leadingZero(d.getHours())} :
                   ${leadingZero(d.getMinutes())} :
                   ${leadingZero(d.getSeconds())}`;

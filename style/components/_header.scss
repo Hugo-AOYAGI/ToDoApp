@@ -1,6 +1,7 @@
 
 .header {
-  background: $dark-grey-1;
+  background-color: $medium-grey;
+  background: linear-gradient(130deg, rgba($medium-grey, 0.5), rgba($dark-grey-3, 0.5) 125%);
   padding: 0px;
   display: inline-flex;
   align-items: center;
@@ -8,19 +9,31 @@
   & .__mainTitle {
     width: fit-content;
     font-size: 4em;
-    color: $light-grey-1;
+    color: $dark-grey-1;
     font-weight: 100;
     text-transform: uppercase;
     margin-left: 2em;
     padding-left: 0.3em;
     border-left: 1px solid $dark-grey-2;
+    transition: all 0.5s;
+
+    &:hover {
+      font-weight: 300;
+      transform: skew(-15deg);
+    }
   }
 
   & .__date {
     color: $light-grey-1;
     margin-left: 4em;
+    font-weight: 100;
     font-size: 3em;
+    transition: all 0.2s;
     text-transform: uppercase;
+
+    &:hover {
+      font-size: 3.1em;
+    }
 
   }
 }

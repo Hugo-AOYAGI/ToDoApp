@@ -9,12 +9,12 @@
   .__day-button {
     box-shadow: 1px 0px 1px 1px #4040400d;
     text-align: center;
-    background: linear-gradient(110deg, $dark-grey-1, $dark-grey-2);
+    background: linear-gradient(110deg, $dark-grey-2, $medium-grey);
     transition: all 0.2s;
     height: 14%;
 
     &:hover {
-      background: linear-gradient(110deg, $dark-grey-2, $dark-grey-1);
+      background: linear-gradient(110deg, $medium-grey, $dark-grey-2);
   }
 
     &:active {

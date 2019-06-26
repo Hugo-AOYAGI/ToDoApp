@@ -1,14 +1,15 @@
 
 .day-card {
-    background-color: $dark-grey-1;
+    background-color: $medium-grey;
     border-radius: 0.5em;
     margin: 1em;
 
     & .__day-title {
-        font-size: 7em;
+        font-size: 3em;
         color: $light-grey-1;
         font-weight: 100;
-        margin-left: 1em;
+        padding-top: 3em;
+        margin: 1em;
     }
 
     & .__tasks-to-display {
