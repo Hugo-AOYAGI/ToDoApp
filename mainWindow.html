@@ -7,6 +7,7 @@
   <body>
     <div class="header">
       <h1 class="__mainTitle">Your Week</h1>
+      <span class="__date">Today is the [DATE].</span>
     </div>
     <div class="day-selection-bar">
       <div class="__day-button template">
@@ -15,12 +16,15 @@
       </div>
     </div>
     <div class="day-card">
-      <div class="__day-title">
-        DAY TITLE
-      </div>
+      <span class="__day-title">
+        [DAY]
+      </span>
       <div class="__tasks-to-display">
-        <div class="template task-card">
-
+        <div class="__template __task-card">
+          <h1 class="__task-title">[TITLE]</h1>
+          <p class="__day-description"><b>Description :</b><br>[DESC]</p>
+          <span class="start">Start</span> <span class="end">End</span>  <br>
+          <div class="__progress-bar">---------------------</div>
         </div>
       </div>
     </div>

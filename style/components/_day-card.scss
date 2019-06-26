@@ -1,0 +1,27 @@
+
+.day-card {
+    background-color: $dark-grey-1;
+    border-radius: 0.5em;
+    margin: 1em;
+
+    & .__day-title {
+        font-size: 7em;
+        color: $light-grey-1;
+        font-weight: 100;
+        margin-left: 1em;
+    }
+
+    & .__tasks-to-display {
+        margin: 1em;
+        border-top: 1px solid $medium-grey;
+        border-radius: 0.2em;
+    }
+
+    & .__task-card {
+        box-shadow: 0px 0px 1px 1px rgba($dark-grey-2, 0.4);
+        margin-top: 1em;
+        padding: 1em;
+        border-radius: 2em;
+    }
+
+}

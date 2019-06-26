@@ -4,6 +4,7 @@ body {
   display: grid;
   padding: 0px;
   margin: 0px;
+  background-color: #3a3835;
   font-family: "Calibri", serif;
   height: 100vh;
   grid-template: "head head" 1fr "nav  main" 4fr "nav  foot" 1fr / 1fr 5fr;
@@ -29,47 +30,95 @@ body {
   grid-area: foot;
 }
 
-div {
-  border: 1px solid #b86868;
-}
-
 .header {
-  background: linear-gradient(110deg, rgba(92, 219, 149, 0.8), rgba(55, 150, 131, 0.8));
-  padding: 0em;
-  border-radius: 0.1em;
+  background: #282726;
+  padding: 0px;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .header .__mainTitle {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
   font-size: 4em;
-  color: #05386B;
-  font-weight: 400;
+  color: #D6CAB0;
+  font-weight: 100;
   text-transform: uppercase;
-  margin-left: 1em;
-  padding-left: 0.5em;
-  border-left: 1px solid #05386B;
+  margin-left: 2em;
+  padding-left: 0.3em;
+  border-left: 1px solid #54504C;
+}
+
+.header .__date {
+  color: #D6CAB0;
+  margin-left: 4em;
+  font-size: 3em;
+  text-transform: uppercase;
 }
 
 .day-selection-bar {
-  color: #379683;
+  color: #D6CAB0;
+  text-transform: uppercase;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  background-color: #54504C;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column;
+          flex-flow: column;
 }
 
 .day-selection-bar .__day-button {
   -webkit-box-shadow: 1px 0px 1px 1px #4040400d;
           box-shadow: 1px 0px 1px 1px #4040400d;
   text-align: center;
-  -webkit-transition: all 0.5s;
-  transition: all 0.5s;
-  height: 10%;
+  background: linear-gradient(110deg, #282726, #54504C);
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+  height: 14%;
 }
 
-.day-selection-bar :hover {
-  background-color: linear-gradient(110deg, rgba(55, 150, 131, 0.8), rgba(92, 219, 149, 0.8));
+.day-selection-bar .__day-button:hover {
+  background: linear-gradient(110deg, #54504C, #282726);
 }
 
-.day-selection-bar :active {
+.day-selection-bar .__day-button:active {
   -webkit-box-shadow: 0px 0px #4040400d;
           box-shadow: 0px 0px #4040400d;
   -webkit-transform: translate(0px, 2px);
           transform: translate(0px, 2px);
+}
+
+.day-card {
+  background-color: #282726;
+  border-radius: 0.5em;
+  margin: 1em;
+}
+
+.day-card .__day-title {
+  font-size: 7em;
+  color: #D6CAB0;
+  font-weight: 100;
+  margin-left: 1em;
+}
+
+.day-card .__tasks-to-display {
+  margin: 1em;
+  border-top: 1px solid #86817C;
+  border-radius: 0.2em;
+}
+
+.day-card .__task-card {
+  -webkit-box-shadow: 0px 0px 1px 1px rgba(84, 80, 76, 0.4);
+          box-shadow: 0px 0px 1px 1px rgba(84, 80, 76, 0.4);
+  margin-top: 1em;
+  padding: 1em;
+  border-radius: 2em;
 }
 /*# sourceMappingURL=main.css.map */

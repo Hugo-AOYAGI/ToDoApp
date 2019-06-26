@@ -4,6 +4,7 @@ body {
   display: grid;
   padding: 0px;
   margin: 0px;
+  background-color: $dark-grey-3;
   font-family: "Calibri", serif;
   height: 100vh;
   grid-template: "head head" 1fr
@@ -32,7 +33,4 @@ body {
   grid-area: foot;
 }
 
-div {
-  border: 1px solid rgb(184, 104, 104);
-}
 

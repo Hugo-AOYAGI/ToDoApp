@@ -1,5 +1,6 @@
 // Setting up all the buttons for the day selection bar
-let days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+const months = ["January", "February", "March", "April", "May", "June", "July", "September", "October", "November", "December"];
 
 let buttons = [];
 // Getting the template
@@ -19,3 +20,24 @@ template.style.display = "none";
 for(button of buttons) {
   selection_bar.appendChild(button);
 }
+
+let date_span = document.querySelector(".__date");
+let date_span_og = date_span.cloneNode(true);
+
+leadingZero = (n) => {
+  return n < 10 ? "0"+n : n;
+}
+
+reloadDate = () => {
+  let d = new Date();
+  let txt_date = `${leadingZero(d.getDate())} /
+                  ${leadingZero(d.getMonth()+1)} /
+                  ${leadingZero(d.getFullYear())} ,    
+                  ${leadingZero(d.getHours())} :
+                  ${leadingZero(d.getMinutes())} :
+                  ${leadingZero(d.getSeconds())}`;
+  console.log(txt_date);
+  date_span.innerHTML = date_span_og.innerHTML.replace("[DATE]", txt_date);
+}
+reloadDate();
+t = setInterval(reloadDate, 1000);

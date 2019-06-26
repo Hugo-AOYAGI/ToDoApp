@@ -1,21 +1,25 @@
 
 .day-selection-bar {
-  color: $dark-green-2;
+  color: $light-grey-1;
+  text-transform: uppercase;
+  display: flex;
+  background-color: $dark-grey-2;
+  flex-flow: column;
 
-  & .__day-button {
+  .__day-button {
     box-shadow: 1px 0px 1px 1px #4040400d;
     text-align: center;
-    transition: all 0.5s;
-    height: 10%;
+    background: linear-gradient(110deg, $dark-grey-1, $dark-grey-2);
+    transition: all 0.2s;
+    height: 14%;
+
+    &:hover {
+      background: linear-gradient(110deg, $dark-grey-2, $dark-grey-1);
   }
 
-  & :hover {
-      background-color: linear-gradient(110deg, rgba($dark-green-2, 0.8), rgba($medium-green, 0.8));;
+    &:active {
+      box-shadow: 0px 0px #4040400d;
+      transform: translate(0px, 2px);
+    }
   }
-
-  & :active {
-    box-shadow: 0px 0px #4040400d;
-    transform: translate(0px, 2px);
-  }
-
 }
