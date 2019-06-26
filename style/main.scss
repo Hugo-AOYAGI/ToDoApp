@@ -1,24 +1,7 @@
 
+@import "variables.scss";
 
-$light-grey-1: #C9C9C9;
-$light-grey-2: #A9A9A9;
+@import "layout.scss";
 
-.header {
-  background-color: $light-grey-1;
-
-  &.mainTitle {
-    color: red;
-  }
-}
-
-.calendar {
-  background-color: $light-grey-2;
-  display: flex;
-
-  &.card-day {
-    border: 1px solid black;
-    padding: 10px;
-  }
-
-
-}
+@import "components/header.scss";
+@import "components/selection-bar.scss"

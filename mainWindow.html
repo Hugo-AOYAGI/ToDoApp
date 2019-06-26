@@ -5,16 +5,25 @@
     <link rel = "stylesheet" type = "text/css" href = "style/main.css" />
   </head>
   <body>
-    <div class="header">
-      <h1 class="mainTitle">Your Calendar</h1>
+    <div class="box header">
+      <h1 class="__mainTitle">Your Week</h1>
     </div>
-    <div class="calendar">
-      <div id="cardTemplate" class="card-day">
-        <h2>Monday</h2>
-        <div class="actions">
-          <button>Finish the todo list.</button>
-        </div>
+    <div class="box day-selection-bar">
+      <div class="__day-button" id="day-button-template">
+        <h2 class="__day-name">Day Name</h1>
+        <p class="__task-numbers"><span>X</span> task(s) left.</p>
       </div>
+    </div>
+    <div class="box day-card">
+      <div class="__day-title">
+        DAY TITLE
+      </div>
+      <div class="__tasks-to-display">
+        TASKS
+      </div>
+    </div>
+    <div class="box footer">
+      test footer
     </div>
   </body>
   <script type="text/javascript", src="mainWindow.js"></script>

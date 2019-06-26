@@ -1,0 +1,13 @@
+
+.header {
+
+  & .__mainTitle {
+    font-size: 4em;
+    color: $dark-green-1;
+    font-weight: 400;
+    text-transform: uppercase;
+    margin-left: 1em;
+    padding-left: 0.5em;
+    border-left: 1px solid $dark-green-1;
+  }
+}
