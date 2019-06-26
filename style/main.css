@@ -30,7 +30,13 @@ body {
 }
 
 div {
-  border: 2px solid red;
+  border: 1px solid #b86868;
+}
+
+.header {
+  background: linear-gradient(110deg, rgba(92, 219, 149, 0.8), rgba(55, 150, 131, 0.8));
+  padding: 0em;
+  border-radius: 0.1em;
 }
 
 .header .__mainTitle {

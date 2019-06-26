@@ -1,5 +1,8 @@
 
 .header {
+  background: linear-gradient(110deg, rgba($medium-green, 0.8), rgba($dark-green-2, 0.8));
+  padding: 0em;
+  border-radius: 0.1em;
 
   & .__mainTitle {
     font-size: 4em;
