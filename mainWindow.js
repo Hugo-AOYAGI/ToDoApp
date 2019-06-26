@@ -4,7 +4,7 @@ let days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", 
 let buttons = [];
 // Getting the template
 let selection_bar = document.querySelector(".day-selection-bar");
-let template = document.querySelector("#day-button-template");
+let template = document.querySelector(".template.__day-button");
 for(day of days) {
   copy = template.cloneNode(true);
   // Changing the template with the right text

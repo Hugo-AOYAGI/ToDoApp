@@ -1,15 +1,12 @@
-
 body {
   font-size: 50%;
+  display: -ms-grid;
   display: grid;
   padding: 0px;
   margin: 0px;
   font-family: "Calibri", serif;
   height: 100vh;
-  grid-template: "head head" 1fr
-                 "nav  main" 4fr
-                 "nav  foot" 1fr
-                 / 1fr 5fr;
+  grid-template: "head head" 1fr "nav  main" 4fr "nav  foot" 1fr / 1fr 5fr;
 }
 
 .header {
@@ -33,6 +30,6 @@ body {
 }
 
 div {
-  border: 1px solid rgb(184, 104, 104);
+  border: 1px solid #b86868;
 }
-
+/*# sourceMappingURL=layout.css.map */
