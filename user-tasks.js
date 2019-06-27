@@ -1,9 +1,13 @@
 
 // Contains the information of the day
 function Day(name, tasks, card) {
-  this.name = name;
+  this.day = name;
+  this.month = month;
+  this.week = week;
+  this.year = year;
   this.tasks = tasks;
   this.card = card;
+  
 }
 
 

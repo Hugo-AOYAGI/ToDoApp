@@ -4,13 +4,13 @@ body {
   display: grid;
   padding: 0px;
   margin: 0px;
-  background-color: $dark-grey-2;
+  background-color: $medium-grey-2;
   font-family: "Calibri", serif;
   height: 100vh;
-  grid-template: "head head" 2fr
-                 "nav  main" 12fr
-                 "nav  foot" 1fr
-                 / 1fr 5fr;
+  grid-template: "head head timer" 2fr
+                 "nav  main main" 12fr
+                 "nav  foot foot" 1fr
+                 / 1fr 3.5fr 1.5fr;
 }
 
 .header {
@@ -31,6 +31,11 @@ body {
 .footer {
   background-color: pink;
   grid-area: foot;
+}
+
+.next-task {
+  background-color: orange;
+  grid-area: timer;
 }
 
 

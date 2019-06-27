@@ -1,21 +1,23 @@
 
 .header {
-  background-color: $medium-grey;
-  background: linear-gradient(130deg, rgba($medium-grey, 0.5), rgba($dark-grey-3, 0.5) 125%);
+  background: linear-gradient(130deg, $dark-grey-1, $dark-grey-3 125%);
   padding: 0px;
   display: inline-flex;
   align-items: center;
+  clip-path: polygon(0% 0%, 100% 0%, 95% 100%, 0% 100%);
+  
 
   & .__mainTitle {
     width: fit-content;
     font-size: 4em;
-    color: $dark-grey-1;
+    color: $light-grey-3;
     font-weight: 100;
     text-transform: uppercase;
     margin-left: 2em;
     padding-left: 0.3em;
     border-left: 1px solid $dark-grey-2;
     transition: all 0.5s;
+    
 
     &:hover {
       font-weight: 300;

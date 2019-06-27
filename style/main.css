@@ -4,10 +4,10 @@ body {
   display: grid;
   padding: 0px;
   margin: 0px;
-  background-color: #54504C;
+  background-color: #D9D9D9;
   font-family: "Calibri", serif;
   height: 100vh;
-  grid-template: "head head" 2fr "nav  main" 12fr "nav  foot" 1fr / 1fr 5fr;
+  grid-template: "head head timer" 2fr "nav  main main" 12fr "nav  foot foot" 1fr / 1fr 3.5fr 1.5fr;
 }
 
 .header {
@@ -30,9 +30,13 @@ body {
   grid-area: foot;
 }
 
+.next-task {
+  background-color: orange;
+  grid-area: timer;
+}
+
 .header {
-  background-color: #86817C;
-  background: linear-gradient(130deg, rgba(134, 129, 124, 0.5), rgba(58, 56, 53, 0.5) 125%);
+  background: linear-gradient(130deg, #282726, #3a3835 125%);
   padding: 0px;
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
@@ -40,6 +44,8 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  -webkit-clip-path: polygon(0% 0%, 100% 0%, 95% 100%, 0% 100%);
+          clip-path: polygon(0% 0%, 100% 0%, 95% 100%, 0% 100%);
 }
 
 .header .__mainTitle {
@@ -47,7 +53,7 @@ body {
   width: -moz-fit-content;
   width: fit-content;
   font-size: 4em;
-  color: #282726;
+  color: #F9F9F9;
   font-weight: 100;
   text-transform: uppercase;
   margin-left: 2em;
@@ -83,6 +89,7 @@ body {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  font-weight: 400;
   background-color: #54504C;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
@@ -94,14 +101,15 @@ body {
   -webkit-box-shadow: 1px 0px 1px 1px #4040400d;
           box-shadow: 1px 0px 1px 1px #4040400d;
   text-align: center;
-  background: linear-gradient(110deg, #54504C, #86817C);
+  background: linear-gradient(110deg, #282726, #3a3835);
   -webkit-transition: all 0.2s;
   transition: all 0.2s;
-  height: 14%;
+  position: relative;
+  height: 14.25%;
 }
 
 .day-selection-bar .__day-button:hover {
-  background: linear-gradient(110deg, #86817C, #54504C);
+  background: linear-gradient(110deg, #3a3835, #282726);
 }
 
 .day-selection-bar .__day-button:active {
@@ -111,15 +119,33 @@ body {
           transform: translate(0px, 2px);
 }
 
+.day-selection-bar .__day-button h2 {
+  font-size: 2.5em;
+  margin: 0.5em;
+}
+
+.day-selection-bar .__day-button div {
+  position: absolute;
+  top: 70%;
+  width: 100%;
+  margin-left: auto;
+  font-size: 1.3em;
+}
+
+.day-selection-bar .__day-button div span {
+  color: #EDF5E1;
+  font-weight: 800;
+}
+
 .day-card {
-  background-color: #86817C;
+  background-color: #F9F9F9;
   border-radius: 0.5em;
   margin: 1em;
 }
 
 .day-card .__day-title {
   font-size: 3em;
-  color: #D6CAB0;
+  color: #86817C;
   font-weight: 100;
   padding-top: 3em;
   margin: 1em;
@@ -127,7 +153,7 @@ body {
 
 .day-card .__tasks-to-display {
   margin: 1em;
-  border-top: 1px solid #86817C;
+  border-top: 1px solid #D9D9D9;
   border-radius: 0.2em;
 }
 
