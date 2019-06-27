@@ -4,8 +4,9 @@
   padding: 0px;
   display: inline-flex;
   align-items: center;
+  overflow-y: hidden;
+  overflow-x: hidden;
   clip-path: polygon(0% 0%, 100% 0%, 95% 100%, 0% 100%);
-  
 
   & .__mainTitle {
     width: fit-content;

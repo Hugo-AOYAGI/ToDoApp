@@ -4,34 +4,29 @@ body {
   display: grid;
   padding: 0px;
   margin: 0px;
-  background-color: #D9D9D9;
+  background: linear-gradient(110deg, #D9D9D9, #86817C);
   font-family: "Calibri", serif;
   height: 100vh;
   grid-template: "head head timer" 2fr "nav  main main" 12fr "nav  foot foot" 1fr / 1fr 3.5fr 1.5fr;
 }
 
 .header {
-  background-color: red;
   grid-area: head;
 }
 
 .day-selection-bar {
-  background-color: yellow;
   grid-area: nav;
 }
 
 .day-card {
-  background-color: blue;
   grid-area: main;
 }
 
 .footer {
-  background-color: pink;
   grid-area: foot;
 }
 
 .next-task {
-  background-color: orange;
   grid-area: timer;
 }
 
@@ -44,6 +39,8 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  overflow-y: hidden;
+  overflow-x: hidden;
   -webkit-clip-path: polygon(0% 0%, 100% 0%, 95% 100%, 0% 100%);
           clip-path: polygon(0% 0%, 100% 0%, 95% 100%, 0% 100%);
 }
@@ -113,8 +110,8 @@ body {
 }
 
 .day-selection-bar .__day-button:active {
-  -webkit-box-shadow: 0px 0px #4040400d;
-          box-shadow: 0px 0px #4040400d;
+  -webkit-box-shadow: 0px 0px transparent;
+          box-shadow: 0px 0px transparent;
   -webkit-transform: translate(0px, 2px);
           transform: translate(0px, 2px);
 }
@@ -147,8 +144,9 @@ body {
   font-size: 3em;
   color: #86817C;
   font-weight: 100;
-  padding-top: 3em;
-  margin: 1em;
+  margin: 0.5em;
+  position: relative;
+  top: 0.3em;
 }
 
 .day-card .__tasks-to-display {
@@ -163,5 +161,47 @@ body {
   margin-top: 1em;
   padding: 1em;
   border-radius: 2em;
+}
+
+.next-task {
+  text-align: center;
+  position: relative;
+  display: block;
+}
+
+.next-task h1 {
+  font-size: 2em;
+  color: #54504C;
+  text-transform: uppercase;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  border-top: 1px solid #282726;
+  border-bottom: 1px solid #282726;
+  margin-bottom: 0;
+}
+
+.next-task .__task-title {
+  color: #282726;
+  font-size: 2em;
+  width: 80%;
+  height: 1.3em;
+  margin-left: auto;
+  margin-right: auto;
+  overflow-y: hidden;
+  margin-bottom: 0.5em;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.next-task .__timer {
+  color: #54504C;
+  font-size: 2.5em;
+}
+
+.footer {
+  background: linear-gradient(130deg, #3a3835, #282726 125%);
 }
 /*# sourceMappingURL=main.css.map */

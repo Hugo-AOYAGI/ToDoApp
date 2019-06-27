@@ -4,7 +4,7 @@ body {
   display: grid;
   padding: 0px;
   margin: 0px;
-  background-color: $medium-grey-2;
+  background: linear-gradient(110deg, $medium-grey-2, $medium-grey-1);
   font-family: "Calibri", serif;
   height: 100vh;
   grid-template: "head head timer" 2fr
@@ -14,27 +14,22 @@ body {
 }
 
 .header {
-  background-color: red;
   grid-area: head;
 }
 
 .day-selection-bar {
-  background-color: yellow;
   grid-area: nav;
 }
 
 .day-card {
-  background-color: blue;
   grid-area: main;
 }
 
 .footer {
-  background-color: pink;
   grid-area: foot;
 }
 
 .next-task {
-  background-color: orange;
   grid-area: timer;
 }
 
