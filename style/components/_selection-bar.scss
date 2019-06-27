@@ -3,23 +3,37 @@
   color: $light-grey-1;
   text-transform: uppercase;
   display: flex;
+  font-weight: 400;
   background-color: $dark-grey-2;
   flex-flow: column;
 
   .__day-button {
     box-shadow: 1px 0px 1px 1px #4040400d;
     text-align: center;
-    background: linear-gradient(110deg, $dark-grey-2, $medium-grey);
+    background: linear-gradient(110deg, $dark-grey-1, $dark-grey-3);
     transition: all 0.2s;
     height: 14%;
 
     &:hover {
-      background: linear-gradient(110deg, $medium-grey, $dark-grey-2);
+      background: linear-gradient(110deg, $dark-grey-3, $dark-grey-1);
   }
 
     &:active {
       box-shadow: 0px 0px #4040400d;
       transform: translate(0px, 2px);
+    }
+
+    & h2 {
+      font-size: 2.5em;
+    }
+
+    & p {
+      font-size: 1.3em;
+
+      & span {
+        color: $light-grey-2;
+        font-weight: 800;
+      }
     }
   }
 }
