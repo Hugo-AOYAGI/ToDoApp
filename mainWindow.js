@@ -36,7 +36,6 @@ reloadDate = () => {
                   ${leadingZero(d.getHours())} :
                   ${leadingZero(d.getMinutes())} :
                   ${leadingZero(d.getSeconds())}`;
-  console.log(txt_date);
   date_span.innerHTML = date_span_og.innerHTML.replace("[DATE]", txt_date);
 }
 reloadDate();

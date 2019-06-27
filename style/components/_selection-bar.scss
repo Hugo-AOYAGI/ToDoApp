@@ -12,7 +12,8 @@
     text-align: center;
     background: linear-gradient(110deg, $dark-grey-1, $dark-grey-3);
     transition: all 0.2s;
-    height: 14%;
+    position: relative;
+    height: 14.25%;
 
     &:hover {
       background: linear-gradient(110deg, $dark-grey-3, $dark-grey-1);
@@ -25,9 +26,14 @@
 
     & h2 {
       font-size: 2.5em;
+      margin: 0.5em;
     }
 
-    & p {
+    & div {
+      position: absolute;
+      top: 70%;
+      width: 100%;
+      margin-left: auto;
       font-size: 1.3em;
 
       & span {

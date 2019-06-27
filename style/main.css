@@ -7,7 +7,7 @@ body {
   background-color: #D9D9D9;
   font-family: "Calibri", serif;
   height: 100vh;
-  grid-template: "head head" 2fr "nav  main" 12fr "nav  foot" 1fr / 1fr 5fr;
+  grid-template: "head head timer" 2fr "nav  main main" 12fr "nav  foot foot" 1fr / 1fr 3.5fr 1.5fr;
 }
 
 .header {
@@ -30,6 +30,11 @@ body {
   grid-area: foot;
 }
 
+.next-task {
+  background-color: orange;
+  grid-area: timer;
+}
+
 .header {
   background: linear-gradient(130deg, #282726, #3a3835 125%);
   padding: 0px;
@@ -39,8 +44,8 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-clip-path: polygon(0% 0%, 60% 0%, 40% 100%, 0% 100%);
-          clip-path: polygon(0% 0%, 60% 0%, 40% 100%, 0% 100%);
+  -webkit-clip-path: polygon(0% 0%, 100% 0%, 95% 100%, 0% 100%);
+          clip-path: polygon(0% 0%, 100% 0%, 95% 100%, 0% 100%);
 }
 
 .header .__mainTitle {
@@ -99,7 +104,8 @@ body {
   background: linear-gradient(110deg, #282726, #3a3835);
   -webkit-transition: all 0.2s;
   transition: all 0.2s;
-  height: 14%;
+  position: relative;
+  height: 14.25%;
 }
 
 .day-selection-bar .__day-button:hover {
@@ -115,13 +121,18 @@ body {
 
 .day-selection-bar .__day-button h2 {
   font-size: 2.5em;
+  margin: 0.5em;
 }
 
-.day-selection-bar .__day-button p {
+.day-selection-bar .__day-button div {
+  position: absolute;
+  top: 70%;
+  width: 100%;
+  margin-left: auto;
   font-size: 1.3em;
 }
 
-.day-selection-bar .__day-button p span {
+.day-selection-bar .__day-button div span {
   color: #EDF5E1;
   font-weight: 800;
 }
