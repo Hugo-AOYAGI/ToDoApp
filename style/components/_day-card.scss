@@ -3,14 +3,13 @@
     background-color: $light-grey-3;
     border-radius: 0.5em;
     margin: 1em;
+    position: relative;
 
     & .__day-title {
         font-size: 3em;
         color: $medium-grey-1;
         font-weight: 100;
         margin: 0.5em;
-        position: relative;
-        top: 0.3em;
     }
 
     & .__tasks-to-display {
@@ -24,6 +23,13 @@
         margin-top: 1em;
         padding: 1em;
         border-radius: 2em;
+    }
+
+    &:after {
+        content: "";
+        margin: 0px;
+        position: absolute;
+        background-color: red;
     }
 
 }

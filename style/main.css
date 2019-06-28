@@ -46,27 +46,55 @@ body {
 }
 
 .header .__mainTitle {
+  position: relative;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+  width: 30%;
+  height: 80%;
+}
+
+.header .__mainTitle h1 {
+  position: absolute;
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
+  border-left: 1px solid #54504C;
   font-size: 4em;
+  top: -0.2em;
   color: #F9F9F9;
+  white-space: pre;
   font-weight: 100;
   text-transform: uppercase;
   margin-left: 2em;
   padding-left: 0.3em;
-  border-left: 1px solid #54504C;
   -webkit-transition: all 0.5s;
   transition: all 0.5s;
 }
 
-.header .__mainTitle:hover {
-  font-weight: 300;
-  -webkit-transform: skew(-15deg);
-          transform: skew(-15deg);
+.header .__mainTitle .weekx {
+  opacity: 0;
 }
 
-.header .__date {
+.header .__mainTitle:hover > .weekx {
+  opacity: 1;
+  -webkit-transform: rotateY(360deg);
+          transform: rotateY(360deg);
+}
+
+.header .__mainTitle:hover > .yourweek {
+  opacity: 0;
+  -webkit-transform: rotateY(360deg);
+          transform: rotateY(360deg);
+}
+
+.header .__time-container {
+  position: relative;
+  width: 50%;
+  height: 90%;
+  padding-top: 6em;
+}
+
+.header .__time-container .__text-second {
   color: #D6CAB0;
   margin-left: 4em;
   font-weight: 100;
@@ -76,8 +104,22 @@ body {
   text-transform: uppercase;
 }
 
-.header .__date:hover {
-  font-size: 3.1em;
+.header .__time-container .__date {
+  position: absolute;
+  opacity: 1;
+}
+
+.header .__time-container .__time {
+  position: absolute;
+  opacity: 0;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.header .__time-container:hover > .__time {
+  opacity: 1;
+  -webkit-transform: translateX(150%);
+          transform: translateX(150%);
 }
 
 .day-selection-bar {
@@ -138,6 +180,7 @@ body {
   background-color: #F9F9F9;
   border-radius: 0.5em;
   margin: 1em;
+  position: relative;
 }
 
 .day-card .__day-title {
@@ -145,8 +188,6 @@ body {
   color: #86817C;
   font-weight: 100;
   margin: 0.5em;
-  position: relative;
-  top: 0.3em;
 }
 
 .day-card .__tasks-to-display {
@@ -161,6 +202,13 @@ body {
   margin-top: 1em;
   padding: 1em;
   border-radius: 2em;
+}
+
+.day-card:after {
+  content: "";
+  margin: 0px;
+  position: absolute;
+  background-color: red;
 }
 
 .next-task {

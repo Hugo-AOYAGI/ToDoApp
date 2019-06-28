@@ -9,34 +9,75 @@
   clip-path: polygon(0% 0%, 100% 0%, 95% 100%, 0% 100%);
 
   & .__mainTitle {
-    width: fit-content;
-    font-size: 4em;
-    color: $light-grey-3;
-    font-weight: 100;
-    text-transform: uppercase;
-    margin-left: 2em;
-    padding-left: 0.3em;
-    border-left: 1px solid $dark-grey-2;
+    position: relative;
     transition: all 0.5s;
+    width: 30%;
+    height: 80%;
+
+    & h1 {
+      position: absolute;
+      width: fit-content;
+      border-left: 1px solid $dark-grey-2;
+      font-size: 4em;
+      top: -0.2em;
+      color: $light-grey-3;
+      white-space: pre;
+      font-weight: 100;
+      text-transform: uppercase;
+      margin-left: 2em;
+      padding-left: 0.3em;
+      transition: all 0.5s;
+
+    }
+
+    & .weekx {
+      opacity: 0;
+    }
+
+    &:hover > .weekx {
+      opacity: 1;
+      transform: rotateY(360deg);
+    }
+
+    &:hover > .yourweek {
+      opacity: 0;
+      transform: rotateY(360deg);
+    }
+
+  }
     
 
-    &:hover {
-      font-weight: 300;
-      transform: skew(-15deg);
-    }
-  }
+  & .__time-container {
+    position: relative;
+    width: 50%;
+    height: 90%;
+    padding-top: 6em;
 
-  & .__date {
-    color: $light-grey-1;
-    margin-left: 4em;
-    font-weight: 100;
-    font-size: 3em;
-    transition: all 0.2s;
-    text-transform: uppercase;
+    & .__text-second {
+      color: $light-grey-1;
+      margin-left: 4em;
+      font-weight: 100;
+      font-size: 3em;
+      transition: all 0.2s;
+      text-transform: uppercase;
 
-    &:hover {
-      font-size: 3.1em;
     }
 
+    & .__date {
+      position: absolute;
+      opacity: 1;
+
+    }
+
+    & .__time {
+      position: absolute;
+      opacity: 0;
+      transition: all 0.3s; 
+    }
+
+    &:hover > .__time {
+      opacity: 1;
+      transform: translateX(150%);
+    }
   }
-}
+} 
