@@ -3,33 +3,72 @@
     background-color: $light-grey-3;
     border-radius: 0.5em;
     margin: 1em;
+    display: grid;
+    min-width: 0;
+    min-height: 0;
+    border: 2px solid red;
     position: relative;
+    grid-template: "titleT titleD titleD titleS" 1fr
+                   "task task schedule schedule" 9fr
+                   / 3fr 1fr 1fr 3fr;
 
-    & .__day-title {
-        font-size: 3em;
-        color: $medium-grey-1;
-        font-weight: 100;
-        margin: 0.5em;
-    }
-
-    & .__tasks-to-display {
-        margin: 1em;
-        border-top: 1px solid $medium-grey-2;
-        border-radius: 0.2em;
-    }
-
-    & .__task-card {
-        box-shadow: 0px 0px 1px 1px rgba($dark-grey-2, 0.4);
-        margin-top: 1em;
-        padding: 1em;
-        border-radius: 2em;
-    }
-
-    &:after {
-        content: "";
-        margin: 0px;
-        position: absolute;
+    & .__title-task {
+        grid-area: titleT;
         background-color: red;
     }
 
+    & .__title-day {
+        grid-area: titleD;
+        background-color: pink;
+    }
+
+    & .__title-schedule {
+        grid-area: titleS;
+        background-color: violet;
+    }
+
+    & .__tasks-box {
+        grid-area: task;
+        overflow-y: auto;
+        overflow-x: hidden;
+        background-color: green;
+    }
+
+    & .__schedule {
+        grid-area: schedule;
+        background-color: yellow;
+    }
+
+    & .task {
+        height: 20%;
+        display: grid;
+        grid-template: "sidebar title" 1fr
+                       "sidebar time"  1fr / 1fr 4fr;
+
+        & .__title {
+            background-color: rgba(red, 0.5);
+            grid-area: title;
+
+        }
+
+        & .__start-time {
+            background-color: rgba(blue, 0.5);
+            grid-area: time;
+
+        }
+
+        & .__side-bar {
+            background-color: rgba(pink, 0.5);
+            grid-area: sidebar;
+
+        }
+
+        & .__complete-btn {
+
+        }
+
+        & .__remove-btn {
+
+        }
+    }
 }

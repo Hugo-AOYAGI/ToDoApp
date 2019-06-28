@@ -1,3 +1,4 @@
+@charset "UTF-8";
 body {
   font-size: 65%;
   display: -ms-grid;
@@ -41,8 +42,8 @@ body {
           align-items: center;
   overflow-y: hidden;
   overflow-x: hidden;
-  -webkit-clip-path: polygon(0% 0%, 100% 0%, 95% 100%, 0% 100%);
-          clip-path: polygon(0% 0%, 100% 0%, 95% 100%, 0% 100%);
+  -webkit-clip-path: polygon(0% 0%, 100% 0%, 100% 40%, 95% 100%, 0% 100%);
+          clip-path: polygon(0% 0%, 100% 0%, 100% 40%, 95% 100%, 0% 100%);
 }
 
 .header .__mainTitle {
@@ -185,73 +186,126 @@ body {
   background-color: #F9F9F9;
   border-radius: 0.5em;
   margin: 1em;
+  display: -ms-grid;
+  display: grid;
+  min-width: 0;
+  min-height: 0;
+  border: 2px solid red;
   position: relative;
+  grid-template: "titleT titleD titleD titleS" 1fr "task task schedule schedule" 9fr / 3fr 1fr 1fr 3fr;
 }
 
-.day-card .__day-title {
-  font-size: 3em;
-  color: #86817C;
-  font-weight: 100;
-  margin: 0.5em;
-}
-
-.day-card .__tasks-to-display {
-  margin: 1em;
-  border-top: 1px solid #D9D9D9;
-  border-radius: 0.2em;
-}
-
-.day-card .__task-card {
-  -webkit-box-shadow: 0px 0px 1px 1px rgba(84, 80, 76, 0.4);
-          box-shadow: 0px 0px 1px 1px rgba(84, 80, 76, 0.4);
-  margin-top: 1em;
-  padding: 1em;
-  border-radius: 2em;
-}
-
-.day-card:after {
-  content: "";
-  margin: 0px;
-  position: absolute;
+.day-card .__title-task {
+  grid-area: titleT;
   background-color: red;
+}
+
+.day-card .__title-day {
+  grid-area: titleD;
+  background-color: pink;
+}
+
+.day-card .__title-schedule {
+  grid-area: titleS;
+  background-color: violet;
+}
+
+.day-card .__tasks-box {
+  grid-area: task;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background-color: green;
+}
+
+.day-card .__schedule {
+  grid-area: schedule;
+  background-color: yellow;
+}
+
+.day-card .task {
+  height: 20%;
+  display: -ms-grid;
+  display: grid;
+  grid-template: "sidebar title" 1fr "sidebar time"  1fr / 1fr 4fr;
+}
+
+.day-card .task .__title {
+  background-color: rgba(255, 0, 0, 0.5);
+  grid-area: title;
+}
+
+.day-card .task .__start-time {
+  background-color: rgba(0, 0, 255, 0.5);
+  grid-area: time;
+}
+
+.day-card .task .__side-bar {
+  background-color: rgba(255, 192, 203, 0.5);
+  grid-area: sidebar;
 }
 
 .next-task {
   text-align: center;
   position: relative;
   display: block;
+  text-overflow: clip;
 }
 
 .next-task h1 {
   font-size: 2em;
-  color: #54504C;
+  overflow: hidden;
+  white-space: pre;
+  position: absolute;
+  color: #F9F9F9;
+  background: linear-gradient(135deg, #282726 -325%, #3a3835);
+  width: 100%;
+  height: 40%;
   text-transform: uppercase;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
   margin-left: auto;
   margin-right: auto;
-  border-top: 1px solid #282726;
-  border-bottom: 1px solid #282726;
-  margin-bottom: 0;
+  margin-top: 0;
 }
 
-.next-task .__task-title {
-  color: #282726;
-  font-size: 2em;
+.next-task h1:after {
+  content: "⟹";
+  position: relative;
+  opacity: 0;
+  left: -0.5em;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.next-task:hover > h1:after {
+  left: 0.5em;
+  opacity: 1;
+}
+
+.next-task .__task-info {
+  position: absolute;
+  height: 60%;
+  bottom: 0;
+  margin-left: 2em;
   width: 80%;
+}
+
+.next-task .__task-info .__task-title {
+  color: #282726;
+  font-size: 1.7em;
   height: 1.3em;
+  font-weight: 800;
   margin-left: auto;
   margin-right: auto;
+  white-space: pre;
   overflow-y: hidden;
-  margin-bottom: 0.5em;
+  margin-bottom: 0;
   text-overflow: ellipsis;
   overflow: hidden;
 }
 
-.next-task .__timer {
-  color: #54504C;
-  font-size: 2.5em;
+.next-task .__task-info .__timer {
+  color: #282726;
+  font-size: 1.8em;
+  font-weight: 100;
 }
 
 .footer {
