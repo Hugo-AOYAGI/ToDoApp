@@ -9,22 +9,23 @@
   clip-path: polygon(0% 0%, 100% 0%, 95% 100%, 0% 100%);
 
   & .__mainTitle {
-    position: relative;
     transition: all 0.5s;
-    width: 30%;
-    height: 80%;
+    position: relative;
+    margin-left: 3em;
+    min-width: 30%;
+    height: 4em;
 
     & h1 {
       position: absolute;
+      margin: 0;
+      height: 100%;
       width: fit-content;
       border-left: 1px solid $dark-grey-2;
       font-size: 4em;
-      top: -0.2em;
       color: $light-grey-3;
       white-space: pre;
       font-weight: 100;
       text-transform: uppercase;
-      margin-left: 2em;
       padding-left: 0.3em;
       transition: all 0.5s;
 
@@ -46,16 +47,17 @@
 
   }
     
-
   & .__time-container {
-    position: relative;
     width: 50%;
-    height: 90%;
-    padding-top: 6em;
+    height: 4em;
+    position: relative;
+    vertical-align: middle;
 
     & .__text-second {
       color: $light-grey-1;
-      margin-left: 4em;
+      width: fit-content;
+      padding-top: 0.2em;
+      height: 100%;
       font-weight: 100;
       font-size: 3em;
       transition: all 0.2s;

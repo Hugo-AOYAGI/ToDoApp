@@ -1,5 +1,5 @@
 body {
-  font-size: 50%;
+  font-size: 65%;
   display: -ms-grid;
   display: grid;
   padding: 0px;
@@ -46,26 +46,27 @@ body {
 }
 
 .header .__mainTitle {
-  position: relative;
   -webkit-transition: all 0.5s;
   transition: all 0.5s;
-  width: 30%;
-  height: 80%;
+  position: relative;
+  margin-left: 3em;
+  min-width: 30%;
+  height: 4em;
 }
 
 .header .__mainTitle h1 {
   position: absolute;
+  margin: 0;
+  height: 100%;
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
   border-left: 1px solid #54504C;
   font-size: 4em;
-  top: -0.2em;
   color: #F9F9F9;
   white-space: pre;
   font-weight: 100;
   text-transform: uppercase;
-  margin-left: 2em;
   padding-left: 0.3em;
   -webkit-transition: all 0.5s;
   transition: all 0.5s;
@@ -88,15 +89,19 @@ body {
 }
 
 .header .__time-container {
-  position: relative;
   width: 50%;
-  height: 90%;
-  padding-top: 6em;
+  height: 4em;
+  position: relative;
+  vertical-align: middle;
 }
 
 .header .__time-container .__text-second {
   color: #D6CAB0;
-  margin-left: 4em;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  padding-top: 0.2em;
+  height: 100%;
   font-weight: 100;
   font-size: 3em;
   -webkit-transition: all 0.2s;
