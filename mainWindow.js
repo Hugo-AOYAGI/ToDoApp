@@ -21,13 +21,16 @@ for(button of buttons) {
   selection_bar.appendChild(button);
 }
 
+//Displaying the date on the page header
 let date_span = document.querySelector(".__date");
 let time_span = document.querySelector(".__time");
 
+//Adds a zero before a date or time if it is lesser than 10
 leadingZero = (n) => {
   return n < 10 ? "0"+n : n;
 }
 
+//Reloads the date every second
 reloadDate = () => {
   let d = new Date();
   let txt_date = `${leadingZero(d.getDate())} /
@@ -41,4 +44,26 @@ reloadDate = () => {
   time_span.innerHTML = txt_time;
 }
 reloadDate();
-t = setInterval(reloadDate, 1000);
+let t = setInterval(reloadDate, 1000);
+
+
+//Manages the sidebar buttons on each task
+let tab_buttons = document.getElementsByClassName("__tab-main");
+let sidebars = document.getElementsByClassName("__side-bar");
+
+//Add event listeners to each tab
+for(let i = 0; i < tab_buttons.length; i++) {
+  tab_buttons[i].addEventListener("click", () => {toggleSideBar(i);});
+}
+
+function toggleSideBar(i) {
+  if (tab_buttons[i].innerHTML == "〉") {
+    sidebars[i].style.width = "15%";
+    tab_buttons[i].style.left = "15%";
+    tab_buttons[i].innerHTML = "〈";
+  } else {
+    sidebars[i].style.width = "0";
+    tab_buttons[i].style.left = "0%";
+    tab_buttons[i].innerHTML = "〉";
+  }
+}

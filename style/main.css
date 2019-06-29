@@ -295,7 +295,7 @@ body {
   left: 0;
   padding: 0;
   font-weight: 100;
-  font-size: 3em;
+  font-size: 2em;
   color: #F9F9F9;
   width: 100%;
   height: 70%;
@@ -304,6 +304,7 @@ body {
 .task .__side-bar .__label {
   position: absolute;
   left: 0;
+  font-size: 0.8em;
   text-transform: uppercase;
   font-weight: 900;
   color: #F9F9F9;
@@ -324,29 +325,15 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  font-size: 2.8em;
+  font-size: 2em;
+  padding-left: 0.075em;
+  padding-right: 0.075em;
   color: #F9F9F9;
   -webkit-transition: left 0.5s;
   transition: left 0.5s;
   z-index: 20;
   height: 100%;
   cursor: pointer;
-}
-
-.task .__tab-main:after {
-  content: "〉";
-}
-
-.task .__tab-main:hover {
-  left: 10%;
-}
-
-.task .__tab-main:hover:after {
-  content: "〈";
-}
-
-.task .__tab-main:hover ~ .__side-bar {
-  width: 10%;
 }
 
 .task:nth-child(odd) > .__title, .task:nth-child(odd) .__start-time {
