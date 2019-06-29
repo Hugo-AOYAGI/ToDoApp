@@ -5,6 +5,7 @@
     // margin: 0.2em;
     // border-radius: 0.5em;
     background-color: $light-grey-3;
+    box-shadow: 0px 1px solid rgba($medium-grey-1, 0.4);
 
     &:not(:last-child) {
         margin-bottom: 0.5em;
@@ -15,10 +16,13 @@
         position: absolute;
         top: 0;
         z-index: 1;
+        overflow: auto;
         padding-top: 1rem;
         text-transform: uppercase;
         font-weight: 100;
         color: $dark-grey-1;
+        margin-left: 0;
+        transition: all 0.5s;
         padding-left: 2rem;
         width: fit-content;
         text-decoration: underline;
@@ -35,8 +39,30 @@
         color: $medium-grey-1;
         width: fit-content;
         top: 50%;
-        right: 4rem;
+        right: 6rem;
         height: 50%
+    }
+
+    & .__more-button {
+        border-radius: 50%;
+        background-color:$light-grey-3;
+        position: absolute;
+        right: 0.5rem;
+        bottom: 0.5rem;
+        height: 1.3rem;
+        width: 1.3rem;
+        font-weight: 900;
+        font-size: 1.55em;
+        color: $dark-grey-2;
+        text-align: center;
+        transition: all 0.5s;
+        transform: rotateZ(45deg);
+        cursor: pointer;
+
+        &:hover {
+            color: $light-grey-3;
+            background-color: $dark-grey-2;
+        }
     }
 
     & .__side-bar {

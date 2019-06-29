@@ -50,6 +50,7 @@ let t = setInterval(reloadDate, 1000);
 //Manages the sidebar buttons on each task
 let tab_buttons = document.getElementsByClassName("__tab-main");
 let sidebars = document.getElementsByClassName("__side-bar");
+let titles = document.querySelectorAll(".task .__title");
 
 //Add event listeners to each tab
 for(let i = 0; i < tab_buttons.length; i++) {
@@ -61,9 +62,11 @@ function toggleSideBar(i) {
     sidebars[i].style.width = "15%";
     tab_buttons[i].style.left = "15%";
     tab_buttons[i].innerHTML = "〈";
+    titles[i].style.marginLeft = "15%";
   } else {
     sidebars[i].style.width = "0";
     tab_buttons[i].style.left = "0%";
     tab_buttons[i].innerHTML = "〉";
+    titles[i].style.marginLeft = "0";
   }
 }
