@@ -12,17 +12,34 @@
 
     & .__title-task {
         grid-area: titleT;
-        background-color: red;
+        background-color: $dark-grey-2;
+        text-align: left;
+        font-weight: 900;
+        text-transform: uppercase;
+        padding-left: 1rem;
+        font-size: 2.5em;
+        color: $light-grey-3;
     }
 
     & .__title-day {
         grid-area: titleD;
-        background-color: pink;
+        background-color: $medium-grey-2;
+        text-align: center;
+        font-weight: 900;
+        text-transform: uppercase;
+        font-size: 2.5em;
+        color: $dark-grey-2;
     }
 
     & .__title-schedule {
         grid-area: titleS;
-        background-color: violet;
+        background-color: $dark-grey-2;
+        text-align: right;
+        font-weight: 900;
+        text-transform: uppercase;
+        padding-right: 1rem;
+        font-size: 2.5em;
+        color: $light-grey-3;
     }
 
     & .__tasks-box {
@@ -30,6 +47,7 @@
         overflow-y: auto;
         overflow-x: hidden;
         border-right: 1px solid $medium-grey-1;
+
     }
 
     & .__schedule {
