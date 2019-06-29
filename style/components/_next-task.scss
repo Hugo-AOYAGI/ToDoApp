@@ -2,16 +2,19 @@
 .next-task {
     text-align: center;
     position: relative;
-    display: block;
+    display: flex;
     text-overflow: clip;
 
     & h1 {
         font-size: 2em;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         overflow: hidden;
         white-space: pre;
         position: absolute;
         color: $light-grey-3;
-        background: linear-gradient(135deg, $dark-grey-1 -325%, $dark-grey-3);
+        background: linear-gradient(135deg, $dark-grey-1 , $dark-grey-2);
         width: 100%;
         height: 40%;
         text-transform: uppercase;
@@ -37,9 +40,9 @@
         position: absolute;
         height: 60%;
         bottom: 0;
-        margin-left: 2em;
         width: 80%;
-
+        margin-left: 10%;
+        
         & .__task-title {
             color: $dark-grey-1;
             font-size: 1.7em;

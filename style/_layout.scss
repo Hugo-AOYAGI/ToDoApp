@@ -4,7 +4,7 @@ body {
   display: grid;
   padding: 0px;
   margin: 0px;
-  background: linear-gradient(110deg, $medium-grey-2, $medium-grey-1);
+  background: linear-gradient(110deg, $medium-grey-2 20%, $light-grey-3 250%);
   font-family: "Calibri", serif;
   height: 100vh;
   grid-template: "head head timer" 2fr
