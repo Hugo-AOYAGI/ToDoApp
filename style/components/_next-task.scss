@@ -4,6 +4,7 @@
     position: relative;
     display: flex;
     text-overflow: clip;
+    cursor: pointer;
 
     & h1 {
         font-size: 2em;

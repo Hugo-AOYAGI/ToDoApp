@@ -14,6 +14,7 @@
     transition: all 0.2s;
     position: relative;
     height: 14.25%;
+    cursor: pointer;
 
     &:hover {
       background: linear-gradient(110deg, $dark-grey-3, $dark-grey-1);

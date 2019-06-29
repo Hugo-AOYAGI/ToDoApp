@@ -37,6 +37,7 @@
         z-index: 10;
         transition: all 0.5s;
         overflow: hidden;
+        cursor: pointer;
 
         & .__complete-btn {
             white-space: nowrap;
@@ -101,6 +102,7 @@
         transition: left 0.5s;
         z-index: 20;
         height: 100%;
+        cursor: pointer;
         
         &:after {
             content: "〉";
