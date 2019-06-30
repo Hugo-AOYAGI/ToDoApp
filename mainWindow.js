@@ -78,7 +78,8 @@ function toggleSideBar(i) {
 let more_info_buttons = document.getElementsByClassName("__more-button");
 let tasks = document.getElementsByClassName("task");
 let time_divs = document.getElementsByClassName("__start-time");
-let task_card = document.getElementsByClassName("task-card");
+let task_cards = document.getElementsByClassName("task-card");
+
 
 // Add event listeners to each button
 for(let i = 0; i < tasks.length; i++) {
@@ -87,12 +88,16 @@ for(let i = 0; i < tasks.length; i++) {
 
 // Displays the transition when the button is pressed
 function toggleTaskCard(i) {
-  // Checks whether the  is alrcardeady shown or not
+  // Checks whether the card is already shown or not
   if (tasks[i].style.height == "20%" || tasks[i].style.height == "") {
+    if (tab_buttons[i].innerHTML != "〉") {
+      toggleSideBar(i);
+    }
     tasks[i].style.height = "10%";
     more_info_buttons[i].style.transform = "rotateZ(0deg)";
     time_divs[i].style.opacity = "0";
     tab_buttons[i].style.left = "-1em";
+    setTimeout(() => {task_cards[0].style.transform = "translateX(0)";}, 450);
     // Hides all the other tasks
     for(let j = 0; j < tasks.length; j++) {
       if (j != i){
@@ -112,6 +117,7 @@ function toggleTaskCard(i) {
     time_divs[i].style.opacity = "1";
     tab_buttons[i].style.left = "0";
     tasks[i].style.left = "-100%";
+    task_cards[0].style.transform = "translateX(100%)";
     // Unhides all the other tasks
     for(let j = 0; j < tasks.length; j++) {
       if (j != i){

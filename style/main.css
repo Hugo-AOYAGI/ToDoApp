@@ -286,7 +286,8 @@ body {
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
-  text-decoration: underline;
+  -webkit-text-decoration: #D6CAB0 underline;
+          text-decoration: #D6CAB0 underline;
   font-size: 1.6em;
   height: 50%;
 }
@@ -616,14 +617,18 @@ body {
   position: absolute;
   -webkit-box-shadow: inset 0px 0px 0.3rem 0.3rem rgba(134, 129, 124, 0.4);
           box-shadow: inset 0px 0px 0.3rem 0.3rem rgba(134, 129, 124, 0.4);
-  padding: 0.5rem;
+  padding: 1rem;
+  background-color: #F9F9F9;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   top: 10%;
   left: 0;
   width: 100%;
-  height: 90%;
-  display: none;
+  min-height: 90%;
+  -webkit-transform: translateX(100%);
+          transform: translateX(100%);
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
 }
 
 .task-card .__sticker {
@@ -681,6 +686,42 @@ body {
   font-size: 1.2em;
   width: 20%;
   height: 10%;
+}
+
+.task-card .__edit-btn {
+  position: absolute;
+  background-color: #3a3835;
+  line-height: 1.2em;
+  left: 0;
+  top: 0;
+  width: 1.8rem;
+  height: 1.8rem;
+  -webkit-clip-path: polygon(0 0, 100% 0, 0 100%);
+          clip-path: polygon(0 0, 100% 0, 0 100%);
+  font-size: 1.4em;
+  color: #D6CAB0;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+  cursor: pointer;
+}
+
+.task-card .__edit-btn:hover {
+  padding: 0.1rem;
+  width: 2rem;
+  height: 2rem;
+  color: #FFF;
+}
+
+.task-card h3 {
+  font-size: 1.5em;
+  -webkit-text-decoration: #D6CAB0 underline;
+          text-decoration: #D6CAB0 underline;
+}
+
+.task-card .__description {
+  font-size: 1.2em;
+  padding-left: 0.5rem;
+  border-left: 2px solid #D6CAB0;
 }
 
 .footer {
