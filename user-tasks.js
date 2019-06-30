@@ -7,6 +7,7 @@ function Day(name, tasks, card) {
   this.year = year;
   this.tasks = tasks;
   this.card = card;
+  this.id = day+month+year;
   
 }
 

@@ -2,7 +2,6 @@
 const electron = require("electron");
 const url = require("url");
 const path = require("path");
-
 // Extracting objects from the electron module
 const {app, BrowserWindow} = electron;
 
@@ -21,7 +20,7 @@ app.on("ready", () => {
 
   //mainWindow.webContents.openDevTools();
 
-})
+});
 
 app.on("close", () => {
   mainWindow = null;

@@ -631,7 +631,7 @@ body {
   transition: all 0.5s;
 }
 
-.task-card .__sticker {
+.task-card .__sticker-important {
   position: absolute;
   right: 0.5rem;
   top: 0;
@@ -650,7 +650,7 @@ body {
   transition: all 0.3s;
 }
 
-.task-card .__sticker:hover {
+.task-card .__sticker-important:hover {
   font-weight: 900;
 }
 
@@ -681,7 +681,7 @@ body {
   transition: all 0.3s;
 }
 
-.task-card .__sticker:hover ~ .__sticker-hover-important {
+.task-card .__sticker-important:hover ~ .__sticker-hover-important {
   right: 2rem;
   font-size: 1.2em;
   width: 20%;
@@ -722,6 +722,15 @@ body {
   font-size: 1.2em;
   padding-left: 0.5rem;
   border-left: 2px solid #D6CAB0;
+}
+
+.task-card span {
+  color: #282726;
+  font-size: 1.3em;
+}
+
+.task-card .__timer {
+  font-size: 1.4em;
 }
 
 .footer {

@@ -1,3 +1,5 @@
+
+
 // Setting up all the buttons for the day selection bar
 const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 const months = ["January", "February", "March", "April", "May", "June", "July", "September", "October", "November", "December"];
@@ -132,4 +134,10 @@ function toggleTaskCard(i) {
   }
 }
 
-toggleTaskCard(0);
+function getNumberOfWeek() {
+  const today = new Date();
+  const firstDayOfYear = new Date(today.getFullYear(), 0, 1);
+  const pastDaysOfYear = (today - firstDayOfYear) / 86400000;
+  return Math.ceil((pastDaysOfYear + firstDayOfYear.getDay() + 1) / 7);
+}
+console.log(getNumberOfWeek());
