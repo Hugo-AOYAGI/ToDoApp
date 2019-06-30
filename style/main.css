@@ -245,6 +245,7 @@ body {
 }
 
 .day-card .__tasks-box {
+  position: relative;
   grid-area: task;
   overflow-y: auto;
   overflow-x: hidden;
@@ -266,7 +267,7 @@ body {
 }
 
 .task:not(:last-child) {
-  margin-bottom: 0.5em;
+  margin-bottom: 0.3rem;
 }
 
 .task .__title {
@@ -612,7 +613,74 @@ body {
 .task-card {
   -webkit-transition: all 0.4s;
   transition: all 0.4s;
+  position: absolute;
+  -webkit-box-shadow: inset 0px 0px 0.3rem 0.3rem rgba(134, 129, 124, 0.4);
+          box-shadow: inset 0px 0px 0.3rem 0.3rem rgba(134, 129, 124, 0.4);
+  padding: 0.5rem;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  top: 10%;
+  left: 0;
+  width: 100%;
+  height: 90%;
   display: none;
+}
+
+.task-card .__sticker {
+  position: absolute;
+  right: 0.5rem;
+  top: 0;
+  z-index: 10;
+  width: 1rem;
+  height: 1.5rem;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(-150%, #3a3835), to(darkred));
+  background: linear-gradient(#3a3835 -150%, darkred);
+  -webkit-clip-path: polygon(50% 65%, 100% 100%, 100% 0, 0 0, 0 98%);
+          clip-path: polygon(50% 65%, 100% 100%, 100% 0, 0 0, 0 98%);
+  text-align: center;
+  color: #F9F9F9;
+  font-weight: 500;
+  font-size: 1.2em;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.task-card .__sticker:hover {
+  font-weight: 900;
+}
+
+.task-card .__sticker-hover-important {
+  position: absolute;
+  right: 1rem;
+  top: 0.5rem;
+  z-index: 5;
+  height: 0;
+  width: 0;
+  overflow: hidden;
+  border-radius: 0.1rem;
+  white-space: nowrap;
+  background-color: #3a3835;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  color: #F9F9F9;
+  font-weight: 900;
+  font-size: 0.1em;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.task-card .__sticker:hover ~ .__sticker-hover-important {
+  right: 2rem;
+  font-size: 1.2em;
+  width: 20%;
+  height: 10%;
 }
 
 .footer {

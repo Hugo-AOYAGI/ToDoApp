@@ -1,5 +1,62 @@
 
 .task-card {
     transition: all 0.4s;
+    position: absolute;
+    box-shadow: inset 0px 0px 0.3rem 0.3rem rgba($medium-grey-1, 0.4);
+    padding: 0.5rem;
+    box-sizing: border-box;
+    top: 10%;
+    left: 0;
+    width: 100%;
+    height: 90%;
     display: none;
+
+    & .__sticker {
+        position: absolute;
+        right: 0.5rem;
+        top: 0;
+        z-index: 10;
+        width: 1rem;
+        height: 1.5rem;
+        background: linear-gradient($dark-grey-3 -150%, darkred);
+        clip-path: polygon(50% 65%, 100% 100%, 100% 0, 0 0, 0 98%);
+        text-align: center;
+        color: $light-grey-3;
+        font-weight: 500;
+        font-size: 1.2em;
+        transition: all 0.3s;
+
+        &:hover {
+            font-weight: 900;
+        }
+    }
+    
+    & .__sticker-hover-important {
+        position: absolute;
+        right: 1rem;
+        top: 0.5rem;
+        z-index: 5;
+        height: 0;
+        width: 0;
+        overflow: hidden;
+        border-radius: 0.1rem;
+        white-space: nowrap;
+        background-color: $dark-grey-3;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: $light-grey-3;
+        font-weight: 900;
+        font-size: 0.1em;
+        transition: all 0.3s;
+    }
+
+    & .__sticker:hover ~ .__sticker-hover-important {
+        right: 2rem;
+        font-size: 1.2em;
+        width: 20%;
+        height: 10%;
+
+    }
+
 }

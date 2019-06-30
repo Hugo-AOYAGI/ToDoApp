@@ -89,7 +89,7 @@ for(let i = 0; i < tasks.length; i++) {
 function toggleTaskCard(i) {
   // Checks whether the  is alrcardeady shown or not
   if (tasks[i].style.height == "20%" || tasks[i].style.height == "") {
-    tasks[i].style.height = "12%";
+    tasks[i].style.height = "10%";
     more_info_buttons[i].style.transform = "rotateZ(0deg)";
     time_divs[i].style.opacity = "0";
     tab_buttons[i].style.left = "-1em";
@@ -126,3 +126,4 @@ function toggleTaskCard(i) {
   }
 }
 
+toggleTaskCard(0);
