@@ -261,9 +261,10 @@ body {
 .task {
   position: relative;
   height: 20%;
+  left: 0;
   background-color: #F9F9F9;
-  -webkit-box-shadow: 0px 1px solid rgba(134, 129, 124, 0.4);
-          box-shadow: 0px 1px solid rgba(134, 129, 124, 0.4);
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
 }
 
 .task:not(:last-child) {
@@ -302,6 +303,8 @@ body {
   width: -moz-fit-content;
   width: fit-content;
   top: 50%;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
   right: 6rem;
   height: 50%;
 }
@@ -607,6 +610,12 @@ body {
   color: #282726;
   font-size: 1.8em;
   font-weight: 100;
+}
+
+.task-card {
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
+  display: none;
 }
 
 .footer {

@@ -33,10 +33,11 @@ leadingZero = (n) => {
 //Reloads the date every second
 reloadDate = () => {
   let d = new Date();
+  // Formats the date with leading zeros and dashes
   let txt_date = `${leadingZero(d.getDate())} /
                   ${leadingZero(d.getMonth()+1)} /
                   ${leadingZero(d.getFullYear())}`;
-                  
+  // Formats the time with leading zeros and semi-colons
   let txt_time = `${leadingZero(d.getHours())} :
                   ${leadingZero(d.getMinutes())} :
                   ${leadingZero(d.getSeconds())}`;
@@ -52,12 +53,14 @@ let tab_buttons = document.getElementsByClassName("__tab-main");
 let sidebars = document.getElementsByClassName("__side-bar");
 let titles = document.querySelectorAll(".task .__title");
 
-//Add event listeners to each tab
+// Add event listeners to each tab
 for(let i = 0; i < tab_buttons.length; i++) {
   tab_buttons[i].addEventListener("click", () => {toggleSideBar(i);});
 }
 
+// Displays the transition when the button is pressed
 function toggleSideBar(i) {
+  // Checks whether the sidebar is already shown or not
   if (tab_buttons[i].innerHTML == "〉") {
     sidebars[i].style.width = "15%";
     tab_buttons[i].style.left = "15%";
@@ -70,3 +73,56 @@ function toggleSideBar(i) {
     titles[i].style.marginLeft = "0";
   }
 }
+
+// Manages the more-info button on each task which displays the full task card
+let more_info_buttons = document.getElementsByClassName("__more-button");
+let tasks = document.getElementsByClassName("task");
+let time_divs = document.getElementsByClassName("__start-time");
+let task_card = document.getElementsByClassName("task-card");
+
+// Add event listeners to each button
+for(let i = 0; i < tasks.length; i++) {
+  more_info_buttons[i].addEventListener("click", () => {toggleTaskCard(i);});
+}
+
+// Displays the transition when the button is pressed
+function toggleTaskCard(i) {
+  // Checks whether the  is alrcardeady shown or not
+  if (tasks[i].style.height == "20%" || tasks[i].style.height == "") {
+    tasks[i].style.height = "12%";
+    more_info_buttons[i].style.transform = "rotateZ(0deg)";
+    time_divs[i].style.opacity = "0";
+    tab_buttons[i].style.left = "-1em";
+    // Hides all the other tasks
+    for(let j = 0; j < tasks.length; j++) {
+      if (j != i){
+        setTimeout(() => {
+          tasks[j].style.display = "none";
+        }, 300);
+      }
+      tasks[j].style.left = "-100%";
+      setTimeout(() => {
+        tasks[i].style.left = "0";
+      }, 600);
+      
+    }
+  } else {
+    tasks[i].style.height = "20%";
+    more_info_buttons[i].style.transform = "rotateZ(45deg)";
+    time_divs[i].style.opacity = "1";
+    tab_buttons[i].style.left = "0";
+    tasks[i].style.left = "-100%";
+    // Unhides all the other tasks
+    for(let j = 0; j < tasks.length; j++) {
+      if (j != i){
+        setTimeout(() => {
+          tasks[j].style.display = "block";
+        }, 300);
+      }
+      setTimeout(() => {
+        tasks[j].style.left = "0";
+      }, 600);
+    }
+  }
+}
+
