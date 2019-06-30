@@ -3,7 +3,7 @@
   color: $light-grey-1;
   text-transform: uppercase;
   display: flex;
-  font-weight: 400;
+  font-weight: 300;
   background-color: $dark-grey-2;
   flex-flow: column;
 
@@ -26,7 +26,8 @@
     }
 
     & h2 {
-      font-size: 2.5em;
+      font-size: 2em;
+      font-weight: 500;
       margin: 0.5em;
     }
 
