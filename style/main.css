@@ -4,6 +4,7 @@ body {
   display: -ms-grid;
   display: grid;
   padding: 0px;
+  overflow: hidden;
   margin: 0px;
   background: linear-gradient(110deg, #D9D9D9 20%, #F9F9F9 250%);
   font-family: "Calibri", serif;
@@ -67,8 +68,8 @@ body {
   font-weight: 100;
   text-transform: uppercase;
   padding-left: 0.3em;
-  -webkit-transition: all 0.5s;
-  transition: all 0.5s;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
 }
 
 .header .__mainTitle .weekx {
@@ -404,6 +405,112 @@ body {
   z-index: 20;
   height: 100%;
   cursor: pointer;
+}
+
+.day-card .__schedule {
+  background-color: #F9F9F9;
+  position: relative;
+  display: -ms-grid;
+  display: grid;
+  grid-template: "labels spans" 1fr / 1fr 9fr;
+}
+
+.day-card .__schedule .__hours-labels {
+  grid-area: labels;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  background: linear-gradient(120deg, rgba(40, 39, 38, 0.8), rgba(58, 56, 53, 0.8) 130%);
+}
+
+.day-card .__schedule .__hours-labels .__label {
+  text-align: center;
+  -webkit-transform: translateY(90%);
+          transform: translateY(90%);
+  width: 100%;
+  height: 16.7%;
+  font-weight: 100;
+  color: #D6CAB0;
+  font-size: 1.3em;
+  text-decoration: underline;
+}
+
+.day-card .__schedule .__hour-spans {
+  grid-area: spans;
+  position: relative;
+}
+
+.day-card .__schedule .__hour-spans .__4-hours {
+  height: 16.7%;
+}
+
+.day-card .__schedule .__hour-spans .__4-hours:not(:last-child) {
+  border-bottom: 1px solid #86817C;
+}
+
+.day-card .__schedule .__tasks-spans-box {
+  position: absolute;
+  left: 10%;
+  width: 90%;
+  height: 100%;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.day-card .__schedule .__tasks-spans-box .__task-spans {
+  position: absolute;
+  border-radius: 0rem;
+  border: 1px solid #86817C;
+  cursor: pointer;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+}
+
+.day-card .__schedule .__tasks-spans-box .__task-spans:hover {
+  -webkit-box-shadow: 0.1rem 0.2rem rgba(134, 129, 124, 0.2);
+          box-shadow: 0.1rem 0.2rem rgba(134, 129, 124, 0.2);
+  border: 1px solid #D9D9D9;
+}
+
+.day-card .__schedule .__tasks-spans-box #task1 {
+  -webkit-transform: translateX(0);
+          transform: translateX(0);
+  width: 5%;
+  height: 30%;
+  top: 33.6%;
+  background: linear-gradient(110deg, linen, darkred 550%);
+}
+
+.day-card .__schedule .__tasks-spans-box #task2 {
+  -webkit-transform: translateX(120%);
+          transform: translateX(120%);
+  width: 5%;
+  height: 25%;
+  top: 16.7%;
+  background: linear-gradient(110deg, linen, darkblue 550%);
+}
+
+.day-card .__schedule .__tasks-spans-box #task3 {
+  -webkit-transform: translateX(120%);
+          transform: translateX(120%);
+  width: 5%;
+  height: 15%;
+  top: 50.5%;
+  background: linear-gradient(110deg, linen, darkgreen 550%);
+}
+
+.day-card .__schedule .__tasks-spans-box #task4 {
+  -webkit-transform: translateX(240%);
+          transform: translateX(240%);
+  width: 5%;
+  height: 25%;
+  top: 59.1%;
+  background: linear-gradient(110deg, linen, darkorange 550%);
 }
 
 .next-task {
