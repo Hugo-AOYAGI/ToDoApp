@@ -9,8 +9,8 @@ body {
   font-family: "Calibri", serif;
   height: 100vh;
   grid-template: "head head timer" 2fr
-                 "nav  main main" 12fr
-                 "nav  foot foot" 1fr
+                 "main  main main" 12fr
+                 "foot  foot foot" 1fr
                  / 1fr 3.5fr 1.5fr;
 }
 

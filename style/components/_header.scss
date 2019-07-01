@@ -10,8 +10,8 @@
   & .__mainTitle {
     transition: all 0.5s;
     position: relative;
-    margin-left: 3em;
-    min-width: 30%;
+    margin-left: 10%;
+    min-width: 20%;
     height: 4em;
 
     & h1 {
@@ -30,27 +30,14 @@
 
     }
 
-    & .weekx {
-      opacity: 0;
-    }
-
-    &:hover > .weekx {
-      opacity: 1;
-      transform: rotateY(360deg);
-    }
-
-    &:hover > .yourweek {
-      opacity: 0;
-      transform: rotateY(360deg);
-    }
-
   }
     
   & .__time-container {
-    width: 50%;
+    width: 20%;
     height: 4em;
     position: relative;
-    padding: 5%;
+    padding: 0;
+    margin: 0;
     vertical-align: middle;
 
     & .__text-second {
