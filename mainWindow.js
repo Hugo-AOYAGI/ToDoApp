@@ -4,6 +4,7 @@
 const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 const months = ["January", "February", "March", "April", "May", "June", "July", "September", "October", "November", "December"];
 
+let body = document.querySelector("body");
 let buttons = [];
 // Getting the template
 let selection_bar = document.querySelector(".day-selection-bar");
@@ -21,6 +22,23 @@ for(day of days) {
 template.style.display = "none";
 for(button of buttons) {
   selection_bar.appendChild(button);
+}
+
+// Manages the navigation bar button
+let nav_btn = document.querySelector(".nav-btn");
+nav_btn.addEventListener("click", () => {toggleNavBar();});
+
+// Allows for the navigation bar to appear and disappear
+toggleNavBar = () => {
+  if (selection_bar.style.display == "none" || selection_bar.style.display == "" ) {
+    body.style.gridTemplate = '"head head timer" 2fr "nav main main" 12fr "nav foot foot" 1fr / 1fr 3.5fr 1.5fr';
+    selection_bar.style.display = "flex";
+    nav_btn.style.transform = "rotateZ(90deg)";
+  } else {
+    body.style.gridTemplate = '"head head timer" 2fr "main main main" 12fr "foot foot foot" 1fr / 1fr 3.5fr 1.5fr';
+    selection_bar.style.display = "none";
+    nav_btn.style.transform = "rotateZ(0deg)";
+  }
 }
 
 //Displaying the date on the page header
@@ -134,10 +152,3 @@ function toggleTaskCard(i) {
   }
 }
 
-function getNumberOfWeek() {
-  const today = new Date();
-  const firstDayOfYear = new Date(today.getFullYear(), 0, 1);
-  const pastDaysOfYear = (today - firstDayOfYear) / 86400000;
-  return Math.ceil((pastDaysOfYear + firstDayOfYear.getDay() + 1) / 7);
-}
-console.log(getNumberOfWeek());
