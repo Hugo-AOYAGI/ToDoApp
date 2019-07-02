@@ -1,8 +1,9 @@
 
 
+/*DAY SELECTION BAR*/
+
 // Setting up all the buttons for the day selection bar
 const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
-const months = ["January", "February", "March", "April", "May", "June", "July", "September", "October", "November", "December"];
 
 let body = document.querySelector("body");
 let buttons = [];
@@ -16,13 +17,12 @@ for(day of days) {
   copy.innerHTML = copy.innerHTML.replace("X", "0");
   copy.setAttribute("class", "__day-button")
   buttons.push(copy);
+  // Displaying all the buttons
+  selection_bar.appendChild(copy);
 }
 
-// Displaying all the buttons
 template.style.display = "none";
-for(button of buttons) {
-  selection_bar.appendChild(button);
-}
+
 
 // Manages the navigation bar button
 let nav_btn = document.querySelector(".nav-btn");
@@ -40,6 +40,8 @@ toggleNavBar = () => {
     nav_btn.style.transform = "rotateZ(0deg)";
   }
 }
+
+/*HEADER*/
 
 //Displaying the date on the page header
 let date_span = document.querySelector(".__date");
@@ -67,6 +69,7 @@ reloadDate = () => {
 reloadDate();
 let t = setInterval(reloadDate, 1000);
 
+/*TASK CARDS*/
 
 //Manages the sidebar buttons on each task
 let tab_buttons = document.getElementsByClassName("__tab-main");
@@ -151,4 +154,24 @@ function toggleTaskCard(i) {
     }
   }
 }
+
+/*DAY CARDS*/
+
+// Makes 7 copy of the template for each day of the week
+let day_cards = [];
+let template_day_card = document.querySelector(".template.day-card");
+let day_cards_container = document.querySelector(".day-card-container");
+
+for(day of days) {
+  copy = template_day_card.cloneNode(true);
+  // Changing the template with the right text
+  copy.innerHTML = copy.innerHTML.replace("[DAY-NAME]", day);
+  copy.setAttribute("class", "day-card")
+  copy.style.display = "grid";
+  day_cards.push(copy);
+  day_cards_container.appendChild(copy);
+}
+
+template_day_card.style.display = "none";
+
 

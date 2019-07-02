@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "electron": "^5.0.5",
+    "jquery": "^3.4.1",
     "sass": "^1.22.0",
     "weeknumber": "^1.1.1"
   }

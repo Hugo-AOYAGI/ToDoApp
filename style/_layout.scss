@@ -22,8 +22,9 @@ body {
   grid-area: nav;
 }
 
-.day-card {
+.day-card-container {
   grid-area: main;
+  position: relative;
 }
 
 .footer {
