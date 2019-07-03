@@ -1,177 +1,149 @@
 
 
-/*DAY SELECTION BAR*/
+// Seeting up array of the days
+// let days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]; 
+const $body = $("body");
 
-// Setting up all the buttons for the day selection bar
-const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+// Wait for window to load
+$(document).ready(() => { 
 
-let body = document.querySelector("body");
-let buttons = [];
-// Getting the template
-let selection_bar = document.querySelector(".day-selection-bar");
-let template = document.querySelector(".template.__day-button");
-for(day of days) {
-  copy = template.cloneNode(true);
-  // Changing the template with the right text
-  copy.innerHTML = copy.innerHTML.replace("Day Name", day);
-  copy.innerHTML = copy.innerHTML.replace("X", "0");
-  copy.setAttribute("class", "__day-button")
-  buttons.push(copy);
-  // Displaying all the buttons
-  selection_bar.appendChild(copy);
-}
+  /* ===Creating the day Selection bar=== */
 
-template.style.display = "none";
+  // Getting the template and day selection bar
+  let $template = $(".__day-button.template");
+  let $nav_bar = $(".day-selection-bar");
+  let nav_enabled = false;
 
-
-// Manages the navigation bar button
-let nav_btn = document.querySelector(".nav-btn");
-nav_btn.addEventListener("click", () => {toggleNavBar();});
-
-// Allows for the navigation bar to appear and disappear
-toggleNavBar = () => {
-  if (selection_bar.style.display == "none" || selection_bar.style.display == "" ) {
-    body.style.gridTemplate = '"head head timer" 2fr "nav main main" 12fr "nav foot foot" 1fr / 1fr 3.5fr 1.5fr';
-    selection_bar.style.display = "flex";
-    nav_btn.style.transform = "rotateZ(90deg)";
-  } else {
-    body.style.gridTemplate = '"head head timer" 2fr "main main main" 12fr "foot foot foot" 1fr / 1fr 3.5fr 1.5fr';
-    selection_bar.style.display = "none";
-    nav_btn.style.transform = "rotateZ(0deg)";
+  //Creating a button for each day of the week
+  for (day of days) {
+    // Cloning template
+    let clone = $template.clone()
+    // Changing the text in the template
+    clone.html(clone.html().replace("Day Name", day).replace("X", "0"));
+    $nav_bar.append(clone);
   }
-}
+  // Making it so the template doesn't show
+  $template.css("display", "none");
 
-/*HEADER*/
-
-//Displaying the date on the page header
-let date_span = document.querySelector(".__date");
-let time_span = document.querySelector(".__time");
-
-//Adds a zero before a date or time if it is lesser than 10
-leadingZero = (n) => {
-  return n < 10 ? "0"+n : n;
-}
-
-//Reloads the date every second
-reloadDate = () => {
-  let d = new Date();
-  // Formats the date with leading zeros and dashes
-  let txt_date = `${leadingZero(d.getDate())} /
-                  ${leadingZero(d.getMonth()+1)} /
-                  ${leadingZero(d.getFullYear())}`;
-  // Formats the time with leading zeros and semi-colons
-  let txt_time = `${leadingZero(d.getHours())} :
-                  ${leadingZero(d.getMinutes())} :
-                  ${leadingZero(d.getSeconds())}`;
-  date_span.innerHTML = txt_date;
-  time_span.innerHTML = txt_time;
-}
-reloadDate();
-let t = setInterval(reloadDate, 1000);
-
-/*TASK CARDS*/
-
-//Manages the sidebar buttons on each task
-let tab_buttons = document.getElementsByClassName("__tab-main");
-let sidebars = document.getElementsByClassName("__side-bar");
-let titles = document.querySelectorAll(".task .__title");
-
-// Add event listeners to each tab
-for(let i = 0; i < tab_buttons.length; i++) {
-  tab_buttons[i].addEventListener("click", () => {toggleSideBar(i);});
-}
-
-// Displays the transition when the button is pressed
-function toggleSideBar(i) {
-  // Checks whether the sidebar is already shown or not
-  if (tab_buttons[i].innerHTML == "〉") {
-    sidebars[i].style.width = "15%";
-    tab_buttons[i].style.left = "15%";
-    tab_buttons[i].innerHTML = "〈";
-    titles[i].style.marginLeft = "15%";
-  } else {
-    sidebars[i].style.width = "0";
-    tab_buttons[i].style.left = "0%";
-    tab_buttons[i].innerHTML = "〉";
-    titles[i].style.marginLeft = "0";
-  }
-}
-
-// Manages the more-info button on each task which displays the full task card
-let more_info_buttons = document.getElementsByClassName("__more-button");
-let tasks = document.getElementsByClassName("task");
-let time_divs = document.getElementsByClassName("__start-time");
-let task_cards = document.getElementsByClassName("task-card");
-
-
-// Add event listeners to each button
-for(let i = 0; i < tasks.length; i++) {
-  more_info_buttons[i].addEventListener("click", () => {toggleTaskCard(i);});
-}
-
-// Displays the transition when the button is pressed
-function toggleTaskCard(i) {
-  // Checks whether the card is already shown or not
-  if (tasks[i].style.height == "20%" || tasks[i].style.height == "") {
-    if (tab_buttons[i].innerHTML != "〉") {
-      toggleSideBar(i);
-    }
-    tasks[i].style.height = "10%";
-    more_info_buttons[i].style.transform = "rotateZ(0deg)";
-    time_divs[i].style.opacity = "0";
-    tab_buttons[i].style.left = "-1em";
-    setTimeout(() => {task_cards[0].style.transform = "translateX(0)";}, 450);
-    // Hides all the other tasks
-    for(let j = 0; j < tasks.length; j++) {
-      if (j != i){
-        setTimeout(() => {
-          tasks[j].style.display = "none";
-        }, 300);
-      }
-      tasks[j].style.left = "-100%";
-      setTimeout(() => {
-        tasks[i].style.left = "0";
-      }, 600);
-      
-    }
-  } else {
-    tasks[i].style.height = "20%";
-    more_info_buttons[i].style.transform = "rotateZ(45deg)";
-    time_divs[i].style.opacity = "1";
-    tab_buttons[i].style.left = "0";
-    tasks[i].style.left = "-100%";
-    task_cards[0].style.transform = "translateX(100%)";
-    // Unhides all the other tasks
-    for(let j = 0; j < tasks.length; j++) {
-      if (j != i){
-        setTimeout(() => {
-          tasks[j].style.display = "block";
-        }, 300);
-      }
-      setTimeout(() => {
-        tasks[j].style.left = "0";
-      }, 600);
+  // Callback function of click event on nav_btn
+  toggleNavBar = () => {
+    // Checking if the navigation bar is already enabled
+    if (!nav_enabled) {
+      // Displaying the navigation bar
+      $body.css("grid-template-areas", "'head head timer' 'nav main main' 'nav foot foot'");
+      $nav_bar.css("display", "inline-flex");
+      $nav_btn.css("transform", "rotate(90deg)");
+      nav_enabled = true;
+    } else {
+      // Hiding the navigation bar
+      $body.css("grid-template-areas", "'head head timer' 'main main main' 'foot foot foot'");
+      $nav_bar.css("display", "none");
+      $nav_btn.css("transform", "rotate(0deg)");
+      nav_enabled = false;
     }
   }
-}
 
-/*DAY CARDS*/
+  // Adding event listener to the navigation button
+  let $nav_btn = $(".nav-btn");
+  $nav_btn.on("click", toggleNavBar);
 
-// Makes 7 copy of the template for each day of the week
-let day_cards = [];
-let template_day_card = document.querySelector(".template.day-card");
-let day_cards_container = document.querySelector(".day-card-container");
+  /* ===Displaying the time onto the header=== */
+  let $date_span = $("span.__date");
+  let $time_span = $("span.__time");
 
-for(day of days) {
-  copy = template_day_card.cloneNode(true);
-  // Changing the template with the right text
-  copy.innerHTML = copy.innerHTML.replace("[DAY-NAME]", day);
-  copy.setAttribute("class", "day-card")
-  copy.style.display = "grid";
-  day_cards.push(copy);
-  day_cards_container.appendChild(copy);
-}
+  //Fonction that adds a leading zero to time and date values for formatting
+  lz = (n) => {
+    return n < 10 ? "0"+n : n;
+  }
+  
+  // Updates the time and date spans every second
+  updateTimeAndDate = () => {
+    let d = new Date();
+    // Formating the dates and time
+    let formatedTime = `${lz(d.getHours())} : ${lz(d.getMinutes())} : ${lz(d.getSeconds())}`;
+    let formatedDate = `${lz(d.getDate())} / ${lz(d.getMonth())} / ${lz(d.getFullYear())}`;
+    // Changing the html of the time and date spans
+    $time_span.html(formatedTime);
+    $date_span.html(formatedDate);
+  }
+  // Calling the updateTimeAndDate every 1000 ms or 1s
+  updateTimeAndDate();
+  t = setInterval(updateTimeAndDate, 1000);
+  
 
-template_day_card.style.display = "none";
+  /* ===Managing the next-task element=== */
+
+  // Display the time left until the next task/event
 
 
+  // Add event listener to the next-task element thats redirects to the corresponding task card
+
+
+  /* ===Managing the day card=== */
+
+  // Load the tasks of the day card
+
+
+  // Load the schedule of the day card
+
+
+  /* ===Managing the task card=== */
+
+  // Add event listeners to go to task card with the more-info button
+
+  // Add event listeners to the tab and sidebar buttons
+  let $tabs = $(".__tab-main");
+  
+
+  toggleSideBar = (event) => {
+    // Getting the element that caused the click event
+    $tab = $(event.target);
+    // Checking if the sidebar of the tab is already toggled
+    if ($tab.css("left") == "0px") {
+      // Displaying the sidebar
+      $tab.siblings(".__side-bar").css("width", "15%");
+      $tab.siblings(".__title").css("left", "15%");
+      $tab.css("left", "15%");
+      $tabs.html("〈");
+    } else {
+      // Hiding the sidebar
+      $tab.siblings(".__side-bar").css("width", "0%");
+      $tab.siblings(".__title").css("left", "0%");
+      $tab.css("left", "0px");
+      $tabs.html("〉");
+    }
+  }
+
+  // Adds event listener to the tabs and checks if $tabs is an array or not
+  if(Array.isArray($tabs)) {
+    for (tab of $tabs) {
+      tab.on("click", toggleSideBar);
+    }
+  } else {
+    $tabs.on("click", toggleSideBar);
+  }
+
+  // Remove option for the task
+
+
+  // Edit option for the task
+
+
+  // Check option for the task
+
+
+
+  /* ===Adding footer events listeners=== */
+
+
+
+
+  /* ===New task feature=== */
+
+  // Create new html window (addTask.html) from the main.js
+
+
+  // Reload the tasks so that the new task appears
+
+
+}); 
