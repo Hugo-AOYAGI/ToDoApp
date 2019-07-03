@@ -6,6 +6,7 @@ const $body = $("body");
 
 // Wait for window to load
 $(document).ready(() => { 
+
   /* ===Creating the day Selection bar=== */
 
   // Getting the template and day selection bar
@@ -46,7 +47,6 @@ $(document).ready(() => {
   let $nav_btn = $(".nav-btn");
   $nav_btn.on("click", toggleNavBar);
 
-
   /* ===Displaying the time onto the header=== */
   let $date_span = $("span.__date");
   let $time_span = $("span.__time");
@@ -55,7 +55,7 @@ $(document).ready(() => {
   lz = (n) => {
     return n < 10 ? "0"+n : n;
   }
-
+  
   // Updates the time and date spans every second
   updateTimeAndDate = () => {
     let d = new Date();
@@ -67,7 +67,9 @@ $(document).ready(() => {
     $date_span.html(formatedDate);
   }
   // Calling the updateTimeAndDate every 1000 ms or 1s
+  updateTimeAndDate();
   t = setInterval(updateTimeAndDate, 1000);
+  
 
   /* ===Managing the next-task element=== */
 
