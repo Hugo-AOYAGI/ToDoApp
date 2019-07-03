@@ -1,7 +1,7 @@
 
 
- // Seeting up array of the days
-const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]; 
+// Seeting up array of the days
+// let days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]; 
 const $body = $("body");
 
 // Wait for window to load

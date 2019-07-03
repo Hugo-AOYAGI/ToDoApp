@@ -1,14 +1,32 @@
 
+
+//Fonction that adds a leading zero to time and date values for formatting
+lz = (n) => {
+  return n < 10 ? "0"+n : n;
+}
+
+const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+
+
 // Contains the information of the day
 class Day {
 
   // Creates a day from an existing day, loading its saved tasks
   static fromDate (date) {
     // Get ID of the day from the argument's date
-
-    // Get the information to display in the future in an object
-
+    this.id = `${lz(date.getDate())}${lz(date.getMonth())}${lz(date.getFullYear())}`
+    // Get the information to display in the day-card
+    this.day_name = days[date.getDay()-1];
     // Load the tasks at the date
+    $.ajax({ 
+      type: 'GET', 
+      url: 'user-data/user-data.json', 
+      data: { get_param: 'value' }, 
+      dataType: 'json',
+      success: function (data) { 
+        console.log(data);
+      }
+    });
 
   }
 
@@ -38,3 +56,5 @@ class Day {
   }
   
 }
+
+Day.fromDate(new Date());
