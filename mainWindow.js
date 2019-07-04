@@ -90,11 +90,10 @@ $(document).ready(() => {
   // Add event listeners to go to task card with the more-info button
   let $tasks = $(".task");
 
-  //(1) Change styling of the task--> (2) Hide all tasks --> (3) Show only task and task card needed
    // Displays the taskcard
-  toggleTaskCard = (event) => {
+  toggleTaskCard = (i) => {
     // Getting the element that caused the click event
-    let $task = $(event.target).closest(".task");
+    let $task = $tasks[i];
     let $task_card = $task.next(".task-card");
     // Checking if the sidebar of the tab is already toggled
     if ($task.find(".__start-time").css("opacity") == "1") {
@@ -102,27 +101,48 @@ $(document).ready(() => {
       $task.css("height", "10%");
       $task.find(".__start-time").css("opacity", "0");
       $task.find(".__more-button").css("transform", "rotateZ(0deg)");
-    } else {
-      // Reverts the styling of the task
+      // Hide all tasks
+      for (task of $tasks) {
+        task.animate({left: "-100%"}, 0, function() {
+          if (!task.is($task)) {task.css("display", "none");}
+        });
+      }
+      // Show only the task and task card needed
       setTimeout(() => {
-        $task.css("height", "20%");
-        $task.find(".__start-time").css("opacity", "1");
-        $task.find(".__more-button").css("transform", "rotateZ(45deg)");
-      }, 600);
+        $task.css("left", "0");
+        $task_card.css("left", "-100%");
+      }, 300);
+    } else {
+      //Hide the task and task card
+      $task.css("left", "-100%");
+      $task_card.css("left", "0");
+      // Reverts the styling of the task
+      $task.css("height", "20%");
+      $task.find(".__start-time").css("opacity", "1");
+      $task.find(".__more-button").css("transform", "rotateZ(45deg)");
+      //Show every card
+      setTimeout(() => {
+        for (task of $tasks) {
+          if (!task.is(".template"))
+            task.css("display", "block");
+        }}, 300);
+      setTimeout(() => {
+        for (task of $tasks) {
+          if (!task.is(".template"))
+            task.css("left", "0");
+        }}, 400);
     }
   }
 
   reloadTasks = () => {
-    $tasks = $(".task");
-    $tasks.each( function () {
-      $(this).find(".__more-button").on("click", toggleTaskCard);
-    });
+    $tasks = $(".task").toArray();
+    for (let i=0; i<$tasks.length; i++) {
+      $tasks[i] = $($tasks[i]);
+      $tasks[i].find(".__more-button").on("click", () => {toggleTaskCard(i);});
+    }
   }
 
   setTimeout(reloadTasks, 1000);
-  
-
-
 
   // Displays the side bars
   toggleSideBar = (event) => {

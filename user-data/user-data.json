@@ -22,12 +22,6 @@
             "title": "Task4",
             "desc": "This is the task4",
             "start": "13:00",
-            "end": "13:15"
-        },
-        {
-            "title": "Task5",
-            "desc": "This is the task5",
-            "start": "15:00",
             "end": "N/A"
         }
     ]

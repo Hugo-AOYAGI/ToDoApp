@@ -62,8 +62,9 @@ class Day {
       $clone_task.find(".__title").html($task["title"]);
       $clone_task.find(".__start-time").html($task["start"]);
       $tasks_box.append($clone_task);
-      $clone_task_card.find(".__start-time").html($task["start"])
-      $clone_task_card.find(".__end-time").html($task["end"])
+      $clone_task_card.find(".__description").html($task["desc"]);
+      $clone_task_card.find(".__start-time").html($task["start"]);
+      $clone_task_card.find(".__end-time").html($task["end"]);
       $clone_task_card.find(".__timer").html("N/A");
       $tasks_box.append($clone_task_card);
       // Keeping reference of the task cards to update the timer.
@@ -81,7 +82,6 @@ class Day {
     }
     for (let i=0; i<this.tasks.length; i++) {
       let until_time = new Date(this.dateString.replace("[time]", this.tasks[i]["start"]+":00")) - new Date();
-      until_time *= -1;
       if (until_time < 0) {
         this.$task_cards[i].find(".__timer").html("Done !");
       } else {
