@@ -17,13 +17,11 @@ $(document).ready(() => {
   //Creating a button for each day of the week
   for (day of days) {
     // Cloning template
-    let clone = $template.clone()
+    let clone = $template.clone().css("display", "unset");
     // Changing the text in the template
     clone.html(clone.html().replace("Day Name", day).replace("X", "0"));
     $nav_bar.append(clone);
   }
-  // Making it so the template doesn't show
-  $template.css("display", "none");
 
   // Callback function of click event on nav_btn
   toggleNavBar = () => {
@@ -91,10 +89,7 @@ $(document).ready(() => {
 
   // Add event listeners to go to task card with the more-info button
 
-  // Add event listeners to the tab and sidebar buttons
-  let $tabs = $(".__tab-main");
-  
-
+  // Displays the side bars
   toggleSideBar = (event) => {
     // Getting the element that caused the click event
     $tab = $(event.target);
@@ -104,24 +99,32 @@ $(document).ready(() => {
       $tab.siblings(".__side-bar").css("width", "15%");
       $tab.siblings(".__title").css("left", "15%");
       $tab.css("left", "15%");
-      $tabs.html("〈");
+      $tab.html("〈");
     } else {
       // Hiding the sidebar
       $tab.siblings(".__side-bar").css("width", "0%");
       $tab.siblings(".__title").css("left", "0%");
       $tab.css("left", "0px");
-      $tabs.html("〉");
+      $tab.html("〉");
     }
   }
 
-  // Adds event listener to the tabs and checks if $tabs is an array or not
-  if(Array.isArray($tabs)) {
-    for (tab of $tabs) {
-      tab.on("click", toggleSideBar);
+  loadSideBars = () => {
+    $tabs = $(".__tab-main");
+
+    // Adds event listener to the tabs and checks if $tabs is an array or not
+    if(Array.isArray($tabs)) {
+      for (tab of $tabs) {
+        tab.on("click", toggleSideBar);
+      }
+    } else {
+      $tabs.on("click", toggleSideBar);
     }
-  } else {
-    $tabs.on("click", toggleSideBar);
   }
+
+
+  setTimeout(loadSideBars, 1000);
+  
 
   // Remove option for the task
 

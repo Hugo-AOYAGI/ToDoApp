@@ -53,6 +53,10 @@ body {
   background-color: rgba(250, 240, 230, 0.6);
 }
 
+.template {
+  display: none;
+}
+
 .nav-btn {
   position: fixed;
   display: -webkit-box;
