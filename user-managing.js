@@ -1,5 +1,4 @@
 
-
 //Fonction that adds a leading zero to time and date values for formatting
 lz = (n) => {
   return n < 10 ? "0"+n : n;
@@ -70,7 +69,9 @@ class Day {
       // Keeping reference of the task cards to update the timer.
       this.$task_cards.push($clone_task_card);
     }
+    
     this.updateTimers();
+
   }
 
   // Updates the timers of every task card of the current day
@@ -107,3 +108,5 @@ class Day {
 
 current_day = Day.fromDate(new Date(new Date() - one_day));
 
+// Interval for updating timers
+let t = setInterval(current_day.updateTimers(), 1000);

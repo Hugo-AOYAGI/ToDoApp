@@ -88,6 +88,41 @@ $(document).ready(() => {
   /* ===Managing the task card=== */
 
   // Add event listeners to go to task card with the more-info button
+  let $tasks = $(".task");
+
+  //(1) Change styling of the task--> (2) Hide all tasks --> (3) Show only task and task card needed
+   // Displays the taskcard
+  toggleTaskCard = (event) => {
+    // Getting the element that caused the click event
+    let $task = $(event.target).closest(".task");
+    let $task_card = $task.next(".task-card");
+    // Checking if the sidebar of the tab is already toggled
+    if ($task.find(".__start-time").css("opacity") == "1") {
+      // Modifies the styling of the task
+      $task.css("height", "10%");
+      $task.find(".__start-time").css("opacity", "0");
+      $task.find(".__more-button").css("transform", "rotateZ(0deg)");
+    } else {
+      // Reverts the styling of the task
+      setTimeout(() => {
+        $task.css("height", "20%");
+        $task.find(".__start-time").css("opacity", "1");
+        $task.find(".__more-button").css("transform", "rotateZ(45deg)");
+      }, 600);
+    }
+  }
+
+  reloadTasks = () => {
+    $tasks = $(".task");
+    $tasks.each( function () {
+      $(this).find(".__more-button").on("click", toggleTaskCard);
+    });
+  }
+
+  setTimeout(reloadTasks, 1000);
+  
+
+
 
   // Displays the side bars
   toggleSideBar = (event) => {
@@ -109,21 +144,15 @@ $(document).ready(() => {
     }
   }
 
-  loadSideBars = () => {
-    $tabs = $(".__tab-main");
-
-    // Adds event listener to the tabs and checks if $tabs is an array or not
-    if(Array.isArray($tabs)) {
-      for (tab of $tabs) {
-        tab.on("click", toggleSideBar);
-      }
-    } else {
-      $tabs.on("click", toggleSideBar);
-    }
+  reloadSideBars = () => {
+    let $tabs = $(".__tab-main");
+    
+    $tabs.each( function () {
+      $(this).on("click", toggleSideBar);
+    });
   }
 
-
-  setTimeout(loadSideBars, 1000);
+  setTimeout(reloadSideBars, 1000);
   
 
   // Remove option for the task

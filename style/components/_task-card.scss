@@ -8,10 +8,11 @@
     box-sizing: border-box;
     top: 10%;
     left: 0;
-    width: 100%;
+    width: 0%;
+    overflow: hidden;
     min-height: 90%;
     transform: translateX(100%);
-    transition: all 0.5s;
+    transition: all 0.3s;
 
     & .__sticker-important {
         position: absolute;
