@@ -7,11 +7,12 @@
     background-color: $light-grey-3;
     box-sizing: border-box;
     top: 10%;
+    width: 100%;
+    // left: 100%;
     left: 0;
-    width: 0%;
+    display: none;
     overflow: hidden;
     min-height: 90%;
-    transform: translateX(100%);
     transition: all 0.3s;
 
     & .__sticker-important {

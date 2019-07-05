@@ -106,7 +106,7 @@ class Day {
   
 }
 
-current_day = Day.fromDate(new Date(new Date() - one_day));
+current_day = Day.fromDate(new Date(new Date() - 2*one_day));
 
 // Interval for updating timers
 let t = setInterval(current_day.updateTimers(), 1000);

@@ -99,38 +99,25 @@ $(document).ready(() => {
     if ($task.find(".__start-time").css("opacity") == "1") {
       // Modifies the styling of the task
       $task.css("height", "10%");
+      $task.find(".__tab-main").css("display", "none");
       $task.find(".__start-time").css("opacity", "0");
-      $task.find(".__more-button").css("transform", "rotateZ(0deg)");
-      // Hide all tasks
-      for (task of $tasks) {
-        task.animate({left: "-100%"}, 0, function() {
-          if (!task.is($task)) {task.css("display", "none");}
-        });
+      $task.find(".__more-button").css("transform", "rotateZ(0deg)")
+      $task_card.css("display", "unset");
+      for(task of $tasks){
+        if(!task.is($task))
+          task.css("display", "none");
       }
-      // Show only the task and task card needed
-      setTimeout(() => {
-        $task.css("left", "0");
-        $task_card.css("left", "-100%");
-      }, 300);
     } else {
-      //Hide the task and task card
-      $task.css("left", "-100%");
-      $task_card.css("left", "0");
-      // Reverts the styling of the task
+      // Modifies the styling of the task
       $task.css("height", "20%");
+      $task.find(".__tab-main").css("display", "flex");
       $task.find(".__start-time").css("opacity", "1");
-      $task.find(".__more-button").css("transform", "rotateZ(45deg)");
-      //Show every card
-      setTimeout(() => {
-        for (task of $tasks) {
-          if (!task.is(".template"))
-            task.css("display", "block");
-        }}, 300);
-      setTimeout(() => {
-        for (task of $tasks) {
-          if (!task.is(".template"))
-            task.css("left", "0");
-        }}, 400);
+      $task.find(".__more-button").css("transform", "rotateZ(45deg)")
+      $task_card.css("display", "none");
+      for(task of $tasks) {
+        if (!task.is(".template"))
+          task.css("display", "block");
+      }
     }
   }
 
