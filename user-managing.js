@@ -66,6 +66,8 @@ class Day {
       $clone_task_card.find(".__start-time").html($task["start"]);
       $clone_task_card.find(".__end-time").html($task["end"]);
       $clone_task_card.find(".__timer").html("N/A");
+      if ($task["important"] == "false")
+        $clone_task_card.find(".__sticker-important").css("display", "none");
       $tasks_box.append($clone_task_card);
       // Keeping reference of the task cards to update the timer.
       this.$task_cards.push($clone_task_card);

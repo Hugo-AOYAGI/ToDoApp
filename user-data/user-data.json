@@ -4,25 +4,29 @@
             "title": "Task1",
             "desc": "This is the task1",
             "start": "08:00",
-            "end": "08:45"
+            "end": "08:45",
+            "important": "true"
         },
         {
             "title": "Task2",
             "desc": "This is the task2",
             "start": "09:00",
-            "end": "10:00"
+            "end": "10:00",
+            "important": "false"
         },
         {
             "title": "Task3",
             "desc": "This is the task3",
             "start": "N/A",
-            "end": "N/A"
+            "end": "N/A",
+            "important": "false"
         },
         {
             "title": "Task4",
             "desc": "This is the task4",
             "start": "13:00",
-            "end": "N/A"
+            "end": "N/A",
+            "important": "true"
         }
     ]
 }
