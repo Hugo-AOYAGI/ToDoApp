@@ -1,11 +1,34 @@
+/* UTILITY FUNCTION */
 
 //Fonction that adds a leading zero to time and date values for formatting
 lz = (n) => {
   return n < 10 ? "0"+n : n;
 }
+
+addDates = (a, b, asStr = true) => {
+  let date1 = a.split(":"), date2 = b.split(":");
+  let hours = parseInt(date1[0]) + parseInt(date2[0]);
+  let minutes = parseInt(date1[1]) + parseInt(date2[1]);
+  minutes = minutes%60;
+  hours += Math.trunc(minutes/60);
+  return asStr ? `${lz(hours)}:${lz(minutes)}` : hours + minutes/60;
+}
+
+subDates = (a, b, asStr = true) => {
+  let date1 = a.split(":"), date2 = b.split(":");
+  let hours = parseInt(date1[0]) - parseInt(date2[0]);
+  let minutes = parseInt(date1[1]) - parseInt(date2[1]);
+  minutes = minutes%60;
+  hours += Math.trunc(minutes/60);
+  return asStr ? `${lz(hours)}:${lz(minutes)}` : hours + minutes/60;
+}
+
+/* CONSTANTS */
+
 const one_day = 86400000;
 
 const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+const task_colors = ["blue", "cyan", "goldenrod", "green", "magenta", "orchid", "red", "slategrey", "turquoise"];
 
 // Contains the information of the day
 class Day {
@@ -35,6 +58,7 @@ class Day {
       },
       complete: () => {
         day.loadTasks($(".day-card.template"));
+        day.loadSchedule();
       }
     });
 
@@ -98,12 +122,28 @@ class Day {
   }
 
   // Loads the tasks into the schedule
-  loadSchedule = (card) => {
+  loadSchedule = () => {
     //Loops through every task of that day 
-
+    let $tasks_spans_box = $(".__tasks-spans-box");
+    for (let i=0; i<this.tasks.length; i++){
       //Display the task's div
+      let $task_span = $(document.createElement("span")).addClass("__task-span");
+      // Calculating every position and dimensions
+      let width = 100/this.tasks.length - 1*this.tasks.length;
+      let left = width*i + 2*(i+1);
+      let height = 100*(subDates(this.tasks[i]["end"], this.tasks[i]["start"], false)/24);
+      let top = 100*(subDates(this.tasks[i]["start"], "0:0", false)/24);
+      if (!top || !height) {
+        height = 100
+        $task_span.css("opacity", "0.6");
+      }
+      let color = `dark${task_colors[i%task_colors.length]}`;
+      $task_span.css({"width": `${width}%`,"left": `${left}%`, "height": `${height}%`,"top": `${top}%`, 
+                      "background": `linear-gradient(110deg, linen, ${color} 550%)`});
+      $tasks_spans_box.append($task_span);
 
       //Display the info window of the task
+    }
   }
   
 }

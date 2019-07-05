@@ -20,9 +20,8 @@ body {
   grid-area: nav;
 }
 
-.day-card-container {
+.day-card {
   grid-area: main;
-  position: relative;
 }
 
 .footer {
@@ -236,9 +235,7 @@ body {
   margin: 0em;
   display: -ms-grid;
   display: grid;
-  width: 100%;
-  height: 100%;
-  position: absolute;
+  position: relative;
   grid-template: "titleT titleD titleD titleS" 1fr "task task schedule schedule" 14fr / 3fr 1fr 1fr 3fr;
 }
 
@@ -257,6 +254,7 @@ body {
   background-color: #D9D9D9;
   text-align: center;
   font-weight: 300;
+  text-transform: uppercase;
   font-size: 2.5em;
   color: #54504C;
 }
@@ -512,7 +510,7 @@ body {
   padding-right: 0.5rem;
 }
 
-.day-card .__schedule .__tasks-spans-box .__task-spans {
+.day-card .__schedule .__tasks-spans-box .__task-span {
   position: absolute;
   border-radius: 0rem;
   border: 1px solid #86817C;
@@ -521,7 +519,7 @@ body {
   transition: all 0.2s;
 }
 
-.day-card .__schedule .__tasks-spans-box .__task-spans:hover {
+.day-card .__schedule .__tasks-spans-box .__task-span:hover {
   -webkit-box-shadow: 0.1rem 0.2rem rgba(134, 129, 124, 0.2);
           box-shadow: 0.1rem 0.2rem rgba(134, 129, 124, 0.2);
   border: 1px solid #D9D9D9;
