@@ -40,6 +40,7 @@ class Day {
     let day = new Day();
     day.$task_cards = [];
     day.$tasks = [];
+    day.date = date;
     day.dateString = date.toString().replace(
         `${lz(date.getHours())}:${lz(date.getMinutes())}:${lz(date.getSeconds())}`,
          "[time]");
@@ -72,7 +73,7 @@ class Day {
   loadTasks = ($card) => {
     // Displaying the day name
     $card.html($day_card_template.html());
-    $card.find(".__title-day").html(this.day_name);
+    $card.find(".__title-day-container").find(".__day").html(this.day_name);
     // Load every task in the tasks-box
     let $template_task = $card.find(".task.template");
     let $template_task_card = $card.find(".task-card.template");

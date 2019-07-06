@@ -213,11 +213,11 @@ $(document).ready(() => {
     refreshCurrDay();
   });
   $(".__next-w").on("click", () => {
-    day_counter += 7;
+    day_counter += 7 - current_day.date.getDay() + 1;
     refreshCurrDay();
   });
   $(".__prev-w").on("click", () => {
-    day_counter -= 7;
+    day_counter -= 7 + current_day.date.getDay() - 1;
     refreshCurrDay();
   });
 
