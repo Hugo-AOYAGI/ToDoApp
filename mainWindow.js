@@ -90,34 +90,52 @@ $(document).ready(() => {
   // Add event listeners to go to task card with the more-info button
   let $tasks = $(".task");
 
+  // Displays the task card and modify the task's styling
+  displayCard = ($task, $task_card) => {
+    // Modifies the styling of the task
+    $task.css("height", "10%");
+    $task.find(".__tab-main").css("display", "none");
+    $task.find(".__start-time").css("opacity", "0");
+    $task.find(".__more-button").css("transform", "rotateZ(0deg)")
+    $task_card.css("display", "unset");
+    for(task of $tasks){
+      if(!task.is($task))
+        task.css("display", "none");
+    }
+  }
+
+  // Resets the task and task card styling back to default
+  hideCard = ($task, $task_card) => {
+    // Modifies the styling of the task
+    $task.css("height", "20%");
+    $task.find(".__tab-main").css("display", "flex");
+    $task.find(".__start-time").css("opacity", "1");
+    $task.find(".__more-button").css("transform", "rotateZ(45deg)")
+    $task_card.css("display", "none");
+    for(task of $tasks) {
+      if (!task.is(".template"))
+        task.css("display", "block");
+    }
+  }
+
    // Displays the taskcard
   toggleTaskCard = (i) => {
     // Getting the element that caused the click event
-    let $task = $tasks[i];
+    let $task = typeof i == "number" ? $tasks[i] : i;
     let $task_card = $task.next(".task-card");
     // Checking if the sidebar of the tab is already toggled
     if ($task.find(".__start-time").css("opacity") == "1") {
-      // Modifies the styling of the task
-      $task.css("height", "10%");
-      $task.find(".__tab-main").css("display", "none");
-      $task.find(".__start-time").css("opacity", "0");
-      $task.find(".__more-button").css("transform", "rotateZ(0deg)")
-      $task_card.css("display", "unset");
-      for(task of $tasks){
-        if(!task.is($task))
-          task.css("display", "none");
-      }
+      displayCard($task, $task_card);
     } else {
-      // Modifies the styling of the task
-      $task.css("height", "20%");
-      $task.find(".__tab-main").css("display", "flex");
-      $task.find(".__start-time").css("opacity", "1");
-      $task.find(".__more-button").css("transform", "rotateZ(45deg)")
-      $task_card.css("display", "none");
-      for(task of $tasks) {
-        if (!task.is(".template"))
-          task.css("display", "block");
-      }
+      hideCard($task, $task_card);
+    }
+  }
+
+  // Hides all current task cards reseting the styling to default
+  resetAllCards = () => {
+    for (let $task of $tasks) {
+      let $task_card = $task.next(".task-card");
+      hideCard($task, $task_card);
     }
   }
 
@@ -183,6 +201,14 @@ $(document).ready(() => {
 
 
   // Reload the tasks so that the new task appears
+
+
+
+  /* LOAD THE FIRST DAY */
+  current_day = Day.fromDate(new Date(new Date()));
+
+  // Interval for updating timers
+  let t1 = setInterval(current_day.updateTimers(), 1000);
 
 
 }); 

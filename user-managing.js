@@ -38,6 +38,7 @@ class Day {
     // Defining variables
     let day = new Day();
     day.$task_cards = [];
+    day.$tasks = [];
     day.dateString = date.toString().replace(
         `${lz(date.getHours())}:${lz(date.getMinutes())}:${lz(date.getSeconds())}`,
          "[time]");
@@ -86,6 +87,8 @@ class Day {
       $clone_task.find(".__title").html($task["title"]);
       $clone_task.find(".__start-time").html($task["start"]);
       $tasks_box.append($clone_task);
+      // Keeping reference of the task.
+      this.$tasks.push($clone_task);
       $clone_task_card.find(".__description").html($task["desc"]);
       $clone_task_card.find(".__start-time").html($task["start"]);
       $clone_task_card.find(".__end-time").html($task["end"]);
@@ -123,6 +126,9 @@ class Day {
 
   // Loads the tasks into the schedule
   loadSchedule = () => {
+    // Check if there are tasks for the day
+    if (!this.tasks)
+      return 0;
     //Loops through every task of that day 
     let $tasks_spans_box = $(".__tasks-spans-box");
     for (let i=0; i<this.tasks.length; i++){
@@ -141,14 +147,12 @@ class Day {
       $task_span.css({"width": `${width}%`,"left": `${left}%`, "height": `${height}%`,"top": `${top}%`, 
                       "background": `linear-gradient(110deg, linen, ${color} 550%)`});
       $tasks_spans_box.append($task_span);
-
-      //Display the info window of the task
+      // Adds event listeners to the schedule spans
+      $task_span.on("click", () => {
+        resetAllCards();
+        toggleTaskCard(this.$tasks[i]);
+      });
     }
   }
   
 }
-
-current_day = Day.fromDate(new Date(new Date() - 2*one_day));
-
-// Interval for updating timers
-let t = setInterval(current_day.updateTimers(), 1000);
