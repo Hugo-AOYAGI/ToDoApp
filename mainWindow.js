@@ -7,6 +7,18 @@ const $body = $("body");
 // Wait for window to load
 $(document).ready(() => { 
 
+  /* LOAD THE FIRST DAY */
+  let day_counter = 0;
+  let current_day;
+  refreshCurrDay = () => {
+    current_day = Day.fromDate(new Date(Date.now() + day_counter*one_day));
+  }
+  refreshCurrDay();
+  
+  // Interval for updating timers
+  let t1 = setInterval(current_day.updateTimers(), 1000);
+
+
   /* ===Creating the day Selection bar=== */
 
   // Getting the template and day selection bar
@@ -192,7 +204,22 @@ $(document).ready(() => {
 
   /* ===Adding footer events listeners=== */
 
-
+  $(".__next-d").on("click", () => {
+    day_counter += 1;
+    refreshCurrDay();
+  });
+  $(".__prev-d").on("click", () => {
+    day_counter -= 1;
+    refreshCurrDay();
+  });
+  $(".__next-w").on("click", () => {
+    day_counter += 7;
+    refreshCurrDay();
+  });
+  $(".__prev-w").on("click", () => {
+    day_counter -= 7;
+    refreshCurrDay();
+  });
 
 
   /* ===New task feature=== */
@@ -201,14 +228,6 @@ $(document).ready(() => {
 
 
   // Reload the tasks so that the new task appears
-
-
-
-  /* LOAD THE FIRST DAY */
-  current_day = Day.fromDate(new Date(new Date()));
-
-  // Interval for updating timers
-  let t1 = setInterval(current_day.updateTimers(), 1000);
 
 
 }); 

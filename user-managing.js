@@ -27,8 +27,9 @@ subDates = (a, b, asStr = true) => {
 
 const one_day = 86400000;
 
-const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 const task_colors = ["blue", "cyan", "goldenrod", "green", "magenta", "orchid", "red", "slategrey", "turquoise"];
+const $day_card_template = $(".day-card.template").clone();
 
 // Contains the information of the day
 class Day {
@@ -45,7 +46,7 @@ class Day {
     // Get ID of the day from the argument's date
     day.id = `${lz(date.getDate())}${lz(date.getMonth()+1)}${lz(date.getFullYear())}`
     // Get the information to display in the day-card
-    day.day_name = days[date.getDay()-1];
+    day.day_name = days[date.getDay()];
     // Load the tasks at the date
     $.ajax({ 
       type: 'GET',
@@ -70,6 +71,7 @@ class Day {
   // Displays the tasks from a template card.
   loadTasks = ($card) => {
     // Displaying the day name
+    $card.html($day_card_template.html());
     $card.find(".__title-day").html(this.day_name);
     // Load every task in the tasks-box
     let $template_task = $card.find(".task.template");

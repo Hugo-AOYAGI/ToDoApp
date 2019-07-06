@@ -1,11 +1,20 @@
 
+@mixin day-title-bar-text {
+    text-align: center;
+    font-weight: 300;
+    text-transform: uppercase;
+    font-size: 2.5em;
+    color: $dark-grey-2;
+}
+
+
 .day-card {
     background-color: $medium-grey-3;
     margin: 0em;
     display: grid;
     position: relative;
     grid-template: "titleT titleD titleD titleS" 1fr
-                   "task task schedule schedule" 14fr
+                   "task task schedule schedule" 10fr
                    / 3fr 1fr 1fr 3fr;
 
     & .__title-task {
@@ -19,14 +28,17 @@
         color: $light-grey-3;
     }
 
-    & .__title-day {
+    & .__title-day-container {
         grid-area: titleD;
         background-color: $medium-grey-2;
-        text-align: center;
-        font-weight: 300;
-        text-transform: uppercase;
-        font-size: 2.5em;
-        color: $dark-grey-2;
+        
+        & .__day {
+            @include day-title-bar-text;
+        }
+        
+        & .__date {
+            @include day-title-bar-text;
+        }
     }
 
     & .__title-schedule {
