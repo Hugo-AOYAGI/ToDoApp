@@ -7,18 +7,6 @@ const $body = $("body");
 // Wait for window to load
 $(document).ready(() => { 
 
-  /* LOAD THE FIRST DAY */
-  let day_counter = 0;
-  let current_day;
-  refreshCurrDay = () => {
-    current_day = Day.fromDate(new Date(Date.now() + day_counter*one_day));
-  }
-  refreshCurrDay();
-  
-  // Interval for updating timers
-  let t1 = setInterval(current_day.updateTimers(), 1000);
-
-
   /* ===Creating the day Selection bar=== */
 
   // Getting the template and day selection bar
@@ -107,6 +95,7 @@ $(document).ready(() => {
     // Modifies the styling of the task
     $task.css("height", "10%");
     $task.find(".__tab-main").css("display", "none");
+    $task.find(".__side-bar").css("display", "none");
     $task.find(".__start-time").css("opacity", "0");
     $task.find(".__more-button").css("transform", "rotateZ(0deg)")
     $task_card.css("display", "unset");
@@ -121,6 +110,7 @@ $(document).ready(() => {
     // Modifies the styling of the task
     $task.css("height", "20%");
     $task.find(".__tab-main").css("display", "flex");
+    $task.find(".__side-bar").css("display", "unset");
     $task.find(".__start-time").css("opacity", "1");
     $task.find(".__more-button").css("transform", "rotateZ(45deg)")
     $task_card.css("display", "none");
@@ -159,8 +149,6 @@ $(document).ready(() => {
     }
   }
 
-  setTimeout(reloadTasks, 1000);
-
   // Displays the side bars
   toggleSideBar = (event) => {
     // Getting the element that caused the click event
@@ -183,14 +171,10 @@ $(document).ready(() => {
 
   reloadSideBars = () => {
     let $tabs = $(".__tab-main");
-    
     $tabs.each( function () {
       $(this).on("click", toggleSideBar);
     });
   }
-
-  setTimeout(reloadSideBars, 1000);
-  
 
   // Remove option for the task
 
@@ -199,6 +183,25 @@ $(document).ready(() => {
 
 
   // Check option for the task
+
+
+  /* LOAD THE FIRST DAY */
+  let day_counter = 0;
+  let current_day;
+  refreshCurrDay = () => {
+    current_day = Day.fromDate(new Date(Date.now() + day_counter*one_day));
+    setTimeout( () => {
+      // Reload the event listeners
+      reloadSideBars();
+      reloadTasks();
+    }, 500);
+  }
+  
+  refreshCurrDay();
+  
+  // Interval for updating timers
+  let t1 = setInterval(current_day.updateTimers(), 1000);
+
 
 
 
