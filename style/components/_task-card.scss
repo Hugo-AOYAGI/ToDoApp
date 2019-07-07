@@ -1,111 +1,161 @@
 
 .task-card {
-    transition: all 0.4s;
-    position: absolute;
-    box-shadow: inset 0px 0px 0.3rem 0.3rem rgba($medium-grey-1, 0.4);
-    padding: 1rem;
-    background-color: $light-grey-3;
-    box-sizing: border-box;
-    top: 10%;
-    width: 100%;
-    // left: 100%;
+    position: relative;
+    height: 20%;
     left: 0;
-    display: none;
-    overflow: hidden;
-    min-height: 90%;
+    // margin: 0.2em;
+    // border-radius: 0.5em;
+    background-color: $light-grey-3;
     transition: all 0.3s;
 
-    & .__sticker-important {
+    &:not(:last-child) {
+        margin-bottom: 0.3rem;
+    }
+
+    
+    & .__title {
+        position: absolute;
+        top: 0;
+        left: 0px;
+        z-index: 1;
+        overflow: auto;
+        padding-top: 1rem;
+        text-transform: uppercase;
+        font-weight: 100;
+        color: $dark-grey-1;
+        margin-left: 0;
+        transition: all 0.5s;
+        padding-left: 2rem;
+        width: fit-content;
+        text-decoration: $light-grey-1 underline;
+        font-size: 1.6em;
+        height: 50%;
+    }
+
+    & .__start-time {
+        position: absolute;
+        top: 0;
+        font-weight: 900;
+        font-size: 1.5em;
+        z-index: 1;
+        color: $medium-grey-1;
+        width: fit-content;
+        top: 50%;
+        // transition: all 0.3s;
+        right: 6rem;
+        height: 50%
+    }
+
+    & .__more-button {
+        border-radius: 50%;
+        background-color:$light-grey-3;
         position: absolute;
         right: 0.5rem;
-        top: 0;
-        z-index: 10;
-        width: 1rem;
-        height: 1.5rem;
-        background: linear-gradient($dark-grey-3 -150%, darkred);
-        clip-path: polygon(50% 65%, 100% 100%, 100% 0, 0 0, 0 98%);
-        text-align: center;
-        color: $light-grey-3;
-        font-weight: 500;
-        font-size: 1.2em;
-        transition: all 0.3s;
-
-        &:hover {
-            font-weight: 900;
-        }
-    }
-    
-    & .__sticker-hover-important {
-        position: absolute;
-        right: 1rem;
-        top: 0.5rem;
-        z-index: 5;
-        height: 0;
-        width: 0;
-        overflow: hidden;
-        border-radius: 0.1rem;
-        white-space: nowrap;
-        background-color: $dark-grey-3;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: $light-grey-3;
+        bottom: 0.5rem;
+        height: 1.3rem;
+        width: 1.3rem;
         font-weight: 900;
-        font-size: 0.1em;
-        transition: all 0.3s;
-    }
-
-    & .__sticker-important:hover ~ .__sticker-hover-important {
-        right: 2rem;
-        font-size: 1.2em;
-        width: 20%;
-        height: 10%;
-
-    }
-
-    & .__edit-btn {
-        position: absolute;
-        background-color: $dark-grey-3;
-        line-height: 1.2em;
-        left: 0;
-        top: 0;
-        width: 1.8rem;
-        height: 1.8rem;
-        clip-path: polygon(0 0, 100% 0, 0 100%);
-        font-size: 1.4em;
-        color: $light-grey-1;
+        font-size: 1.55em;
+        color: $dark-grey-2;
+        text-align: center;
         transition: all 0.5s;
+        transform: rotateZ(45deg);
         cursor: pointer;
 
         &:hover {
-            padding: 0.1rem;
-            width: 2rem;
-            height: 2rem;
-            color: #FFF;
-
+            color: $light-grey-3;
+            background-color: $dark-grey-2;
         }
 
     }
 
-    & h3 {
-        font-size: 1.5em;
-        text-decoration: $light-grey-1 underline;
+    & .__side-bar {
+        position: absolute;
+        width: 0;
+        text-align: center;
+        background-color: $dark-grey-3;
+        height: 100%;
+        z-index: 10;
+        transition: all 0.5s;
+        overflow: hidden;
+        cursor: pointer;
+
+        & .__complete-btn {
+            white-space: nowrap;
+            position: relative;
+            height: 50%;
+            width: 100%;
+            background-color: $dark-grey-3;
+            transition: all 0.3s;
+
+            &:hover {
+                background-color: darkgreen;
+            }
+
+            &:active {
+                transform: scale(1.1);
+            }
+
+        }
+
+        & .__remove-btn {
+            white-space: nowrap;
+            position: relative;
+            height: 50%;
+            width: 100%;
+            background-color: $dark-grey-3;
+            transition: all 0.3s;
+            
+            &:hover {
+                background-color: darkred;
+            }
+
+            &:active {
+                transform: scale(1.1);
+            }
+        }
+
+        & .__icon {
+            position: absolute;
+            left: 0;
+            padding: 0;
+            font-weight: 100;
+            font-size: 2em;
+            color: $light-grey-3;
+            width: 100%;
+            height: 70%;
+        }
+
+        & .__label {
+            position: absolute;
+            left: 0;
+            font-size: 0.8em;
+            text-transform: uppercase;
+            font-weight: 900;
+            color: $light-grey-3;
+            width: 100%;
+            top: 65%;
+        }
+
     }
 
-    & .__description {
+    & .__tab-main {
+        position: absolute;
+        background-color: $dark-grey-2;
+        max-width: 1em;
+        left: 0;
+        display: flex;
+        transform: translate3d(0, 0, 0);
+        align-items: center;
+        font-size: 2em;
+        padding-left: 0.075em;
+        padding-right: 0.075em;
+        color: $light-grey-3;
+        transition: left 0.5s;
+        z-index: 20;
+        height: 100%;
+        cursor: pointer;
         
-        font-size: 1.2em;
-        padding-left: 0.5rem;
-        border-left: 2px solid $light-grey-1;
     }
-
-    & span {
-        color: $dark-grey-1;
-        font-size: 1.3em;
-    }
-
-    & .__timer {
-        font-size: 1.4em;
-    }
-
+    
 }
