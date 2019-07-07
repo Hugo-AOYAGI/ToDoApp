@@ -80,61 +80,61 @@ $(document).ready(() => {
   let $tasks = $(".task");
 
   // Displays the task card and modify the task's styling
-  displayCard = ($task, $task_card) => {
+  displayPage = ($task_card, $task_page) => {
     // Modifies the styling of the task
-    $task.css("height", "10%");
-    $task.find(".__tab-main").css("display", "none");
-    $task.find(".__side-bar").css("display", "none");
-    $task.find(".__start-time").css("opacity", "0");
-    $task.find(".__more-button").css("transform", "rotateZ(0deg)")
-    $task_card.css("display", "unset");
-    for(task of $tasks){
-      if(!task.is($task))
-        task.css("display", "none");
+    $task_card.css("height", "10%");
+    $task_card.find(".__tab-main").css("display", "none");
+    $task_card.find(".__side-bar").css("display", "none");
+    $task_card.find(".__start-time").css("opacity", "0");
+    $task_card.find(".__more-button").css("transform", "rotateZ(0deg)")
+    $task_page.css("display", "unset");
+    for(task_card of $task_cards){
+      if(!task_card.is($task_card))
+        task_card.css("display", "none");
     }
   }
 
   // Resets the task and task card styling back to default
-  hideCard = ($task, $task_card) => {
+  hidePage = ($task_card, $task_page) => {
     // Modifies the styling of the task
-    $task.css("height", "20%");
-    $task.find(".__tab-main").css("display", "flex");
-    $task.find(".__side-bar").css("display", "unset");
-    $task.find(".__start-time").css("opacity", "1");
-    $task.find(".__more-button").css("transform", "rotateZ(45deg)")
-    $task_card.css("display", "none");
-    for(task of $tasks) {
-      if (!task.is(".template"))
-        task.css("display", "block");
+    $task_card.css("height", "20%");
+    $task_card.find(".__tab-main").css("display", "flex");
+    $task_card.find(".__side-bar").css("display", "unset");
+    $task_card.find(".__start-time").css("opacity", "1");
+    $task_card.find(".__more-button").css("transform", "rotateZ(45deg)")
+    $task_page.css("display", "none");
+    for(task_card of $task_cards) {
+      if (!task_card.is(".template"))
+        task_card.css("display", "block");
     }
   }
 
    // Displays the taskcard
-  toggleTaskCard = (i) => {
+  toggleTaskPage = (i) => {
     // Getting the element that caused the click event
-    let $task = typeof i == "number" ? $tasks[i] : i;
-    let $task_card = $task.next(".task-card");
+    let $task_card = typeof i == "number" ? $task_cards[i] : i;
+    let $task_page = $task_card.next(".task-page");
     // Checking if the sidebar of the tab is already toggled
-    if ($task.find(".__start-time").css("opacity") == "1") {
-      displayCard($task, $task_card);
+    if ($task_card.find(".__start-time").css("opacity") == "1") {
+      displayPage($task_card, $task_page);
     } else {
-      hideCard($task, $task_card);
+      hidePage($task_card, $task_page);
     }
   }
 
   // Hides all current task cards reseting the styling to default
   resetAllCards = () => {
-    for (let $task of $tasks) {
-      let $task_card = $task.next(".task-card");
-      hideCard($task, $task_card);
+    for ($task_card of $task_cards) {
+      let $task_page = $task_card.next(".task-page");
+      hidePage($task_card, $task_page);
     }
   }
 
   reloadTasks = () => {
-    $tasks = $(".task").toArray();
-    for (let i=0; i<$tasks.length; i++) {
-      $tasks[i] = $($tasks[i]);
-      $tasks[i].find(".__more-button").on("click", () => {toggleTaskCard(i);});
+    $task_cards = $(".task-card").toArray();
+    for (let i=0; i<$task_cards.length; i++) {
+      $task_cards[i] = $($task_cards[i]);
+      $task_cards[i].find(".__more-button").on("click", () => {toggleTaskPage(i);});
     }
   }
 
@@ -178,7 +178,7 @@ $(document).ready(() => {
   let day_counter = 0;
   let current_day;
   refreshCurrDay = () => {
-    current_day = Day.fromDate(new Date(Date.now() + day_counter*one_day));
+    current_day = new Day(new Date(Date.now() + day_counter*one_day));
     setTimeout( () => {
       // Reload the event listeners
       reloadSideBars();

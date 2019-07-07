@@ -20,7 +20,7 @@ body {
   grid-area: nav;
 }
 
-.day-card {
+.day-menu {
   grid-area: main;
 }
 
@@ -230,7 +230,7 @@ body {
   font-weight: 800;
 }
 
-.day-card {
+.day-menu {
   background-color: #B9B9B9;
   margin: 0em;
   display: -ms-grid;
@@ -239,7 +239,7 @@ body {
   grid-template: "titleT titleD titleD titleS" 1fr "task task schedule schedule" 10fr / 3fr 1fr 1fr 3fr;
 }
 
-.day-card .__title-task {
+.day-menu .__title-task {
   grid-area: titleT;
   background-color: #54504C;
   text-align: left;
@@ -249,13 +249,13 @@ body {
   color: #F9F9F9;
 }
 
-.day-card .__title-day-container {
+.day-menu .__title-day-container {
   grid-area: titleD;
   position: relative;
   background-color: #D9D9D9;
 }
 
-.day-card .__title-day-container .__day {
+.day-menu .__title-day-container .__day {
   position: absolute;
   text-align: center;
   font-weight: 300;
@@ -266,7 +266,7 @@ body {
   height: 50%;
 }
 
-.day-card .__title-day-container .__date {
+.day-menu .__title-day-container .__date-short {
   position: absolute;
   text-align: center;
   font-weight: 300;
@@ -280,7 +280,7 @@ body {
   top: 50%;
 }
 
-.day-card .__title-schedule {
+.day-menu .__title-schedule {
   grid-area: titleS;
   background-color: #54504C;
   text-align: right;
@@ -290,7 +290,7 @@ body {
   color: #F9F9F9;
 }
 
-.day-card .__tasks-box {
+.day-menu .__tasks-box {
   position: relative;
   grid-area: task;
   overflow-y: auto;
@@ -298,12 +298,12 @@ body {
   border-right: 1px solid #86817C;
 }
 
-.day-card .__schedule {
+.day-menu .__schedule {
   grid-area: schedule;
   background-color: yellow;
 }
 
-.task {
+.task-card {
   position: relative;
   height: 20%;
   left: 0;
@@ -312,11 +312,11 @@ body {
   transition: all 0.3s;
 }
 
-.task:not(:last-child) {
+.task-card:not(:last-child) {
   margin-bottom: 0.3rem;
 }
 
-.task .__title {
+.task-card .__title {
   position: absolute;
   top: 0;
   left: 0px;
@@ -339,7 +339,7 @@ body {
   height: 50%;
 }
 
-.task .__start-time {
+.task-card .__start-time {
   position: absolute;
   top: 0;
   font-weight: 900;
@@ -354,7 +354,7 @@ body {
   height: 50%;
 }
 
-.task .__more-button {
+.task-card .__more-button {
   border-radius: 50%;
   background-color: #F9F9F9;
   position: absolute;
@@ -373,12 +373,12 @@ body {
   cursor: pointer;
 }
 
-.task .__more-button:hover {
+.task-card .__more-button:hover {
   color: #F9F9F9;
   background-color: #54504C;
 }
 
-.task .__side-bar {
+.task-card .__side-bar {
   position: absolute;
   width: 0;
   text-align: center;
@@ -391,7 +391,7 @@ body {
   cursor: pointer;
 }
 
-.task .__side-bar .__complete-btn {
+.task-card .__side-bar .__complete-btn {
   white-space: nowrap;
   position: relative;
   height: 50%;
@@ -401,16 +401,16 @@ body {
   transition: all 0.3s;
 }
 
-.task .__side-bar .__complete-btn:hover {
+.task-card .__side-bar .__complete-btn:hover {
   background-color: darkgreen;
 }
 
-.task .__side-bar .__complete-btn:active {
+.task-card .__side-bar .__complete-btn:active {
   -webkit-transform: scale(1.1);
           transform: scale(1.1);
 }
 
-.task .__side-bar .__remove-btn {
+.task-card .__side-bar .__remove-btn {
   white-space: nowrap;
   position: relative;
   height: 50%;
@@ -420,16 +420,16 @@ body {
   transition: all 0.3s;
 }
 
-.task .__side-bar .__remove-btn:hover {
+.task-card .__side-bar .__remove-btn:hover {
   background-color: darkred;
 }
 
-.task .__side-bar .__remove-btn:active {
+.task-card .__side-bar .__remove-btn:active {
   -webkit-transform: scale(1.1);
           transform: scale(1.1);
 }
 
-.task .__side-bar .__icon {
+.task-card .__side-bar .__icon {
   position: absolute;
   left: 0;
   padding: 0;
@@ -440,7 +440,7 @@ body {
   height: 70%;
 }
 
-.task .__side-bar .__label {
+.task-card .__side-bar .__label {
   position: absolute;
   left: 0;
   font-size: 0.8em;
@@ -451,7 +451,7 @@ body {
   top: 65%;
 }
 
-.task .__tab-main {
+.task-card .__tab-main {
   position: absolute;
   background-color: #54504C;
   max-width: 1em;
@@ -475,7 +475,7 @@ body {
   cursor: pointer;
 }
 
-.day-card .__schedule {
+.day-menu .__schedule {
   background-color: #F9F9F9;
   position: relative;
   display: -ms-grid;
@@ -483,7 +483,7 @@ body {
   grid-template: "labels spans" 1fr / 1fr 9fr;
 }
 
-.day-card .__schedule .__hours-labels {
+.day-menu .__schedule .__hours-labels {
   grid-area: labels;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -496,7 +496,7 @@ body {
   background: linear-gradient(120deg, rgba(185, 185, 185, 0.8), rgba(134, 129, 124, 0.8) 180%);
 }
 
-.day-card .__schedule .__hours-labels .__label {
+.day-menu .__schedule .__hours-labels .__label {
   text-align: center;
   -webkit-transform: translateY(90%);
           transform: translateY(90%);
@@ -507,20 +507,20 @@ body {
   font-size: 1.3em;
 }
 
-.day-card .__schedule .__hour-spans {
+.day-menu .__schedule .__hour-spans {
   grid-area: spans;
   position: relative;
 }
 
-.day-card .__schedule .__hour-spans .__4-hours {
+.day-menu .__schedule .__hour-spans .__4-hours {
   height: 16.7%;
 }
 
-.day-card .__schedule .__hour-spans .__4-hours:not(:last-child) {
+.day-menu .__schedule .__hour-spans .__4-hours:not(:last-child) {
   border-bottom: 1px solid #86817C;
 }
 
-.day-card .__schedule .__tasks-spans-box {
+.day-menu .__schedule .__tasks-spans-box {
   position: absolute;
   left: 10%;
   width: 90%;
@@ -529,7 +529,7 @@ body {
   padding-right: 0.5rem;
 }
 
-.day-card .__schedule .__tasks-spans-box .__task-span {
+.day-menu .__schedule .__tasks-spans-box .__task-span {
   position: absolute;
   border-radius: 0rem;
   border: 1px solid #86817C;
@@ -538,13 +538,13 @@ body {
   transition: all 0.2s;
 }
 
-.day-card .__schedule .__tasks-spans-box .__task-span:hover {
+.day-menu .__schedule .__tasks-spans-box .__task-span:hover {
   -webkit-box-shadow: 0.1rem 0.2rem rgba(134, 129, 124, 0.2);
           box-shadow: 0.1rem 0.2rem rgba(134, 129, 124, 0.2);
   border: 1px solid #D9D9D9;
 }
 
-.day-card .__schedule .__tasks-spans-box #task1 {
+.day-menu .__schedule .__tasks-spans-box #task1 {
   -webkit-transform: translateX(0);
           transform: translateX(0);
   width: 5%;
@@ -553,7 +553,7 @@ body {
   background: linear-gradient(110deg, linen, darkred 550%);
 }
 
-.day-card .__schedule .__tasks-spans-box #task2 {
+.day-menu .__schedule .__tasks-spans-box #task2 {
   -webkit-transform: translateX(120%);
           transform: translateX(120%);
   width: 5%;
@@ -562,7 +562,7 @@ body {
   background: linear-gradient(110deg, linen, darkblue 550%);
 }
 
-.day-card .__schedule .__tasks-spans-box #task3 {
+.day-menu .__schedule .__tasks-spans-box #task3 {
   -webkit-transform: translateX(120%);
           transform: translateX(120%);
   width: 5%;
@@ -571,7 +571,7 @@ body {
   background: linear-gradient(110deg, linen, darkgreen 550%);
 }
 
-.day-card .__schedule .__tasks-spans-box #task4 {
+.day-menu .__schedule .__tasks-spans-box #task4 {
   -webkit-transform: translateX(240%);
           transform: translateX(240%);
   width: 5%;
@@ -656,7 +656,7 @@ body {
   font-weight: 100;
 }
 
-.task-card {
+.task-page {
   -webkit-transition: all 0.4s;
   transition: all 0.4s;
   position: absolute;
@@ -676,7 +676,7 @@ body {
   transition: all 0.3s;
 }
 
-.task-card .__sticker-important {
+.task-page .__sticker-important {
   position: absolute;
   right: 0.5rem;
   top: 0;
@@ -695,11 +695,11 @@ body {
   transition: all 0.3s;
 }
 
-.task-card .__sticker-important:hover {
+.task-page .__sticker-important:hover {
   font-weight: 900;
 }
 
-.task-card .__sticker-hover-important {
+.task-page .__sticker-hover-important {
   position: absolute;
   right: 1rem;
   top: 0.5rem;
@@ -726,14 +726,14 @@ body {
   transition: all 0.3s;
 }
 
-.task-card .__sticker-important:hover ~ .__sticker-hover-important {
+.task-page .__sticker-important:hover ~ .__sticker-hover-important {
   right: 2rem;
   font-size: 1.2em;
   width: 20%;
   height: 10%;
 }
 
-.task-card .__edit-btn {
+.task-page .__edit-btn {
   position: absolute;
   background-color: #3a3835;
   line-height: 1.2em;
@@ -750,31 +750,31 @@ body {
   cursor: pointer;
 }
 
-.task-card .__edit-btn:hover {
+.task-page .__edit-btn:hover {
   padding: 0.1rem;
   width: 2rem;
   height: 2rem;
   color: #FFF;
 }
 
-.task-card h3 {
+.task-page h3 {
   font-size: 1.5em;
   -webkit-text-decoration: #D6CAB0 underline;
           text-decoration: #D6CAB0 underline;
 }
 
-.task-card .__description {
+.task-page .__description {
   font-size: 1.2em;
   padding-left: 0.5rem;
   border-left: 2px solid #D6CAB0;
 }
 
-.task-card span {
+.task-page span {
   color: #282726;
   font-size: 1.3em;
 }
 
-.task-card .__timer {
+.task-page .__timer {
   font-size: 1.4em;
 }
 
