@@ -80,7 +80,10 @@ $(document).ready(() => {
   let $tasks = $(".task");
 
   // Displays the task card and modify the task's styling
-  displayPage = ($task_card, $task_page) => {
+  displayPage = (task) => {
+    // Getting the element that caused the click event
+    let $task_card = task.$task_card;
+    let $task_page = task.$task_page;
     // Modifies the styling of the task
     $task_card.css("height", "10%");
     $task_card.find(".__tab-main").css("display", "none");
@@ -88,14 +91,17 @@ $(document).ready(() => {
     $task_card.find(".__start-time").css("opacity", "0");
     $task_card.find(".__more-button").css("transform", "rotateZ(0deg)")
     $task_page.css("display", "unset");
-    for(task_card of $task_cards){
-      if(!task_card.is($task_card))
-        task_card.css("display", "none");
+    for(task of current_day.tasks){
+      if(!task.$task_card.is($task_card))
+        task.$task_card.css("display", "none");
     }
   }
 
   // Resets the task and task card styling back to default
-  hidePage = ($task_card, $task_page) => {
+  hidePage = (task) => {
+    // Getting the element that caused the click event
+    let $task_card = task.$task_card;
+    let $task_page = task.$task_page;
     // Modifies the styling of the task
     $task_card.css("height", "20%");
     $task_card.find(".__tab-main").css("display", "flex");
@@ -103,45 +109,33 @@ $(document).ready(() => {
     $task_card.find(".__start-time").css("opacity", "1");
     $task_card.find(".__more-button").css("transform", "rotateZ(45deg)")
     $task_page.css("display", "none");
-    for(task_card of $task_cards) {
-      if (!task_card.is(".template"))
-        task_card.css("display", "block");
+    for(task of current_day.tasks) {
+      if (!task.$task_card.is(".template"))
+        task.$task_card.css("display", "block");
     }
   }
 
    // Displays the taskcard
-  toggleTaskPage = (i) => {
-    // Getting the element that caused the click event
-    let $task_card = typeof i == "number" ? $task_cards[i] : i;
-    let $task_page = $task_card.next(".task-page");
+  toggleTaskPage = (task) => {
     // Checking if the sidebar of the tab is already toggled
-    if ($task_card.find(".__start-time").css("opacity") == "1") {
-      displayPage($task_card, $task_page);
+    if (task.$task_card.find(".__start-time").css("opacity") == "1") {
+      displayPage(task);
     } else {
-      hidePage($task_card, $task_page);
+      hidePage(task);
     }
   }
 
   // Hides all current task cards reseting the styling to default
   resetAllCards = () => {
-    for ($task_card of $task_cards) {
-      let $task_page = $task_card.next(".task-page");
-      hidePage($task_card, $task_page);
-    }
-  }
-
-  reloadTasks = () => {
-    $task_cards = $(".task-card").toArray();
-    for (let i=0; i<$task_cards.length; i++) {
-      $task_cards[i] = $($task_cards[i]);
-      $task_cards[i].find(".__more-button").on("click", () => {toggleTaskPage(i);});
+    for (task of current_day.tasks) {
+      hidePage(task);
     }
   }
 
   // Displays the side bars
-  toggleSideBar = (event) => {
+  toggleSideBar = (task) => {
     // Getting the element that caused the click event
-    $tab = $(event.target);
+    $tab = task.find(".__tab-main");
     // Checking if the sidebar of the tab is already toggled
     if ($tab.css("left") == "0px") {
       // Displaying the sidebar
@@ -158,13 +152,6 @@ $(document).ready(() => {
     }
   }
 
-  reloadSideBars = () => {
-    let $tabs = $(".__tab-main");
-    $tabs.each( function () {
-      $(this).on("click", toggleSideBar);
-    });
-  }
-
   // Remove option for the task
 
 
@@ -179,11 +166,6 @@ $(document).ready(() => {
   let current_day;
   refreshCurrDay = () => {
     current_day = new Day(new Date(Date.now() + day_counter*one_day));
-    setTimeout( () => {
-      // Reload the event listeners
-      reloadSideBars();
-      reloadTasks();
-    }, 500);
   }
   
   refreshCurrDay();

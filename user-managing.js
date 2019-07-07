@@ -100,16 +100,14 @@ class Day {
       let $clone_task_card = $template_task_card.clone().removeClass("template");
       let $clone_task_page = $template_task_page.clone().removeClass("template");
 
+      // Appending the clones to the html page
       $tasks_box.append($clone_task_card);
-      // Keeping reference of the task.
-      this.$task_cards.push($clone_task_card);
-
       $tasks_box.append($clone_task_page);
-      // Keeping reference of the task cards to update the timer.
-      this.$task_pages.push($clone_task_page);
     
+      // Adding the task card and page to the task object
       task.addCardAndPage($clone_task_card, $clone_task_page);
       
+      // Loading the data of the task in the html elements
       task.loadData();
     }
     
@@ -158,16 +156,7 @@ class Day {
     //Loops through every task of that day 
     let $tasks_spans_box = $(".__tasks-spans-box");
     for (let i=0; i<this.tasks.length; i++){
-
-      let $task_span = this.tasks[i].createScheduleSpan(this.tasks.length, i);
-      
-      $tasks_spans_box.append($task_span);
-
-      // Adds event listeners to the schedule spans
-      $task_span.on("click", () => {
-        resetAllCards();
-        toggleTaskPage(this.tasks[i].$task_card);
-      });
+      $tasks_spans_box.append(this.tasks[i].createScheduleSpan(this.tasks.length, i));
     }
   }
   
@@ -189,6 +178,18 @@ class Task {
     // html elements linked to the task
     this.$task_card = card;
     this.$task_page = page;
+
+    // Add event listeners
+
+    // For the side bar
+    this.$task_card.find(".__tab-main").on("click", () => {
+      toggleSideBar(this);
+    })
+
+    // For the task page
+    this.$task_card.find(".__more-button").on("click", () => {
+      toggleTaskPage(this);
+    })
 
   }
 
@@ -228,6 +229,12 @@ class Task {
     // Adding the properties to the element
     $span.css({"width": `${width}%`,"left": `${left}%`, "height": `${height}%`,"top": `${top}%`, 
                     "background": `linear-gradient(110deg, linen, ${color} 550%)`});
+
+    // Adds event listeners to the schedule spans
+    $span.on("click", () => {
+      resetAllCards();
+      toggleTaskPage(this);
+    });
     
     return $span;
   }
