@@ -1,7 +1,5 @@
 
 
-// Seeting up array of the days
-// let days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]; 
 const $body = $("body");
 
 // Wait for window to load
@@ -75,15 +73,6 @@ $(document).ready(() => {
 
 
   // Add event listener to the next-task element thats redirects to the corresponding task card
-
-
-  /* ===Managing the day card=== */
-
-  // Load the tasks of the day card
-
-
-  // Load the schedule of the day card
-
 
   /* ===Managing the task card=== */
 
