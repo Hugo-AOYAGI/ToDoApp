@@ -30,14 +30,24 @@
 
     & .__title-day-container {
         grid-area: titleD;
+        position: relative;
         background-color: $medium-grey-2;
         
         & .__day {
+            position: absolute;
             @include day-title-bar-text;
+            width: 100%;
+            height: 50%;
         }
         
         & .__date {
+            position: absolute;
             @include day-title-bar-text;
+            font-size: 1.8em;
+            color: $dark-grey-1;
+            width: 100%;
+            height: 50%;
+            top: 50%;
         }
     }
 

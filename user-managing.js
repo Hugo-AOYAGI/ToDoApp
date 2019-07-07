@@ -74,6 +74,7 @@ class Day {
     // Displaying the day name
     $card.html($day_card_template.html());
     $card.find(".__title-day-container").find(".__day").html(this.day_name);
+    $card.find(".__title-day-container").find(".__date").html(lz(this.date.getDate())+"/"+lz(this.date.getMonth()+1));
     // Load every task in the tasks-box
     let $template_task = $card.find(".task.template");
     let $template_task_card = $card.find(".task-card.template");
