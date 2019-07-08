@@ -44,11 +44,15 @@ ipc.on("remove-task", (event, task_to_del) => {
 
       // Delete the task to delete
       for (i in json_object[id]) {
-        if (areJSONEqual(task_to_del.json, json_object[id][i]))
-          delete json_object[id][i];
-          // Check if day is empty
-          if (!json_object[id])
-            delete json_object[id];
+        if (areJSONEqual(task_to_del.json, json_object[id][i])){
+          json_object[id].splice(i, 1);
+          break;
+        }
+      }
+
+      // Check if day is empty
+      if (json_object[id].length == 0) {
+        delete json_object[id];
       }
 
       // Convert it back to a json file
@@ -61,11 +65,15 @@ ipc.on("remove-task", (event, task_to_del) => {
 
 // Function to check if 2 json objects are equal even thought they don't have the same child order
 areJSONEqual = (a, b) => {
-  console.log(Object.keys(a));
+  let difference = false;
   Object.keys(a).forEach( (key) => {
-    if (a[key] != b[key]) {
-      return false;
+    if (a[key] !== b[key]) { 
+      difference = true;
     }
   });
-  return true;
+  if (difference) {
+    return false;
+  } else {
+    return true;
+  }
 }

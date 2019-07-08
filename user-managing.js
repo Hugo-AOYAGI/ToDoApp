@@ -58,7 +58,7 @@ class Day {
       url: "user-data/user-data.json", 
       dataType: "json",
       success: (json_data) => { 
-        this.tasks = Task.fromArray(this.id, json_data[this.id]);
+        this.tasks = Task.fromArray(this.id, this, json_data[this.id]);
 
       },
       error: () => {
@@ -88,6 +88,11 @@ class Day {
     let $template_task_card = $day_menu.find(".task-card.template");
     let $template_task_page = $day_menu.find(".task-page.template");
     let $tasks_box = $day_menu.find(".__tasks-box");
+
+    // Empty the tasks in case it is full
+    $tasks_box.children().not(".template").each(function () {
+      $(this).remove();
+    });
 
     // Checks if there are tasks on that day
     if (!this.tasks){
@@ -154,8 +159,13 @@ class Day {
     if (!this.tasks)
       return 0;
 
-    //Loops through every task of that day 
     let $tasks_spans_box = $(".__tasks-spans-box");
+    // Empty the schedule in case it is full
+    $tasks_spans_box.children().each(function () {
+      $(this).remove();
+    });
+
+    //Loops through every task of that day 
     for (let i=0; i<this.tasks.length; i++){
       $tasks_spans_box.append(this.tasks[i].createScheduleSpan(this.tasks.length, i));
     }
@@ -164,10 +174,10 @@ class Day {
 }
 
 class Task {
-  constructor (day_id, json) {
+  constructor (day_id, day, json) {
 
     this.day_id = day_id;
-
+    this.day = day;
     this.json = json;
 
     // Task information stored in the json file
@@ -186,6 +196,10 @@ class Task {
     this.$task_page.remove();
 
     removeTask(this);
+
+    // Reset the schedule
+    this.day.tasks = this.day.tasks.filter(item => item !== this);
+    this.day.loadSchedule();
   }
 
   edit = () => {
@@ -280,12 +294,12 @@ class Task {
   }
 
   // Returns an array of tasks from an array of objects from a json file
-  static fromArray (day_id, array) {
+  static fromArray (day_id, day, array) {
     if (!array)
       return [];
     let tasks = [];
     array.forEach( (element) => {
-      tasks.push(new Task(day_id, element));
+      tasks.push(new Task(day_id, day, element));
     });
 
     return tasks;
