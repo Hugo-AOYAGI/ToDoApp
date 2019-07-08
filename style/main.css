@@ -803,8 +803,8 @@ body {
   height: 100%;
   color: #EDF5E1;
   font-size: 2.5em;
-  -webkit-transition: all 0.3s;
-  transition: all 0.3s;
+  -webkit-transition: color 0.3s, background-color 0.3s;
+  transition: color 0.3s, background-color 0.3s;
   cursor: pointer;
   -webkit-transform: rotateZ(180deg);
           transform: rotateZ(180deg);
@@ -837,8 +837,8 @@ body {
   height: 100%;
   color: #EDF5E1;
   font-size: 2.5em;
-  -webkit-transition: all 0.3s;
-  transition: all 0.3s;
+  -webkit-transition: color 0.3s, background-color 0.3s;
+  transition: color 0.3s, background-color 0.3s;
   cursor: pointer;
   -webkit-transform: rotateZ(180deg);
           transform: rotateZ(180deg);
@@ -871,8 +871,8 @@ body {
   height: 100%;
   color: #EDF5E1;
   font-size: 2.5em;
-  -webkit-transition: all 0.3s;
-  transition: all 0.3s;
+  -webkit-transition: color 0.3s, background-color 0.3s;
+  transition: color 0.3s, background-color 0.3s;
   cursor: pointer;
 }
 
@@ -902,8 +902,8 @@ body {
   height: 100%;
   color: #EDF5E1;
   font-size: 2.5em;
-  -webkit-transition: all 0.3s;
-  transition: all 0.3s;
+  -webkit-transition: color 0.3s, background-color 0.3s;
+  transition: color 0.3s, background-color 0.3s;
   cursor: pointer;
   border-left: 0.5px solid #86817C;
 }

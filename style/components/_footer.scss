@@ -11,7 +11,7 @@
     height: 100%;
     color: $light-grey-2;
     font-size: 2.5em;
-    transition: all 0.3s;
+    transition: color 0.3s, background-color 0.3s;
     cursor: pointer;
 
     &:hover {

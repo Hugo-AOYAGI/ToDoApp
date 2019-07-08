@@ -1,9 +1,14 @@
 
-
-const $body = $("body");
+// Importing of all the modules
+const electron = require("electron");
+const url = require("url");
+const path = require("path");
+const ipc = require("electron").ipcRenderer;
 
 // Wait for window to load
 $(document).ready(() => { 
+
+  const $body = $("body");
 
   /* ===Creating the day Selection bar=== */
 
@@ -135,14 +140,14 @@ $(document).ready(() => {
   // Displays the side bars
   toggleSideBar = (task) => {
     // Getting the element that caused the click event
-    $tab = task.find(".__tab-main");
+    $tab = task.$task_card.find(".__tab-main");
     // Checking if the sidebar of the tab is already toggled
     if ($tab.css("left") == "0px") {
       // Displaying the sidebar
       $tab.siblings(".__side-bar").css("width", "15%");
       $tab.siblings(".__title").css("left", "15%");
       $tab.css("left", "15%");
-      $tab.html("〈");
+      $tab.html("〈")
     } else {
       // Hiding the sidebar
       $tab.siblings(".__side-bar").css("width", "0%");
@@ -154,12 +159,17 @@ $(document).ready(() => {
 
   // Remove option for the task
 
+  // Sending event to main.js
+  removeTask = (task) => {
+    ipc.send("remove-task", task);
+  }
 
   // Edit option for the task
 
-
-  // Check option for the task
-
+  // Sending event to main.js
+  editTask = (modifiedTask) => {
+    ipc.send("edit-task", modifiedTask);
+  }
 
   /* LOAD THE FIRST DAY */
   let day_counter = 0;

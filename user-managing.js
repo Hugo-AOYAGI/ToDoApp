@@ -57,8 +57,9 @@ class Day {
       type: 'GET',
       url: "user-data/user-data.json", 
       dataType: "json",
-      success: (data) => { 
-        this.tasks = Task.fromArray(data[this.id]);
+      success: (json_data) => { 
+        this.tasks = Task.fromArray(this.id, json_data[this.id]);
+
       },
       error: () => {
         alert("Your tasks could not be retrieved!");
@@ -163,7 +164,11 @@ class Day {
 }
 
 class Task {
-  constructor (json) {
+  constructor (day_id, json) {
+
+    this.day_id = day_id;
+
+    this.json = json;
 
     // Task information stored in the json file
     this.desc = json["desc"];
@@ -171,6 +176,24 @@ class Task {
     this.end = json["end"];
     this.title = json["title"];
     this.important = json["important"];
+    this.checked = json["checked"];
+  }
+
+  delete = () => {
+
+    // Deleting the html elements
+    this.$task_card.remove();
+    this.$task_page.remove();
+
+    removeTask(this);
+  }
+
+  edit = () => {
+
+  }
+
+  check = () => {
+
   }
 
   addCardAndPage = (card, page) => {
@@ -189,6 +212,19 @@ class Task {
     // For the task page
     this.$task_card.find(".__more-button").on("click", () => {
       toggleTaskPage(this);
+    })
+
+    // For the remove, check and edit button
+    this.$task_card.find(".__remove-btn").on("click", () => {
+      this.delete();
+    })
+
+    this.$task_card.find(".__edit-btn").on("click", () => {
+      this.edit();
+    })
+
+    this.$task_card.find(".__complete-btn").on("click", () => {
+      this.check();
     })
 
   }
@@ -220,10 +256,14 @@ class Task {
     let left = width*i + 2*(i+1);
     let height = 100*(subDates(this.end, this.start, false)/24);
     let top = 100*(subDates(this.start, "0:0", false)/24);
+
+    // Checking if the start or end time are not specified
     if (!top || !height) {
       height = 100
       $span.css("opacity", "0.6");
     }
+
+    // Getting a color from the array
     let color = `dark${task_colors[i%task_colors.length]}`;
 
     // Adding the properties to the element
@@ -240,12 +280,12 @@ class Task {
   }
 
   // Returns an array of tasks from an array of objects from a json file
-  static fromArray (array) {
+  static fromArray (day_id, array) {
     if (!array)
       return [];
     let tasks = [];
     array.forEach( (element) => {
-      tasks.push(new Task(element));
+      tasks.push(new Task(day_id, element));
     });
 
     return tasks;
