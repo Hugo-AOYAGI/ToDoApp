@@ -1,73 +1,41 @@
 
 .header {
-  background: linear-gradient(130deg, $dark-grey-1, $dark-grey-3 125%);
-  padding: 0px;
-  display: inline-flex;
-  align-items: center;
-  overflow-y: hidden;
-  overflow-x: hidden;
+  background: linear-gradient(130deg, $medium-blue-1, $medium-blue-2);
 
   & .__mainTitle {
-    transition: all 0.5s;
-    position: relative;
-    margin-left: 10%;
-    min-width: 20%;
-    height: 4em;
+    margin-left: 2em;
+    border-left: 1px solid $lighter-blue-1;
+    color: white;
+    padding-left: 0.8em;
 
-    & h1 {
-      position: absolute;
-      margin: 0;
-      height: 100%;
-      width: fit-content;
-      border-left: 1px solid $dark-grey-2;
-      font-size: 3em;
-      color: $light-grey-3;
-      white-space: pre;
-      font-weight: 100;
-      text-transform: uppercase;
-      padding-left: 0.3em;
-      transition: all 0.3s;
+  }
 
+  & .__next-task {
+    display: flex;
+    height: 70%;
+    width: 25%;
+    border-radius: 5em;
+    right: 5vmin;
+    background: linear-gradient(90deg, $medium-blue-3, $medium-blue-4 50%, white 50%);
+
+    & .__task-title {
+      overflow-x: auto;
+      padding-left: 1em;
+      padding-right: 1em;
+      width: calc(50% - 2em);
+      color: white;
+      border-right: 1px solid $dark-grey-2;
     }
 
+    & .__timer {
+      color: $dark-grey-2;
+      width: 50%;
+      height: 100%;
+    }
+
+    & ::-webkit-scrollbar {
+      display: none;
+    }
   }
     
-  & .__time-container {
-    width: 20%;
-    height: 4em;
-    position: relative;
-    padding: 0;
-    margin: 0;
-    margin-left: 5em;
-    vertical-align: middle;
-
-    & .__text-second {
-      color: $light-grey-1;
-      width: fit-content;
-      padding-top: 0.15em;
-      height: 100%;
-      font-weight: 100;
-      font-size: 2.2em;
-      transition: all 0.2s;
-      text-transform: uppercase;
-
-    }
-
-    & .__date {
-      position: absolute;
-      opacity: 1;
-
-    }
-
-    & .__time {
-      position: absolute;
-      opacity: 0;
-      transition: all 0.3s; 
-    }
-
-    &:hover > .__time {
-      opacity: 1;
-      transform: translateX(150%);
-    }
-  }
 } 
