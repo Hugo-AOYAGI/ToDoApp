@@ -1,4 +1,27 @@
 .navigation-bar {
     background: linear-gradient($light-blue-1, $lighter-blue-2);
     border-top: none;
+    display: grid;
+
+    & .__day-label {
+        width: 65%;
+        height: 60%;
+        border-bottom-left-radius: 0.5rem;
+        border-bottom-right-radius: 0.5rem;
+        border-top: none;
+        background: linear-gradient(145deg, $medium-blue-5, $light-blue-2);
+        color: white;
+        font-family: 'Trebuchet MS', serif;
+        line-height: 1.75rem;
+    }
+
+    & .__add-task-btn {
+        height: 5rem;
+        width: 5rem;
+        font-family: 'Trebuchet MS', serif;
+        font-size: 6.25em;
+        background: linear-gradient(145deg, $dark-blue-1, $turquoise-1);
+        color: white;
+        box-shadow: 5px 5px 4px rgba($dark-blue-2, 0.2);
+    }
 }

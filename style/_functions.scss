@@ -35,13 +35,22 @@
 }
 
 // Horizontaly aligned items
-.hz-align {
+.hz-align-text {
     text-align: center;
 }
 
 // Horizontaly aligned items in flex display
 .hz-align-flex {
+    display: flex;
     justify-content: center;
+}
+
+// Horizontaly aligned items with margins
+.hz-align-margins {
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 // Verticaly aligned items with flex display
@@ -170,4 +179,9 @@
 // Grey border of 1px
 .border-grey-1 {
     border: 1px solid $dark-grey-2;
+}
+
+// Grey border of 0.5px
+.border-grey-05 {
+    border: 0.5px solid $dark-grey-2;
 }

@@ -28,14 +28,24 @@
   transition: all 0.5s;
 }
 
-.hz-align {
+.hz-align-text {
   text-align: center;
 }
 
 .hz-align-flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+}
+
+.hz-align-margins {
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .vt-align-flex {
@@ -152,8 +162,12 @@
   border: 1px solid #707070;
 }
 
+.border-grey-05 {
+  border: 0.5px solid #707070;
+}
+
 body {
-  font-size: 60%;
+  font-size: 65%;
   display: -ms-grid;
   display: grid;
   padding: 0px;
@@ -232,6 +246,31 @@ body {
   background: -webkit-gradient(linear, left top, left bottom, from(#A5C3F7), to(#B5C9FF));
   background: linear-gradient(#A5C3F7, #B5C9FF);
   border-top: none;
+  display: -ms-grid;
+  display: grid;
+}
+
+.navigation-bar .__day-label {
+  width: 65%;
+  height: 60%;
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+  border-top: none;
+  background: linear-gradient(145deg, #2D7AFF, #73B9FF);
+  color: white;
+  font-family: 'Trebuchet MS', serif;
+  line-height: 1.75rem;
+}
+
+.navigation-bar .__add-task-btn {
+  height: 5rem;
+  width: 5rem;
+  font-family: 'Trebuchet MS', serif;
+  font-size: 6.25em;
+  background: linear-gradient(145deg, #717AFF, #A1FFFF);
+  color: white;
+  -webkit-box-shadow: 5px 5px 4px rgba(52, 0, 255, 0.2);
+          box-shadow: 5px 5px 4px rgba(52, 0, 255, 0.2);
 }
 
 .day-menu {
