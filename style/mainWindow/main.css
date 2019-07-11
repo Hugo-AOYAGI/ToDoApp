@@ -69,6 +69,10 @@
   font-size: 2em;
 }
 
+.fs-25 {
+  font-size: 2.5em;
+}
+
 .fs-175 {
   font-size: 1.75em;
 }
@@ -166,6 +170,10 @@
   border: 0.5px solid #707070;
 }
 
+.opacity-05 {
+  opacity: 0.5;
+}
+
 body {
   font-size: 65%;
   display: -ms-grid;
@@ -219,22 +227,22 @@ body {
   width: 25%;
   border-radius: 5em;
   right: 5vmin;
-  background: -webkit-gradient(linear, left top, right top, from(#A4AAF9), color-stop(50%, #448CF8), color-stop(50%, white));
-  background: linear-gradient(90deg, #A4AAF9, #448CF8 50%, white 50%);
+  background: -webkit-gradient(linear, left top, right top, from(#A4AAF9), color-stop(60%, #448CF8), color-stop(60%, white));
+  background: linear-gradient(90deg, #A4AAF9, #448CF8 60%, white 60%);
 }
 
 .header .__next-task .__task-title {
   overflow-x: auto;
   padding-left: 1em;
   padding-right: 1em;
-  width: calc(50% - 2em);
+  width: calc(60% - 2em);
   color: white;
   border-right: 1px solid #707070;
 }
 
 .header .__next-task .__timer {
   color: #707070;
-  width: 50%;
+  width: 40%;
   height: 100%;
 }
 
@@ -243,16 +251,24 @@ body {
 }
 
 .navigation-bar {
-  background: -webkit-gradient(linear, left top, left bottom, from(#A5C3F7), to(#B5C9FF));
-  background: linear-gradient(#A5C3F7, #B5C9FF);
+  background: linear-gradient(10deg, #A5C3F7, #B5C9FF);
   border-top: none;
-  display: -ms-grid;
-  display: grid;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-preferred-size: 20%;
+      flex-basis: 20%;
+  padding-right: 1em;
+  padding-left: 1em;
 }
 
 .navigation-bar .__day-label {
   width: 65%;
-  height: 60%;
+  height: 3.75rem;
   border-bottom-left-radius: 0.5rem;
   border-bottom-right-radius: 0.5rem;
   border-top: none;
@@ -263,14 +279,75 @@ body {
 }
 
 .navigation-bar .__add-task-btn {
-  height: 5rem;
-  width: 5rem;
-  font-family: 'Trebuchet MS', serif;
-  font-size: 6.25em;
+  height: 4.5rem;
+  width: 4.5rem;
+  margin-top: 12%;
   background: linear-gradient(145deg, #717AFF, #A1FFFF);
-  color: white;
   -webkit-box-shadow: 5px 5px 4px rgba(52, 0, 255, 0.2);
           box-shadow: 5px 5px 4px rgba(52, 0, 255, 0.2);
+}
+
+.navigation-bar .__add-task-btn .__icon {
+  color: white;
+  height: 4.5rem;
+  width: 4.5rem;
+  font-family: 'Trebuchet MS', serif;
+  font-size: 6.25em;
+}
+
+.navigation-bar .__calendar-btn {
+  height: 2.75rem;
+  width: 65%;
+  margin-top: 12%;
+  color: white;
+  border-radius: 0.75rem;
+  background: linear-gradient(145deg, #8AB5FF, #6CA3FF);
+  -webkit-box-shadow: 3px 3px 4px rgba(52, 0, 255, 0.2);
+          box-shadow: 3px 3px 4px rgba(52, 0, 255, 0.2);
+}
+
+.navigation-bar .__completed-tasks {
+  margin-top: 15%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-left: 15%;
+}
+
+.navigation-bar .__important-tasks {
+  margin-top: 5%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-left: 15%;
+}
+
+.navigation-bar .__label {
+  font-family: 'Trebuchet MS', serif;
+  color: #707070;
+  font-size: 0.8rem;
+  -ms-flex-preferred-size: 80%;
+      flex-basis: 80%;
+  margin-left: 7%;
+}
+
+.navigation-bar .__check-box {
+  width: 0.8rem;
+  height: 0.8rem;
+  border-radius: 0.25rem;
+  border: 0.5px solid #707070;
+  background-color: white;
+}
+
+.navigation-bar .checked {
+  background-color: #717AFF;
+}
+
+.navigation-bar .nav-btn {
+  background-color: red;
+  width: 30%;
+  margin-top: 10px;
+  height: 30%;
 }
 
 .day-menu {
