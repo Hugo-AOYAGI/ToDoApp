@@ -9,7 +9,7 @@ body {
   font-family: "Calibri", serif;
   height: 100vh;
   grid-template: "head head head" 1fr
-                 "nav  main main" 6fr
+                 "nav  main schedule" 6fr
                  / 1fr 3.5fr 1fr;
 }
 
@@ -21,17 +21,16 @@ body {
   grid-area: nav;
 }
 
-.day-menu {
+.tasks-box {
   grid-area: main;
   // position: relative;
 }
 
-.footer {
-  grid-area: foot;
-  min-height: 0;
+.schedule {
+  grid-area: schedule;
 }
 
-.template {
-  display: none;
-}
+// .template {
+//   display: none;
+// }
 

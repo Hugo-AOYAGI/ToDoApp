@@ -184,7 +184,7 @@ body {
   background: linear-gradient(110deg, #D9D9D9 20%, #F9F9F9 250%);
   font-family: "Calibri", serif;
   height: 100vh;
-  grid-template: "head head head" 1fr "nav  main main" 6fr / 1fr 3.5fr 1fr;
+  grid-template: "head head head" 1fr "nav  main schedule" 6fr / 1fr 3.5fr 1fr;
 }
 
 .header {
@@ -195,17 +195,12 @@ body {
   grid-area: nav;
 }
 
-.day-menu {
+.tasks-box {
   grid-area: main;
 }
 
-.footer {
-  grid-area: foot;
-  min-height: 0;
-}
-
-.template {
-  display: none;
+.schedule {
+  grid-area: schedule;
 }
 
 .header {
@@ -367,7 +362,7 @@ body {
   height: 50%;
 }
 
-.day-menu {
+.__tasks-box {
   background-color: #B9B9B9;
   margin: 0em;
   display: -ms-grid;
@@ -376,7 +371,7 @@ body {
   grid-template: "titleT titleD titleD titleS" 1fr "task task schedule schedule" 10fr / 3fr 1fr 1fr 3fr;
 }
 
-.day-menu .__title-task {
+.__tasks-box .__title-task {
   grid-area: titleT;
   background-color: #707070;
   text-align: left;
@@ -386,13 +381,13 @@ body {
   color: #F9F9F9;
 }
 
-.day-menu .__title-day-container {
+.__tasks-box .__title-day-container {
   grid-area: titleD;
   position: relative;
   background-color: #D9D9D9;
 }
 
-.day-menu .__title-day-container .__day {
+.__tasks-box .__title-day-container .__day {
   position: absolute;
   text-align: center;
   font-weight: 300;
@@ -403,7 +398,7 @@ body {
   height: 50%;
 }
 
-.day-menu .__title-day-container .__date-short {
+.__tasks-box .__title-day-container .__date-short {
   position: absolute;
   text-align: center;
   font-weight: 300;
@@ -417,7 +412,7 @@ body {
   top: 50%;
 }
 
-.day-menu .__title-schedule {
+.__tasks-box .__title-schedule {
   grid-area: titleS;
   background-color: #707070;
   text-align: right;
@@ -427,7 +422,7 @@ body {
   color: #F9F9F9;
 }
 
-.day-menu .__tasks-box {
+.__tasks-box .__tasks-box {
   position: relative;
   grid-area: task;
   overflow-y: auto;
@@ -435,7 +430,7 @@ body {
   border-right: 1px solid #86817C;
 }
 
-.day-menu .__schedule {
+.__tasks-box .__schedule {
   grid-area: schedule;
   background-color: yellow;
 }
@@ -612,52 +607,34 @@ body {
   cursor: pointer;
 }
 
-.day-menu .__schedule {
-  background-color: #F9F9F9;
+.schedule {
+  background: -webkit-gradient(linear, left top, left bottom, from(#DFE8FF), to(#E0F9FF));
+  background: linear-gradient(#DFE8FF, #E0F9FF);
   position: relative;
-  display: -ms-grid;
-  display: grid;
-  grid-template: "labels spans" 1fr / 1fr 9fr;
+  border-top: none;
 }
 
-.day-menu .__schedule .__hours-labels {
-  grid-area: labels;
+.schedule .__hour-spans {
+  height: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  position: relative;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  background: linear-gradient(120deg, rgba(185, 185, 185, 0.8), rgba(134, 129, 124, 0.8) 180%);
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -ms-flex-line-pack: stretch;
+      align-content: stretch;
 }
 
-.day-menu .__schedule .__hours-labels .__label {
-  text-align: center;
-  -webkit-transform: translateY(90%);
-          transform: translateY(90%);
-  width: 100%;
-  height: 16.7%;
-  font-weight: 300;
-  color: #282726;
-  font-size: 1.3em;
+.schedule .__hour-spans .__4-hours:not(:last-child) {
+  border-bottom: 0.5px solid #86817C;
 }
 
-.day-menu .__schedule .__hour-spans {
-  grid-area: spans;
-  position: relative;
-}
-
-.day-menu .__schedule .__hour-spans .__4-hours {
-  height: 16.7%;
-}
-
-.day-menu .__schedule .__hour-spans .__4-hours:not(:last-child) {
-  border-bottom: 1px solid #86817C;
-}
-
-.day-menu .__schedule .__tasks-spans-box {
+.schedule .__tasks-spans-box {
   position: absolute;
   left: 10%;
   width: 90%;
@@ -666,7 +643,7 @@ body {
   padding-right: 0.5rem;
 }
 
-.day-menu .__schedule .__tasks-spans-box .__task-span {
+.schedule .__tasks-spans-box .__task-span {
   position: absolute;
   border-radius: 0rem;
   border: 1px solid #86817C;
@@ -675,13 +652,13 @@ body {
   transition: all 0.2s;
 }
 
-.day-menu .__schedule .__tasks-spans-box .__task-span:hover {
+.schedule .__tasks-spans-box .__task-span:hover {
   -webkit-box-shadow: 0.1rem 0.2rem rgba(134, 129, 124, 0.2);
           box-shadow: 0.1rem 0.2rem rgba(134, 129, 124, 0.2);
   border: 1px solid #D9D9D9;
 }
 
-.day-menu .__schedule .__tasks-spans-box #task1 {
+.schedule .__tasks-spans-box #task1 {
   -webkit-transform: translateX(0);
           transform: translateX(0);
   width: 5%;
@@ -690,7 +667,7 @@ body {
   background: linear-gradient(110deg, linen, darkred 550%);
 }
 
-.day-menu .__schedule .__tasks-spans-box #task2 {
+.schedule .__tasks-spans-box #task2 {
   -webkit-transform: translateX(120%);
           transform: translateX(120%);
   width: 5%;
@@ -699,7 +676,7 @@ body {
   background: linear-gradient(110deg, linen, darkblue 550%);
 }
 
-.day-menu .__schedule .__tasks-spans-box #task3 {
+.schedule .__tasks-spans-box #task3 {
   -webkit-transform: translateX(120%);
           transform: translateX(120%);
   width: 5%;
@@ -708,7 +685,7 @@ body {
   background: linear-gradient(110deg, linen, darkgreen 550%);
 }
 
-.day-menu .__schedule .__tasks-spans-box #task4 {
+.schedule .__tasks-spans-box #task4 {
   -webkit-transform: translateX(240%);
           transform: translateX(240%);
   width: 5%;
