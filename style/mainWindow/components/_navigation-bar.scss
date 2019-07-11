@@ -77,12 +77,25 @@
         background-color: $dark-blue-1;
     }
 
-    & .nav-btn {
-        background-color: red;
-        width: 30%;
-        margin-top: 10px;
-        height: 30%;
-        
-
+    & .__nav-button-box {
+        margin-top: 15%;
+        width: 100%;
+        display: flex;
+        justify-content: space-evenly;
     }
+
+    & .nav-btn {
+        height: 4rem;
+        width: 4rem;
+        background: linear-gradient(145deg, $dark-blue-1, $medium-blue-3);
+        border-radius: 1rem;
+        cursor: pointer;
+
+        & .__icon {
+            width: 50%;
+            height: 50%;
+        }
+        
+    }
+
 }

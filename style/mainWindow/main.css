@@ -343,11 +343,28 @@ body {
   background-color: #717AFF;
 }
 
+.navigation-bar .__nav-button-box {
+  margin-top: 15%;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+}
+
 .navigation-bar .nav-btn {
-  background-color: red;
-  width: 30%;
-  margin-top: 10px;
-  height: 30%;
+  height: 4rem;
+  width: 4rem;
+  background: linear-gradient(145deg, #717AFF, #A4AAF9);
+  border-radius: 1rem;
+  cursor: pointer;
+}
+
+.navigation-bar .nav-btn .__icon {
+  width: 50%;
+  height: 50%;
 }
 
 .day-menu {
