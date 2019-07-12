@@ -59,6 +59,7 @@ class Day {
       dataType: "json",
       success: (json_data) => { 
         this.tasks = Task.fromArray(this.id, this, json_data[this.id]);
+        console.log(this.tasks);
 
       },
       error: () => {
@@ -67,12 +68,9 @@ class Day {
       complete: () => {
         // Load tasks and schedule once the request is completed
         this.loadTasks($(".day-menu"));
-        this.loadSchedule();
+        // this.loadSchedule();
       }
     });
-
-    // Return the day object 
-    return day;
 
   }
 
@@ -80,14 +78,14 @@ class Day {
   loadTasks = ($day_menu) => {
 
     // Displaying the day name and date
-    $day_menu.html($day_menu_template.html());
-    $day_menu.find(".__title-day-container").find(".__day").html(this.day_name);
-    $day_menu.find(".__title-day-container").find(".__date-short").html(lz(this.date.getDate())+"/"+lz(this.date.getMonth()+1));
+    $(".__day-name").html(this.day_name);
+    $(".__day-date").html(lz(this.date.getDate())+"/"+lz(this.date.getMonth()+1));
 
     // Get the templates and the box to display the tasks in
-    let $template_task_card = $day_menu.find(".task-card.template");
-    let $template_task_page = $day_menu.find(".task-page.template");
-    let $tasks_box = $day_menu.find(".__tasks-box");
+    let $tasks_box = $(".tasks-box");
+    let $template_task_card = $tasks_box.find(".task-card.template");
+    let $template_task_page = $tasks_box.find(".task-page.template");
+    
 
     // Empty the tasks in case it is full
     $tasks_box.children().not(".template").each(function () {
@@ -143,8 +141,7 @@ class Day {
         let hours = lz(Math.floor(until_time/3600000));
         let remainder = until_time%3600000;
         let minutes = lz(Math.trunc(remainder/60000));
-        let seconds = lz(Math.trunc((remainder%60000)/1000));
-        let formatted_time =`${hours}:${minutes}:${seconds}`;
+        let formatted_time =`${hours}:${minutes}`;
 
         // Updating the timer in the task card with the formatted time
         task.$task_page.find(".__timer").html(formatted_time);
@@ -219,9 +216,6 @@ class Task {
     // Add event listeners
 
     // For the side bar
-    this.$task_card.find(".__tab-main").on("click", () => {
-      toggleSideBar(this);
-    })
 
     // For the task page
     this.$task_card.find(".__more-button").on("click", () => {
@@ -233,7 +227,7 @@ class Task {
       this.delete();
     })
 
-    this.$task_card.find(".__edit-btn").on("click", () => {
+    this.$task_page.find(".__edit-btn").on("click", () => {
       this.edit();
     })
 

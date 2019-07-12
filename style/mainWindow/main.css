@@ -174,35 +174,6 @@
   opacity: 0.5;
 }
 
-body {
-  font-size: 65%;
-  display: -ms-grid;
-  display: grid;
-  padding: 0px;
-  overflow: hidden;
-  margin: 0px;
-  background: linear-gradient(110deg, #D9D9D9 20%, #F9F9F9 250%);
-  font-family: "Calibri", serif;
-  height: 100vh;
-  grid-template: "head head head" 1fr "nav  main schedule" 6fr / 1fr 3.5fr 1fr;
-}
-
-.header {
-  grid-area: head;
-}
-
-.navigation-bar {
-  grid-area: nav;
-}
-
-.tasks-box {
-  grid-area: main;
-}
-
-.schedule {
-  grid-area: schedule;
-}
-
 .header {
   background: linear-gradient(130deg, #5B9CFF, #619AF0);
 }
@@ -323,7 +294,6 @@ body {
   font-size: 0.8rem;
   -ms-flex-preferred-size: 80%;
       flex-basis: 80%;
-  margin-left: 7%;
 }
 
 .navigation-bar .__check-box {
@@ -409,14 +379,26 @@ body {
   -ms-flex-preferred-size: 100%;
       flex-basis: 100%;
   border-radius: 0.5rem;
+  -webkit-box-shadow: 5px 5px 6px rgba(165, 195, 247, 0.7);
+          box-shadow: 5px 5px 6px rgba(165, 195, 247, 0.7);
 }
 
 .task-card .__main .__title {
   height: 50%;
-  padding-left: 2rem;
+  padding-left: 5%;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  max-width: 90%;
+  overflow-x: auto;
+  overflow-y: hidden;
   font-size: 2.65em;
   font-family: 'Trebuchet MS', serif;
   color: white;
+}
+
+.task-card .__main .__title::-webkit-scrollbar {
+  display: none;
 }
 
 .task-card .__main .__start-time {
@@ -439,7 +421,7 @@ body {
 }
 
 .task-card .__side-button-box {
-  width: 4rem;
+  width: 2.5rem;
   -webkit-box-ordinal-group: 3;
       -ms-flex-order: 2;
           order: 2;
@@ -472,6 +454,34 @@ body {
 
 .task-card .__remove-btn {
   color: #FF8080;
+}
+
+.small-task-card {
+  margin-top: 1rem;
+  height: 18%;
+}
+
+.small-task-card .__main .__title {
+  height: 100%;
+}
+
+.small-task-card .__main .__start-time {
+  opacity: 0;
+}
+
+.small-task-card .__main .__more-button {
+  -webkit-transform: none;
+          transform: none;
+}
+
+.small-task-card .__side-button-box {
+  width: 2rem;
+}
+
+.small-task-card .__side-button-box .__side-button {
+  height: 2rem;
+  width: 2rem;
+  font-size: 2.5em;
 }
 
 .schedule {
@@ -562,124 +572,176 @@ body {
 }
 
 .task-page {
-  -webkit-transition: all 0.4s;
-  transition: all 0.4s;
-  position: absolute;
-  -webkit-box-shadow: inset 0px 0px 0.3rem 0.3rem rgba(134, 129, 124, 0.4);
-          box-shadow: inset 0px 0px 0.3rem 0.3rem rgba(134, 129, 124, 0.4);
-  padding: 1rem;
-  background-color: #F9F9F9;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  top: 10%;
-  width: 100%;
-  left: 0;
+  width: 74%;
+  height: 70%;
+  left: -1rem;
+  background-color: white;
   display: none;
-  overflow: hidden;
-  min-height: 90%;
-  -webkit-transition: all 0.3s;
-  transition: all 0.3s;
+  border-top: none;
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
 }
 
 .task-page .__sticker-important {
-  position: absolute;
-  right: 0.5rem;
-  top: 0;
-  z-index: 10;
-  width: 1rem;
-  height: 1.5rem;
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(-150%, #3a3835), to(darkred));
-  background: linear-gradient(#3a3835 -150%, darkred);
-  -webkit-clip-path: polygon(50% 65%, 100% 100%, 100% 0, 0 0, 0 98%);
-          clip-path: polygon(50% 65%, 100% 100%, 100% 0, 0 0, 0 98%);
-  text-align: center;
-  color: #F9F9F9;
-  font-weight: 500;
-  font-size: 1.2em;
-  -webkit-transition: all 0.3s;
-  transition: all 0.3s;
-}
-
-.task-page .__sticker-important:hover {
-  font-weight: 900;
+  right: 1.85rem;
+  border-top: none;
+  width: 1.2rem;
+  height: 1.8rem;
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 70%, 0 100%);
+          clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 70%, 0 100%);
+  background-color: #FF8080;
+  color: white;
+  font-size: 1.55em;
+  cursor: default;
 }
 
 .task-page .__sticker-hover-important {
-  position: absolute;
-  right: 1rem;
+  width: 0rem;
+  height: 0rem;
+  opacity: 0;
+  right: 2.45rem;
   top: 0.5rem;
-  z-index: 5;
-  height: 0;
-  width: 0;
-  overflow: hidden;
-  border-radius: 0.1rem;
-  white-space: nowrap;
-  background-color: #3a3835;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  color: #F9F9F9;
-  font-weight: 900;
-  font-size: 0.1em;
-  -webkit-transition: all 0.3s;
-  transition: all 0.3s;
+  font-size: 0em;
+  color: white;
+  border-radius: 0.2rem;
+  background: linear-gradient(145deg, #A4AAF9, #FF8080);
 }
 
 .task-page .__sticker-important:hover ~ .__sticker-hover-important {
-  right: 2rem;
-  font-size: 1.2em;
-  width: 20%;
-  height: 10%;
+  width: 4.25rem;
+  height: 1.75rem;
+  top: 2rem;
+  right: 2.5rem;
+  font-size: 1.15em;
+  opacity: 1;
 }
 
 .task-page .__edit-btn {
-  position: absolute;
-  background-color: #3a3835;
-  line-height: 1.2em;
-  left: 0;
-  top: 0;
-  width: 1.8rem;
-  height: 1.8rem;
-  -webkit-clip-path: polygon(0 0, 100% 0, 0 100%);
-          clip-path: polygon(0 0, 100% 0, 0 100%);
-  font-size: 1.4em;
-  color: #D6CAB0;
-  -webkit-transition: all 0.5s;
-  transition: all 0.5s;
-  cursor: pointer;
+  margin: 0.2rem;
+  width: 1.75rem;
+  height: 1.75rem;
+  color: #707070;
+  border-radius: 0.3rem;
+  background-color: white;
 }
 
-.task-page .__edit-btn:hover {
-  padding: 0.1rem;
-  width: 2rem;
-  height: 2rem;
-  color: #FFF;
+.task-page .__info-box {
+  width: calc(100% - 2rem);
+  height: calc(100% - 3.5rem);
+  padding: 1rem;
+  padding-top: 2.5rem;
+  overflow: auto;
+  color: #707070;
+  font-weight: 300;
+  font-family: 'Ebrima', serif;
+  display: -ms-grid;
+  display: grid;
+  grid-template: "d d d d d d" 1fr "s s e e c c" 1fr "r r r n n n" 1fr / 1fr 1fr 1fr 1fr 1fr 1fr;
+  row-gap: 1.25rem;
 }
 
-.task-page h3 {
-  font-size: 1.5em;
-  -webkit-text-decoration: #D6CAB0 underline;
-          text-decoration: #D6CAB0 underline;
+.task-page .__info-box .__desc-container {
+  grid-area: d;
 }
 
-.task-page .__description {
-  font-size: 1.2em;
+.task-page .__info-box .__start-container {
+  grid-area: s;
+}
+
+.task-page .__info-box .__end-container {
+  grid-area: e;
+}
+
+.task-page .__info-box .__cd-container {
+  grid-area: c;
+}
+
+.task-page .__info-box .__repeat-container {
+  grid-area: r;
+}
+
+.task-page .__info-box .__notif-container {
+  grid-area: n;
+}
+
+.task-page .__info-box h3 {
+  font-size: 1.45em;
+  margin: 0;
+  font-weight: 300;
+  margin-bottom: 0.25rem;
+  text-decoration: underline;
+}
+
+.task-page .__info-box p {
+  text-justify: left;
+  border-left: 0.5px solid #A4AAF9;
   padding-left: 0.5rem;
-  border-left: 2px solid #D6CAB0;
-}
-
-.task-page span {
-  color: #282726;
   font-size: 1.3em;
 }
 
-.task-page .__timer {
-  font-size: 1.4em;
+.task-page .__info-box span {
+  font-size: 2.25em;
+}
+
+.task-page .__info-box .__repeat {
+  color: #E15050;
+  margin-left: 1rem;
+  font-size: 1.45em;
+}
+
+.task-page .__info-box .__notification {
+  color: #65C954;
+  margin-left: 1rem;
+  font-size: 1.45em;
+}
+
+.task-page .__info-box::-webkit-scrollbar {
+  width: 1rem;
+  padding-right: 0.5rem;
+  padding-top: 0.5rem;
+}
+
+.task-page .__info-box::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+.task-page .__info-box::-webkit-scrollbar-thumb {
+  border-radius: 0.8rem;
+  -webkit-box-shadow: inset 0 0 10px 10px #ADDEFF;
+          box-shadow: inset 0 0 10px 10px #ADDEFF;
+  border: 0.35rem solid transparent;
+}
+
+body {
+  font-size: 65%;
+  display: -ms-grid;
+  display: grid;
+  padding: 0px;
+  overflow: hidden;
+  margin: 0px;
+  background: linear-gradient(110deg, #D9D9D9 20%, #F9F9F9 250%);
+  font-family: "Calibri", serif;
+  height: 100vh;
+  grid-template: "head head head" 1fr "nav  main schedule" 6fr / 1fr 3.5fr 1fr;
+}
+
+.header {
+  grid-area: head;
+}
+
+.navigation-bar {
+  grid-area: nav;
+}
+
+.tasks-box {
+  grid-area: main;
+}
+
+.schedule {
+  grid-area: schedule;
+}
+
+.template {
+  display: none;
 }
 /*# sourceMappingURL=main.css.map */

@@ -46,47 +46,36 @@
         </div>
       </div>
     </div>
-    <div class="tasks-box">
-      <div class="task-card template rel transi-03 z-10 hz-align-margins">
+    <div class="tasks-box rel">
+      <div class="task-card rel transi-03 hz-align-margins z-10 template">
         <div class="__side-button-box h-100">
-          <div class="__complete-btn __side-button z-5 vt-align-flex hz-align-flex border-grey-05 pointer">✓</div>
-          <div class="__remove-btn __side-button z-5 vt-align-flex hz-align-flex border-grey-05 pointer">✕</div>
+          <div class="__complete-btn __side-button vt-align-flex hz-align-flex border-grey-05 pointer transi-03">✓</div>
+          <div class="__remove-btn __side-button vt-align-flex hz-align-flex border-grey-05 pointer transi-03">✕</div>
         </div>
         <div class="__main border-grey-05 rel">
-          <div class="__title abs w-100 vt-align-flex">Template Task</div>
-          <div class="__start-time abs fs-2">None</div>
-          <div class="__more-button abs br-50 vt-align-flex hz-align-flex">✕</div>
+          <div class="__title abs w-100 vt-align-flex transi-03">Template Task</div>
+          <div class="__start-time abs fs-2 transi-03">None</div>
+          <div class="__more-button abs br-50 vt-align-flex hz-align-flex pointer transi-03">✕</div>
         </div>
       </div>
-      <script>
-        let template = document.querySelector(".task-card.template");
-        let tasks_box = document.querySelector(".tasks-box");
-        for (i = 0; i < 5; i++) {
-          let clone = template.cloneNode(true);
-          tasks_box.append(clone);
-
-        }
-      </script>
-      <div class="task-page template">
-        <div class="__sticker-important">!</div>
-        <div class="__sticker-hover-important">
-          Important Task
+      <div class="task-page border-grey-05 red hz-align-margins rel z-5 template">
+          <div class="__sticker-important abs border-grey-05 hz-align-flex z-10">!</div>
+          <div class="__sticker-hover-important hz-align-flex vt-align-flex border-grey-05 abs transi-03 z-5">Important</div>
+          <div class="__edit-btn border-grey-05 abs hz-align-flex vt-align-flex fs-175 pointer">✎</div>
+          <div class="__info-box">
+            <div class="__desc-container">
+              <h3>Description: </h3>
+              <p class="__description">
+                This is only a template task, if you see this then there is a problem with the application. The following text is just fake text in order to try the features and adaptability of the application.
+              </p>
+            </div>
+            <div class="__start-container hz-align-text"><h3>Start Time: </h3><span class="__start-time">13:00</span></div>
+            <div class="__end-container hz-align-text"><h3>End Time: </h3><span class="__end-time">15:00</span></div>
+            <div class="__cd-container hz-align-text"><h3>Countdown: </h3><span class="__timer">03:23</span></div>
+            <div class="__repeat-container hz-align-text"><h3>Repeat: </h3><span class="__repeat hz-align-text">None</span></div>
+            <div class="__notif-container hz-align-text"><h3>Notification: </h3><span class="__notification hz-align-text">10 minutes before</span></div>
+          </div>
         </div>
-        <div class="__edit-btn">✎</div>
-        <h3>Description: </h3>
-        <p class="__description">This is only a template task, if you see this then there is a problem with the application.
-        </p>
-        <h3>Start: </h3>
-        <span class="__start-time">[START-TIME]</span>
-        <h3>End: </h3>
-        <span class="__end-time">[END-TIME]</span>
-        <h3>Countdown: </h3>
-        <div class="__timer">[TIMER]</div>
-        <h3>Repeat: </h3>
-        <div class="__timer">None.</div>
-        <h3>Notification: </h3>
-        <div class="__timer">None.</div>
-      </div>
     </div>
     <div class="schedule border-grey-1">
       <div class="__hour-spans">
@@ -102,7 +91,7 @@
       </div>
     </div>
   </body>
-  <!-- <script>
+  <script>
     if (typeof module === 'object') {
       window.module = module; 
       module = undefined;
@@ -114,5 +103,5 @@
   <script>
     if (window.module) 
       module = window.module;
-  </script> -->
+  </script>
 </html>
