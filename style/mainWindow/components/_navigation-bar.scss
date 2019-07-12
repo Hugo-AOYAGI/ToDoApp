@@ -1,0 +1,101 @@
+.navigation-bar {
+    background: linear-gradient(10deg, $light-blue-1, $lighter-blue-2);
+    border-top: none;
+    display: flex;
+    flex-direction: column;
+    flex-basis: 20%;
+    padding-right: 1em;
+    padding-left: 1em;
+
+    & .__day-label {
+        width: 65%;
+        height: 3.75rem;
+        border-bottom-left-radius: 0.5rem;
+        border-bottom-right-radius: 0.5rem;
+        border-top: none;
+        background: linear-gradient(145deg, $medium-blue-5, $light-blue-2);
+        color: white;
+        font-family: 'Trebuchet MS', serif;
+        line-height: 1.75rem;
+    }
+
+    & .__add-task-btn {
+        height: 4.5rem;
+        width: 4.5rem;
+        margin-top: 12%;
+        background: linear-gradient(145deg, $dark-blue-1, $turquoise-1);
+        box-shadow: 5px 5px 4px rgba($dark-blue-2, 0.2);
+
+        & .__icon {
+            color: white;
+            height: 4.5rem;
+            width: 4.5rem;
+            font-family: 'Trebuchet MS', serif;
+            font-size: 6.25em;
+        }
+    }
+
+    & .__calendar-btn {
+        height: 2.75rem;
+        width: 65%;
+        margin-top: 12%;
+        color: white;
+        border-radius: 0.75rem;
+        background: linear-gradient(145deg, $light-blue-3, $light-blue-4);
+        box-shadow: 3px 3px 4px rgba($dark-blue-2, 0.2);
+    }
+    
+    & .__completed-tasks {
+        margin-top: 15%;
+        display: flex;
+        margin-left: 15%;
+    }
+
+    & .__important-tasks {
+        margin-top: 5%; 
+        display: flex;
+        margin-left: 15%;
+    }
+
+    & .__label {
+        font-family: 'Trebuchet MS', serif;
+        color: $dark-grey-2;
+        font-size: 0.8rem;
+        flex-basis: 80%;
+        margin-left: 7%;
+    }
+
+    & .__check-box {
+        width: 0.8rem;
+        height: 0.8rem;
+        border-radius: 0.25rem;
+        border: 0.5px solid $dark-grey-2;
+        background-color: white;
+    }
+
+    & .checked {
+        background-color: $dark-blue-1;
+    }
+
+    & .__nav-button-box {
+        margin-top: 15%;
+        width: 100%;
+        display: flex;
+        justify-content: space-evenly;
+    }
+
+    & .nav-btn {
+        height: 4rem;
+        width: 4rem;
+        background: linear-gradient(145deg, $dark-blue-1, $medium-blue-3);
+        border-radius: 1rem;
+        cursor: pointer;
+
+        & .__icon {
+            width: 50%;
+            height: 50%;
+        }
+        
+    }
+
+}

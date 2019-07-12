@@ -1,38 +1,22 @@
 
-.day-menu .__schedule {
-    background-color: $light-grey-3;
+.schedule {
+    background: linear-gradient($lighter-blue-3, $lighter-blue-4);
     position: relative;
-    display: grid;
-    grid-template: "labels spans" 1fr / 1fr 9fr;
+    border-top: none;
+    
     
 
-    & .__hours-labels {
-        grid-area: labels;
-        display: flex;
-        position: relative;
-        flex-direction: column;
-        background: linear-gradient(120deg, rgba($medium-grey-3, 0.8), rgba($medium-grey-1, 0.8) 180%);
-
-        & .__label {
-            text-align: center;
-            transform: translateY(90%);
-            width: 100%;
-            height: 16.7%;
-            font-weight: 300;
-            color: $dark-grey-1;
-            font-size: 1.3em;
-        }
-    }
-
     & .__hour-spans {
-        grid-area: spans;
-        position: relative;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-content: stretch;
 
         & .__4-hours {
-            height: 16.7%;
 
             &:not(:last-child) {
-                border-bottom: 1px solid $medium-grey-1;
+                border-bottom: 0.5px solid $medium-grey-1;
             }
     
         }        
