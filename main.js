@@ -22,7 +22,9 @@ app.on("ready", () => {
     slashes: true
   }));
 
-  //mainWindow.webContents.openDevTools();
+  mainWindow.maximize();
+
+  mainWindow.webContents.openDevTools();
 
 });
 

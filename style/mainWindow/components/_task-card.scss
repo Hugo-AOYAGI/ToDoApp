@@ -10,13 +10,22 @@
         background: linear-gradient(155deg, $medium-blue-6, $turquoise-2 150%);
         flex-basis: 100%;
         border-radius: 0.5rem;
+        box-shadow: 5px 5px 6px rgba($light-blue-1, 0.7);
 
         & .__title {
             height: 50%;
-            padding-left: 2rem;
+            padding-left: 5%;
+            width: fit-content;
+            max-width: 90%;
+            overflow-x: auto;
+            overflow-y: hidden;
             font-size: 2.65em;
             font-family: 'Trebuchet MS', serif;
             color: white;
+
+            &::-webkit-scrollbar {
+                display: none;
+            }
         }
 
         & .__start-time {
@@ -39,7 +48,7 @@
     }
 
     & .__side-button-box {
-        width: 4rem;
+        width: 2.5rem;
         order: 2;
         display: flex;
         justify-content: space-evenly;
@@ -64,6 +73,35 @@
     & .__remove-btn {
         color: $light-red-1;
     }
-
     
+}
+
+.small-task-card {
+    margin-top: 1rem;
+    height: 18%;
+
+    & .__main { 
+
+        & .__title {
+            height: 100%;
+        }
+
+        & .__start-time {
+            opacity: 0;
+        }
+
+        & .__more-button {
+            transform: none;
+        }
+    }
+
+    & .__side-button-box {
+        width: 2rem;
+
+        & .__side-button {
+            height: 2rem;
+            width: 2rem;
+            font-size: 2.5em;
+        }
+    }
 }

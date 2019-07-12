@@ -1,111 +1,144 @@
 
 .task-page {
-    transition: all 0.4s;
-    position: absolute;
-    box-shadow: inset 0px 0px 0.3rem 0.3rem rgba($medium-grey-1, 0.4);
-    padding: 1rem;
-    background-color: $light-grey-3;
-    box-sizing: border-box;
-    top: 10%;
-    width: 100%;
-    // left: 100%;
-    left: 0;
+    width: 74%;
+    height: 70%;
+    left: -1rem;
+    background-color: white;
     display: none;
-    overflow: hidden;
-    min-height: 90%;
-    transition: all 0.3s;
+    border-top: none;
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
 
     & .__sticker-important {
-        position: absolute;
-        right: 0.5rem;
-        top: 0;
-        z-index: 10;
-        width: 1rem;
-        height: 1.5rem;
-        background: linear-gradient($dark-grey-3 -150%, darkred);
-        clip-path: polygon(50% 65%, 100% 100%, 100% 0, 0 0, 0 98%);
-        text-align: center;
-        color: $light-grey-3;
-        font-weight: 500;
-        font-size: 1.2em;
-        transition: all 0.3s;
+        right: 1.85rem;
+        border-top: none;
+        width: 1.2rem;
+        height: 1.8rem;
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 70%, 0 100%);
+        background-color: $light-red-1;
+        color: white;
+        font-size: 1.55em;
+        cursor: default;
 
-        &:hover {
-            font-weight: 900;
-        }
     }
-    
+
     & .__sticker-hover-important {
-        position: absolute;
-        right: 1rem;
+        width: 0rem;
+        height: 0rem;
+        opacity: 0;
+        right: 2.45rem;
         top: 0.5rem;
-        z-index: 5;
-        height: 0;
-        width: 0;
-        overflow: hidden;
-        border-radius: 0.1rem;
-        white-space: nowrap;
-        background-color: $dark-grey-3;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: $light-grey-3;
-        font-weight: 900;
-        font-size: 0.1em;
-        transition: all 0.3s;
+        font-size: 0em;
+        color: white;
+        border-radius: 0.2rem;
+        background: linear-gradient(145deg, $medium-blue-3, $light-red-1);
     }
 
     & .__sticker-important:hover ~ .__sticker-hover-important {
-        right: 2rem;
-        font-size: 1.2em;
-        width: 20%;
-        height: 10%;
-
+        width: 4.25rem;
+        height: 1.75rem;
+        top: 2rem;
+        right: 2.5rem;
+        font-size: 1.15em;
+        opacity: 1;
     }
 
     & .__edit-btn {
-        position: absolute;
-        background-color: $dark-grey-3;
-        line-height: 1.2em;
-        left: 0;
-        top: 0;
-        width: 1.8rem;
-        height: 1.8rem;
-        clip-path: polygon(0 0, 100% 0, 0 100%);
-        font-size: 1.4em;
-        color: $light-grey-1;
-        transition: all 0.5s;
-        cursor: pointer;
+        margin: 0.2rem;
+        width: 1.75rem;
+        height: 1.75rem;
+        color: $dark-grey-2;
+        border-radius: 0.3rem;
+        background-color: white;
+    }
 
-        &:hover {
-            padding: 0.1rem;
-            width: 2rem;
-            height: 2rem;
-            color: #FFF;
+    & .__info-box {
+        width: calc(100% - 2rem);
+        height: calc(100% - 3.5rem);
+        padding: 1rem;
+        padding-top: 2.5rem;
+        overflow: auto;
+        color: $dark-grey-2;
+        font-weight: 300;
+        font-family: 'Ebrima', serif;
+        display: grid;
+        grid-template: "d d d d d d" 1fr
+                       "s s e e c c" 1fr
+                       "r r r n n n" 1fr
+                       / 1fr 1fr 1fr 1fr 1fr 1fr;
+        row-gap: 1.25rem;
+
+        & .__desc-container {
+            grid-area: d;
+        }
+        
+        & .__start-container {
+            grid-area: s;
+        }
+
+        & .__end-container {
+            grid-area: e;
+        }
+
+        & .__cd-container {
+            grid-area: c;
+        }
+
+        & .__repeat-container {
+            grid-area: r;
+        }
+
+        & .__notif-container {
+            grid-area: n;
+        }
+
+        & h3 {
+            font-size: 1.45em;
+            margin: 0;
+            font-weight: 300;
+            margin-bottom: 0.25rem;
+            text-decoration: underline;
+        }
+
+        & p {
+            text-justify: left;
+            border-left: 0.5px solid $medium-blue-3;
+            padding-left: 0.5rem;
+            font-size: 1.3em;
+        }
+
+        & span {
+            font-size: 2.25em;
+        }
+
+        & .__repeat {
+            color: $medium-red-1;
+            margin-left: 1rem;
+            font-size: 1.45em;
+        }
+
+        & .__notification {
+            color: $medium-green-1;
+            margin-left: 1rem;
+            font-size: 1.45em;
 
         }
 
-    }
-
-    & h3 {
-        font-size: 1.5em;
-        text-decoration: $light-grey-1 underline;
-    }
-
-    & .__description {
-        
-        font-size: 1.2em;
-        padding-left: 0.5rem;
-        border-left: 2px solid $light-grey-1;
-    }
-
-    & span {
-        color: $dark-grey-1;
-        font-size: 1.3em;
-    }
-
-    & .__timer {
-        font-size: 1.4em;
+        &::-webkit-scrollbar {
+            width: 1rem;
+            padding-right: 0.5rem;
+            padding-top: 0.5rem;
+        }
+    
+        &::-webkit-scrollbar-track {
+            background-color: transparent;
+        }
+    
+        &::-webkit-scrollbar-thumb {
+            border-radius: 0.8rem;
+            box-shadow: inset 0 0 10px 10px $light-blue-5;
+            border: 0.35rem solid transparent;
+        }
     }
 
 }
