@@ -1,14 +1,41 @@
 
 .task-card {
-    height: 23%;
+    height: 25%;
     margin-top: 1.5rem;
-    width: 75%;
+    width: 80%;
     display: flex;
+    flex-shrink: 0;
 
     & .__main {
         background: linear-gradient(155deg, $medium-blue-6, $turquoise-2 150%);
         flex-basis: 100%;
         border-radius: 0.5rem;
+
+        & .__title {
+            height: 50%;
+            padding-left: 2rem;
+            font-size: 2.65em;
+            font-family: 'Trebuchet MS', serif;
+            color: white;
+        }
+
+        & .__start-time {
+            right: 4.5rem;
+            bottom: 1.5rem;
+            color: $light-purple-1;
+        }
+
+        & .__more-button {
+            right: 0.5rem;
+            bottom: 0.5rem;
+            width: 1.5rem;
+            height: 1.5rem;
+            font-size: 1.7em;
+            color: white;
+            border: 2px solid white;
+            background: linear-gradient(30deg, $dark-blue-3, $dark-blue-4);
+            transform: rotateZ(45deg);
+        }
     }
 
     & .__side-button-box {

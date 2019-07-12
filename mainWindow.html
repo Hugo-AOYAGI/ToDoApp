@@ -46,18 +46,27 @@
         </div>
       </div>
     </div>
-    <div class="tasks-box hz-align-flex red">
-      <div class="task-card template rel transi-03 z-10">
+    <div class="tasks-box">
+      <div class="task-card template rel transi-03 z-10 hz-align-margins">
         <div class="__side-button-box h-100">
           <div class="__complete-btn __side-button z-5 vt-align-flex hz-align-flex border-grey-05 pointer">✓</div>
           <div class="__remove-btn __side-button z-5 vt-align-flex hz-align-flex border-grey-05 pointer">✕</div>
         </div>
-        <div class="__main border-grey-05">
-          <div class="__title">Template Task</div>
-          <div class="__start-time">None</div>
-          <div class="__more-button">✖</div>
+        <div class="__main border-grey-05 rel">
+          <div class="__title abs w-100 vt-align-flex">Template Task</div>
+          <div class="__start-time abs fs-2">None</div>
+          <div class="__more-button abs br-50 vt-align-flex hz-align-flex">✕</div>
         </div>
       </div>
+      <script>
+        let template = document.querySelector(".task-card.template");
+        let tasks_box = document.querySelector(".tasks-box");
+        for (i = 0; i < 5; i++) {
+          let clone = template.cloneNode(true);
+          tasks_box.append(clone);
+
+        }
+      </script>
       <div class="task-page template">
         <div class="__sticker-important">!</div>
         <div class="__sticker-hover-important">

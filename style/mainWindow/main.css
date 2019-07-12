@@ -365,15 +365,43 @@ body {
 .tasks-box {
   background: -webkit-gradient(linear, left top, left bottom, from(#E4EFFF), to(white));
   background: linear-gradient(#E4EFFF, white);
-}
-
-.task-card {
-  height: 23%;
-  margin-top: 1.5rem;
-  width: 75%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding: 0.5rem;
+  overflow: auto;
+}
+
+.tasks-box::-webkit-scrollbar {
+  width: 1.2rem;
+  padding-right: 0.5rem;
+  padding-top: 0.5rem;
+}
+
+.tasks-box::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+.tasks-box::-webkit-scrollbar-thumb {
+  border-radius: 0.8rem;
+  -webkit-box-shadow: inset 0 0 10px 10px #ADDEFF;
+          box-shadow: inset 0 0 10px 10px #ADDEFF;
+  border: 0.35rem solid transparent;
+}
+
+.task-card {
+  height: 25%;
+  margin-top: 1.5rem;
+  width: 80%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
 }
 
 .task-card .__main {
@@ -381,6 +409,33 @@ body {
   -ms-flex-preferred-size: 100%;
       flex-basis: 100%;
   border-radius: 0.5rem;
+}
+
+.task-card .__main .__title {
+  height: 50%;
+  padding-left: 2rem;
+  font-size: 2.65em;
+  font-family: 'Trebuchet MS', serif;
+  color: white;
+}
+
+.task-card .__main .__start-time {
+  right: 4.5rem;
+  bottom: 1.5rem;
+  color: #8E84EB;
+}
+
+.task-card .__main .__more-button {
+  right: 0.5rem;
+  bottom: 0.5rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  font-size: 1.7em;
+  color: white;
+  border: 2px solid white;
+  background: linear-gradient(30deg, #4F637A, #284880);
+  -webkit-transform: rotateZ(45deg);
+          transform: rotateZ(45deg);
 }
 
 .task-card .__side-button-box {
