@@ -195,3 +195,8 @@
 .opacity-05 {
     opacity: 0.5;
 }
+
+// Prevents user text selection
+.no-select {
+    user-select: none;
+}

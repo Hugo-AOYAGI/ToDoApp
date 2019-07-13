@@ -20,7 +20,7 @@ app.on("ready", () => {
     pathname: path.join(__dirname, "mainWindow.html"),
     protocol: "file",
     slashes: true
-  }));
+  }), {"extraHeaders" : "pragma: no-cache\n"});
 
   mainWindow.maximize();
 

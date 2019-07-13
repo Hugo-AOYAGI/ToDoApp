@@ -4,17 +4,48 @@
     <link rel = "stylesheet" type = "text/css" href = "style/newTaskWindow/main.css" />
 </head>
 <body>
-    <div class="header">
-        <div class="__title"></div>
-        <div class="__close-btn"></div>
+    <div class="header vt-align-flex">
+        <div class="__title fs-3">Add a new Task</div>
+        <div class="__close-btn abs fs-5">✕</div>
     </div>
-    <div class="main">
-        <input class="__title" placeholder="Title" required></input>
-        <input  class="__desc" placeholder="Description"></input>
-        <input type="time" class="__start-time" placeholder="Start Time"></input>
-        <input type="time" class="__end-time" placeholder="Start Time"></input>
-        <input type="radio" class="__important"></input>
-        <input class="__notify-setting"></input>
+    <div class="main-container">
+        <div class="__title-container">
+            <h3>Event Title : </h3>
+            <input class="__title" placeholder="Title"></input>
+        </div>
+        <div class="__desc-container">
+            <h3>Event Description : </h3>
+            <input class="__desc" placeholder="Description"></input>
+        </div>
+        <div class="__start-container">
+            <h3>Start Time : </h3>
+            <button class="__start-time">N/A</button>
+        </div>
+        <div class="__end-container">
+            <h3>End Time : </h3>
+            <button class="__end-time">N/A</button>
+        </div>
+        <div class="__repeat-container">
+            <h3>Repeat : </h3>
+            <select class="__repeat" id="repeat">
+                <option>No Repeat</option>
+                <option>Daily</option>
+                <option>Weekly</option>
+                <option>Monthly</option>
+                <option>Yearly</option>
+            </select>
+        </div>
+        <div class="__notify-container">
+            <h3>Notification : </h3>
+            <select class="__notification" id="notification">
+                <option>None</option>
+                <option>10 minutes before</option>
+                <option>30 minutes before</option>
+                <option>One hour before</option>
+                <option>One day before</option>
+            </select>
+        </div>
+        
     </div>
 </body>
 </html>

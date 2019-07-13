@@ -3,7 +3,8 @@
 const electron = require("electron");
 const url = require("url");
 const path = require("path");
-const ipc = require("electron").ipcRenderer;
+const remote = electron.remote;
+const ipc = electron.ipcRenderer;
 
 // Wait for window to load
 $(document).ready(() => { 

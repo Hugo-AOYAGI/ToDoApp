@@ -62,10 +62,9 @@
         font-weight: 300;
         font-family: 'Ebrima', serif;
         display: grid;
-        grid-template: "d d d d d d" 1fr
-                       "s s e e c c" 1fr
-                       "r r r n n n" 1fr
-                       / 1fr 1fr 1fr 1fr 1fr 1fr;
+        grid-template: "d d d d d d"
+                       "s s e e c c"
+                       "r r r n n n";
         row-gap: 1.25rem;
 
         & .__desc-container {

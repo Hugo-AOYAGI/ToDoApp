@@ -4,11 +4,11 @@ body {
     margin: 0px;
     overflow: hidden;
     position: relative;
+    font-family: "Calibri", serif;
 
     & .header {
-        background-color: pink;
         width: 100vw;
-        height: 10vh;
+        height: 15vh;
     }
     
     & .main {
