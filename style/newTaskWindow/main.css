@@ -200,6 +200,8 @@ body {
   font-size: 100%;
   padding: 0px;
   margin: 0px;
+  width: 100vw;
+  height: 100vh;
   overflow: hidden;
   position: relative;
   font-family: "Calibri", serif;
@@ -208,12 +210,6 @@ body {
 body .header {
   width: 100vw;
   height: 15vh;
-}
-
-body .main {
-  background-color: red;
-  width: 100vw;
-  height: 90vh;
 }
 
 .header {
@@ -252,7 +248,6 @@ body .main {
   margin: 0;
   font-weight: 300;
   margin-bottom: 1rem;
-  margin-left: 1rem;
   text-decoration: underline;
 }
 
@@ -260,35 +255,51 @@ body .main {
   border-radius: 0.5rem;
   border: 0.5px solid #707070;
   padding: 0.2rem;
+  width: calc(100% - 0.4rem);
   font-size: 1.2em;
   color: #707070;
   font-family: 'Trebuchet MS', serif;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 }
 
 .main-container .__desc {
   text-justify: left;
+  width: calc(100% - 1rem);
   padding: 0.5rem;
   font-size: 1.2em;
   color: #707070;
   font-family: 'Trebuchet MS', serif;
   overflow: auto;
   border-radius: 0.5rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 }
 
-.main-container span {
-  font-size: 2.25em;
+.main-container .__time-btn {
+  border-radius: 0.2rem;
+  width: 30%;
+  height: 2rem;
+  color: white;
+  font-size: 1.5em;
+  background: linear-gradient(135deg, #6CA3FF, #A4AAF9);
+  margin-bottom: 1.5rem;
 }
 
-.main-container .__repeat {
-  color: #E15050;
-  font-size: 1.45em;
+.main-container .__confirm-btn {
+  bottom: 0;
+  width: 20%;
+  height: 3.5rem;
+  background: linear-gradient(135deg, #8AB5FF, #5B9CFF);
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+  color: white;
+  font-size: 1.5em;
+  border-bottom: none;
 }
 
-.main-container .__notification {
-  color: #65C954;
-  font-size: 1.45em;
+.main-container .listbox {
+  width: 50%;
+  font-size: 1.3em;
+  color: #707070;
 }
 
 .main-container::-webkit-scrollbar {

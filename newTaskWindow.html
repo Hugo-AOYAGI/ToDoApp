@@ -15,29 +15,30 @@
         </div>
         <div class="__desc-container col-1-of-1">
             <h3>Event Description : </h3>
-            <textarea class="__desc" placeholder="Description" cols="70" rows="8"></textarea>
+            <textarea class="__desc" placeholder="Description" rows="5"></textarea>
         </div>
-        <div class="__start-container col-1-of-2">
+        <div class="__start-container col-1-of-2 hz-align-text">
             <h3>Start Time : </h3>
-            <button class="__start-time">N/A</button>
+            <button class="__start-time __time-btn border-grey-05">N/A</button>
         </div>
-        <div class="__end-container col-1-of-2">
+        <div class="__end-container col-1-of-2 hz-align-text">
             <h3>End Time : </h3>
-            <button class="__end-time">N/A</button>
+            <button class="__end-time __time-btn border-grey-05">N/A</button>
         </div>
-        <div class="__repeat-container col-1-of-2">
+        <div class="__repeat-container col-1-of-2 hz-align-text">
             <h3>Repeat : </h3>
-            <select class="__repeat" id="repeat">
+            <select class="__repeat listbox" id="repeat">
                 <option>No Repeat</option>
                 <option>Daily</option>
                 <option>Weekly</option>
                 <option>Monthly</option>
                 <option>Yearly</option>
             </select>
+        <div class="__confirm-btn abs hz-align-margins vt-align-flex hz-align-flex border-grey-05">Confirm</div>
         </div>
-        <div class="__notify-container col-1-of-2">
+        <div class="__notify-container col-1-of-2 hz-align-text">
             <h3>Notification : </h3>
-            <select class="__notification" id="notification">
+            <select class="__notification listbox" id="notification">
                 <option>None</option>
                 <option>10 minutes before</option>
                 <option>30 minutes before</option>
@@ -45,7 +46,21 @@
                 <option>One day before</option>
             </select>
         </div>
-        
+    </div>
+    <div class="time-input">
+        <div class="__hours-input">
+            <div class="__hours-bar"></div>
+            <div class="__plus"></div>
+            <div class="__minus"></div>
+            <div class="__label"></div>
+        </div>
+        <div class="__minutes-input">
+            <div class="__hours-bar"></div>
+            <div class="__plus"></div>
+            <div class="__minus"></div>
+            <div class="__label"></div>
+
+        </div>
     </div>
 </body>
 </html>
