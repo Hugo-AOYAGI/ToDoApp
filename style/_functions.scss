@@ -200,3 +200,18 @@
 .no-select {
     user-select: none;
 }
+
+// Functions to organize rows with columns in row display
+
+
+.col-1-of-1 {
+    flex-basis: 100%;
+}
+
+.col-1-of-2 {
+    flex-basis: 50%;
+}
+
+.col-1-of-3 {
+    flex-basis: 33%;
+}

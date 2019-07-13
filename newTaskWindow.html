@@ -5,27 +5,27 @@
 </head>
 <body>
     <div class="header vt-align-flex">
-        <div class="__title fs-3">Add a new Task</div>
-        <div class="__close-btn abs fs-5">✕</div>
+        <div class="__title fs-25">Add a new Task</div>
+        <div class="__close-btn abs fs-3">✕</div>
     </div>
     <div class="main-container">
-        <div class="__title-container">
+        <div class="__title-container col-1-of-1">
             <h3>Event Title : </h3>
             <input class="__title" placeholder="Title"></input>
         </div>
-        <div class="__desc-container">
+        <div class="__desc-container col-1-of-1">
             <h3>Event Description : </h3>
-            <input class="__desc" placeholder="Description"></input>
+            <textarea class="__desc" placeholder="Description" cols="70" rows="8"></textarea>
         </div>
-        <div class="__start-container">
+        <div class="__start-container col-1-of-2">
             <h3>Start Time : </h3>
             <button class="__start-time">N/A</button>
         </div>
-        <div class="__end-container">
+        <div class="__end-container col-1-of-2">
             <h3>End Time : </h3>
             <button class="__end-time">N/A</button>
         </div>
-        <div class="__repeat-container">
+        <div class="__repeat-container col-1-of-2">
             <h3>Repeat : </h3>
             <select class="__repeat" id="repeat">
                 <option>No Repeat</option>
@@ -35,7 +35,7 @@
                 <option>Yearly</option>
             </select>
         </div>
-        <div class="__notify-container">
+        <div class="__notify-container col-1-of-2">
             <h3>Notification : </h3>
             <select class="__notification" id="notification">
                 <option>None</option>
