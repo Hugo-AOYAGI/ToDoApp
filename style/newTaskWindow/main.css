@@ -330,13 +330,15 @@ body .header {
   border: 0.35rem solid transparent;
 }
 
-.time-input {
-  position: relative;
-  background: linear-gradient(160deg, rgba(165, 195, 247, 0.8), rgba(213, 255, 255, 0.8));
-  border-left: 0.5px solid #707070;
-  border-right: 0.5px solid #707070;
-  width: 20%;
+.time-input-container {
+  background: linear-gradient(160deg, rgba(165, 195, 247, 0.65), rgba(213, 255, 255, 0.65));
+  width: 100%;
   height: 85vh;
+}
+
+.time-input {
+  width: 20%;
+  height: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -349,9 +351,11 @@ body .header {
 
 .time-input .__hours-input .__hours-bar {
   width: 5rem;
-  height: 23rem;
+  height: 2.5rem;
   background: linear-gradient(135deg, #8E84EB, #A5C3F7);
   border-radius: 3rem;
+  -webkit-transition: all 0.15s;
+  transition: all 0.15s;
 }
 
 .time-input .__minutes-input {
@@ -361,17 +365,54 @@ body .header {
 
 .time-input .__minutes-input .__minutes-bar {
   width: 5rem;
-  height: 12rem;
+  height: 2.5rem;
   background: linear-gradient(-135deg, #8E84EB, #A5C3F7);
   border-radius: 3rem;
+  -webkit-transition: all 0.15s;
+  transition: all 0.15s;
 }
 
 .time-input .__label {
   font-size: 1.5em;
-  width: 2.25rem;
-  color: #717AFF;
+  width: 2.5rem;
+  color: #707070;
   background-color: white;
   border: none;
   border-radius: 0.5rem;
+}
+
+.time-input .__colon {
+  color: #707070;
+  padding-bottom: 0.5rem;
+}
+
+.time-input .__plus {
+  top: 2rem;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.5rem;
+  padding-bottom: 0.25rem;
+  color: #717AFF;
+  font-size: 3em;
+  background-color: white;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.time-input .__minus {
+  bottom: 2rem;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.5rem;
+  padding-bottom: 0.25rem;
+  color: #717AFF;
+  font-size: 3em;
+  background-color: white;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 /*# sourceMappingURL=main.css.map */
