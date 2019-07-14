@@ -53,7 +53,15 @@
     margin-right: auto;
 }
 
-// Verticaly aligned items with flex display
+// Vertically aligned items with margins
+.vt-align-margins {
+    top: 0;
+    bottom: 0;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+// Vertically aligned items with flex display
 .vt-align-flex {
     display: flex;
     align-items: center;

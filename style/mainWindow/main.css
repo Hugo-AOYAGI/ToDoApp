@@ -48,6 +48,13 @@
   margin-right: auto;
 }
 
+.vt-align-margins {
+  top: 0;
+  bottom: 0;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
 .vt-align-flex {
   display: -webkit-box;
   display: -ms-flexbox;

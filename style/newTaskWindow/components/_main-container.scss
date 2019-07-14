@@ -2,11 +2,14 @@
 .main-container {
     background-color: white;
     padding: 1rem;
+    width: calc(100vw - 2rem);
+    height: calc(85vh - 2rem);
     overflow: auto;
     color: $dark-grey-2;
     font-weight: 300;
     font-family: 'Ebrima', serif;
     display: flex;
+    align-content: flex-start;
     flex-wrap: wrap;
     overflow: auto;
 

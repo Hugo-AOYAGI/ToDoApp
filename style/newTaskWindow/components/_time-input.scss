@@ -1,0 +1,44 @@
+
+.time-input {
+    position: relative;
+    background: linear-gradient(160deg, rgba($light-blue-1, 0.8), rgba($turquoise-2, 0.8));
+    border-left: 0.5px solid $dark-grey-2;
+    border-right: 0.5px solid $dark-grey-2;
+    width: 20%;
+    height: 85vh;
+    display: flex;
+
+    & .__hours-input {
+        height: 100%;
+        width: 50%;
+
+        & .__hours-bar {
+            width: 5rem;
+            height: 23rem;;
+            background: linear-gradient( 135deg, $light-purple-1, $light-blue-1);
+            border-radius: 3rem;
+        }
+    }
+
+    & .__minutes-input {
+        height: 100%;
+        width: 50%;
+
+        & .__minutes-bar {
+            width: 5rem;
+            height: 12rem;;
+            background: linear-gradient( -135deg, $light-purple-1, $light-blue-1);
+            border-radius: 3rem;
+        }
+    }
+
+    & .__label {
+        font-size: 1.5em;
+        width: 2.25rem;
+        color:$dark-blue-1;
+        background-color: white;
+        border: none;
+        border-radius: 0.5rem;
+    }
+
+}
