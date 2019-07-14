@@ -1,3 +1,6 @@
+// Importing of all the modules
+const electron = require("electron");
+const ipcRenderer = electron.ipcRenderer;
 
 //Fonction that adds a leading zero to time and date values for formatting
 lz = (n) => {
@@ -7,11 +10,21 @@ lz = (n) => {
 } 
 
 $(document).ready( () => {
+    
+    // Getting the title of the window (edit or add)
+    ipcRenderer.on("change-new-task-window-title", (event, title) => {
+        console.log("ah");
+        document.querySelector(".__title").innerHTML = title;
+    });
+
+    // Add event listener to the close button
+    $(".__close-btn").on("click", () => {
+        electron.remote.getCurrentWindow().close();
+    });
+
     // Manages the height of the time input progress bars
 
     //Getting the progress bars elements
-    let $hours_progress = $(".__hours-bar");
-    let $minutes_progress = $(".__minutes-bar");
 
     let $hours_input = $("#hours-input");
     let $minutes_input = $("#minutes-input");
@@ -37,7 +50,7 @@ $(document).ready( () => {
 
     incrementInput = ($target, value) => {
         let initial_value = $target.siblings("input").val() == "" ? 0 : parseInt($target.siblings("input").val());
-        let k = $target.hasClass("hours") ? 1 : 0.4;
+        let k = $target.hasClass("hours") ? 0.25 : 0.1;
         let max = $target.hasClass("hours") ? 23 : 59;
         $target.siblings("input").val(initial_value + value);
         inInterval($target.siblings("input"), 0, max);
@@ -47,7 +60,7 @@ $(document).ready( () => {
 
     $hours_input.on("input", (event) => {
         inInterval($(event.target), 0, 23);
-        updateHeight($(event.target), $(event.target).siblings(".bar"), 1);
+        updateHeight($(event.target), $(event.target).siblings(".bar"), 0.25);
     });
 
     $hours_input.on("focusout", () => {
@@ -57,7 +70,7 @@ $(document).ready( () => {
 
     $minutes_input.on("input", (event) => {
         inInterval($(event.target), 0, 59);
-        updateHeight($(event.target), $(event.target).siblings(".bar"), 0.4);
+        updateHeight($(event.target), $(event.target).siblings(".bar"), 0.1);
     });
 
     $minutes_input.on("focusout", () => {
@@ -88,8 +101,8 @@ $(document).ready( () => {
     document.querySelector(".__minus").oncontextmenu = new Function("return false;");
 
     stopPress = () => {
+        // Stopping the interval
         clearInterval(click_interval);
-        console.log("Step 3");
     }
 
     holdingPress = (args) => {
@@ -98,9 +111,13 @@ $(document).ready( () => {
         // Checking if the counter has passed the trigger time
         if (counter > args['time_trigger']) {
             if(counter - args['time_trigger'] > (1/click_period)*1000) {
+                // Reseting counter
                 counter = args['time_trigger'];
+                // Calling the function
                 args['callback'](args["object"]);
+                // Adding acceleration to the click period
                 click_period += args['acceleration'];
+                // Limiting the value of the click period
                 if (click_period > args['max_period'])
                     click_period = args['max_period'];
             }
@@ -109,7 +126,6 @@ $(document).ready( () => {
 
     startPress = (args) => {
         // Reseting variables
-        console.log("Step 1");
         counter = 0;
         click_period = 1;
         // Starting interval
@@ -128,17 +144,17 @@ $(document).ready( () => {
                             'object': $(this)
                         };
                 $(this).mousedown(() => {startPress(args)});
-                // $(this).on("mouseup mouseleave", () => {stopPress()});
+                $(this).on("mouseup mouseleave", () => {stopPress()});
             });
         };
     }(jQuery));
 
     $(".__plus").longPress(function (event) {
         incrementInput(event, 1);
-    });
+    }, 30, 30, 7);
 
     $(".__minus").longPress(function (event) {
         incrementInput(event, -1);
-    });
+    }, 30, 60, 14);
 
 });

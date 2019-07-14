@@ -204,7 +204,7 @@
 }
 
 body {
-  font-size: 100%;
+  font-size: 50%;
   padding: 0px;
   margin: 0px;
   width: 100vw;
@@ -337,7 +337,7 @@ body .header {
 }
 
 .time-input {
-  width: 20%;
+  width: 30%;
   height: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -350,10 +350,10 @@ body .header {
 }
 
 .time-input .__hours-input .__hours-bar {
-  width: 5rem;
-  height: 2.5rem;
+  width: 2.5rem;
+  height: 2.25rem;
   background: linear-gradient(135deg, #8E84EB, #A5C3F7);
-  border-radius: 3rem;
+  border-radius: 1rem;
   -webkit-transition: all 0.15s;
   transition: all 0.15s;
 }
@@ -364,17 +364,17 @@ body .header {
 }
 
 .time-input .__minutes-input .__minutes-bar {
-  width: 5rem;
-  height: 2.5rem;
+  width: 2.5rem;
+  height: 2.25rem;
   background: linear-gradient(-135deg, #8E84EB, #A5C3F7);
-  border-radius: 3rem;
+  border-radius: 1rem;
   -webkit-transition: all 0.15s;
   transition: all 0.15s;
 }
 
 .time-input .__label {
   font-size: 1.5em;
-  width: 2.5rem;
+  width: 1.5rem;
   color: #707070;
   background-color: white;
   border: none;
@@ -388,8 +388,8 @@ body .header {
 
 .time-input .__plus {
   top: 2rem;
-  width: 3rem;
-  height: 3rem;
+  width: 1.5rem;
+  height: 1.5rem;
   border-radius: 0.5rem;
   padding-bottom: 0.25rem;
   color: #717AFF;
@@ -403,8 +403,8 @@ body .header {
 
 .time-input .__minus {
   bottom: 2rem;
-  width: 3rem;
-  height: 3rem;
+  width: 1.5rem;
+  height: 1.5rem;
   border-radius: 0.5rem;
   padding-bottom: 0.25rem;
   color: #717AFF;
@@ -414,5 +414,11 @@ body .header {
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 /*# sourceMappingURL=main.css.map */
