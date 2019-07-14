@@ -13,8 +13,7 @@ $(document).ready( () => {
     
     // Getting the title of the window (edit or add)
     ipcRenderer.on("change-new-task-window-title", (event, title) => {
-        console.log("ah");
-        document.querySelector(".__title").innerHTML = title;
+        $(".__title").html(title);
     });
 
     // Add event listener to the close button

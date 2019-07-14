@@ -8,6 +8,7 @@ const fs = require("fs");
 const {app, BrowserWindow} = electron;
 
 let mainWindow;
+let newTaskWindow;
 
 // Gets called when the app is set up
 app.on("ready", () => {
@@ -24,11 +25,15 @@ app.on("ready", () => {
 
   mainWindow.maximize();
 
-});
+  // Handling the window closing
+  mainWindow.on("close", () => {
+    if (newTaskWindow)
+      newTaskWindow.close();
+    mainWindow = null;
+    newTaskWindow = null;
+  });
 
-app.on("close", () => {
-  mainWindow = null;
-})
+});
 
 ipc.on("remove-task", (event, task_to_del) => {
   // Open json
@@ -76,4 +81,40 @@ areJSONEqual = (a, b) => {
   } else {
     return true;
   }
+}
+
+ipc.on("create-new-task-window", (event, title) => {
+  createNewTaskWindow(title);
+});
+
+
+createNewTaskWindow = (title) => {
+
+  newTaskWindow = new BrowserWindow({
+    webPreferences: {nodeIntegration: true},
+    resizable: false,
+    height: 480,
+    width: 600,
+    frame: false,
+    alwaysOnTop: true
+  });
+
+  //Load html into window
+  newTaskWindow.loadURL(url.format({
+    pathname: path.join(__dirname, "newTaskWindow.html"),
+    protocol: "file",
+    slashes: true
+  }));
+
+  // Handling window closing
+  newTaskWindow.on("close", () => {
+    newTaskWindow = null;
+  });
+
+  //Waiting for window to load
+  newTaskWindow.webContents.once('did-finish-load', () => {
+    newTaskWindow.webContents.send("change-new-task-window-title", title);
+  });
+ 
+
 }

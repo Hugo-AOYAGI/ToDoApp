@@ -120,36 +120,7 @@ $(document).ready(() => {
     refreshCurrDay();
   });
 
-
-  /* ===New task feature=== */
-  let newTaskWindow;
-
-  // Create new html window (addTask.html) from the main.js
-  createNewTaskWindow = (title) => {
-
-    newTaskWindow = new BrowserWindow({
-      webPreferences: {nodeIntegration: true},
-      resizable: false,
-      height: 400,
-      width: 500,
-      frame: false,
-      alwaysOnTop: true
-    });
-    //Load html into window
-    newTaskWindow.loadURL(url.format({
-      pathname: path.join(__dirname, "newTaskWindow.html"),
-      protocol: "file",
-      slashes: true
-    }));
-    ipcRenderer.send("change-new-task-window-title", title);
-  
-  }
-
-
-  createNewTaskWindow("Add a new Task bruh");
-
-
-  // Reload the tasks so that the new task appears
+  ipcRenderer.send("create-new-task-window", "Add a new task");
 
 
 }); 
