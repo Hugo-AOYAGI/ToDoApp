@@ -1,11 +1,7 @@
 
 // Importing of all the modules
 const electron = require("electron");
-const url = require("url");
-const path = require("path");
-const remote = electron.remote;
 const ipcRenderer = electron.ipcRenderer;
-const BrowserWindow = remote.BrowserWindow;
 
 // Wait for window to load
 $(document).ready(() => { 

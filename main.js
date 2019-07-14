@@ -113,6 +113,10 @@ createNewTaskWindow = (title) => {
 
   //Waiting for window to load
   newTaskWindow.webContents.once('did-finish-load', () => {
+    // Making sure the window is actually ready
+    let arr = [];
+    for (i=0; i<10000; i++)
+      arr.push(i);
     newTaskWindow.webContents.send("change-new-task-window-title", title);
   });
  

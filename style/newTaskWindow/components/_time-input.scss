@@ -31,7 +31,7 @@
             height: 2.25rem;
             background: linear-gradient( 135deg, $light-purple-1, $light-blue-1);
             border-radius: 1rem;
-            transition: all 0.15s;
+            transition: all 0.05s;
         }
     }
 
@@ -44,7 +44,7 @@
             height: 2.25rem;
             background: linear-gradient( -135deg, $light-purple-1, $light-blue-1);
             border-radius: 1rem;
-            transition: all 0.15s;
+            transition: all 0.05s;
         }
     }
 
@@ -63,14 +63,24 @@
     }
 
     & .__plus {
-        top: 2rem;
+        top: 4rem;
         @include increment-button;
         
     }
 
     & .__minus {
-        bottom: 2rem;
+        bottom: 4rem;
         @include increment-button;
+    }
+
+    & .__time-confirm-button {
+        width: 4.5rem;
+        height: 1.75rem;
+        bottom: 1rem;
+        font-size: 2.25em;
+        color: white;
+        background-color: $dark-blue-1;
+        border-radius: 0.25rem;
     }
 
 

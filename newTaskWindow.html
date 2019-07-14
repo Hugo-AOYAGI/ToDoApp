@@ -5,7 +5,7 @@
 </head>
 <body>
     <div class="header vt-align-flex">
-        <div class="__title fs-25">Title</div>
+        <div class="__title-main fs-25">Title</div>
         <div class="__close-btn abs fs-3 pointer">✕</div>
     </div>
     <div class="main-container abs">
@@ -49,19 +49,20 @@
     </div>
     <div class="time-input-container rel">
         <div class="time-input hz-align-margins">
-            <div class="__hours-input vt-align-flex hz-align-flex">
+            <div class="__hours-input rel vt-align-flex hz-align-flex">
                 <div class="__hours-bar bar abs z-5"></div>
                 <div class="__plus hours abs border-grey-05 hz-align-flex vt-align-flex">+</div>
                 <div class="__minus hours abs border-grey-05 hz-align-flex vt-align-flex">-</div>
                 <input class="__label hz-align-text z-10" id="hours-input" type="number"></input>
             </div>
             <div class="__colon vt-align-margins fs-2">:</div>
-            <div class="__minutes-input vt-align-flex hz-align-flex">
+            <div class="__minutes-input rel vt-align-flex hz-align-flex">
                 <div class="__minutes-bar bar z-5 abs"></div>
                 <div class="__plus mins abs border-grey-05 hz-align-flex vt-align-flex">+</div>
                 <div class="__minus mins abs border-grey-05 hz-align-flex vt-align-flex">-</div>
                 <input class="__label hz-align-text z-10" id="minutes-input" type="number"></input>
             </div>
+            <div class="__time-confirm-button abs pointer hz-align-flex vt-align-flex hz-align-margins">Confirm</div>
         </div>
     </div>
     <script>

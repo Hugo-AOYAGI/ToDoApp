@@ -13,7 +13,7 @@ $(document).ready( () => {
     
     // Getting the title of the window (edit or add)
     ipcRenderer.on("change-new-task-window-title", (event, title) => {
-        $(".__title").html(title);
+        $(".__title-main").html(title);
     });
 
     // Add event listener to the close button
@@ -93,7 +93,7 @@ $(document).ready( () => {
         
     });
 
-    let click_period;
+    let click_freq;
     let counter;
     let click_interval;
 
@@ -106,54 +106,64 @@ $(document).ready( () => {
 
     holdingPress = (args) => {
         // Incrementing the counter
-        counter += (1/args['max_period'])*1000;
+        counter += (1/args['max_freq'])*1000;
+        console.log(click_freq);
         // Checking if the counter has passed the trigger time
-        if (counter > args['time_trigger']) {
-            if(counter - args['time_trigger'] > (1/click_period)*1000) {
+        if (counter >= args['time_trigger']) {
+            // Limiting the value of the click freq
+            if (click_freq >= args['max_freq'])
+                click_freq = args['max_freq'];
+            if(counter - args['time_trigger'] > (1/click_freq)*1000 || click_freq == 1) {
                 // Reseting counter
                 counter = args['time_trigger'];
                 // Calling the function
-                args['callback'](args["object"]);
-                // Adding acceleration to the click period
-                click_period += args['acceleration'];
-                // Limiting the value of the click period
-                if (click_period > args['max_period'])
-                    click_period = args['max_period'];
+                args['callback'](args["object"]); 
+                // Adding acceleration to the click freq
+                click_freq += args['acceleration'];
             }
         }
+        
     }
 
     startPress = (args) => {
         // Reseting variables
         counter = 0;
-        click_period = 1;
+        click_freq = 1;
         // Starting interval
-        click_interval = setInterval(() => {holdingPress(args);}, (1/args['max_period'])*1000);
+        click_interval = setInterval(() => {holdingPress(args);}, (1/args['max_freq'])*1000);
     }
 
     // Handler for long presses so that they are counted as many clicks
     (function($) {
-        $.fn.longPress = function(callback, time_trigger = 500, max_period = 30, acceleration = 5) {
+        $.fn.longPress = function(callback, time_trigger, max_freq, acceleration) {
             return this.each( function () {
                 // Storing the arguments in an object
-                let args = {'callback': callback, 
+                let _arguments = {'callback': callback, 
                             'time_trigger': time_trigger, 
-                            'max_period': max_period, 
+                            'max_freq': max_freq, 
                             'acceleration': acceleration,
                             'object': $(this)
                         };
-                $(this).mousedown(() => {startPress(args)});
+                $(this).mousedown(() => {startPress(_arguments)});
                 $(this).on("mouseup mouseleave", () => {stopPress()});
             });
         };
     }(jQuery));
 
-    $(".__plus").longPress(function (event) {
+    $(".__plus.hours").longPress(function (event) {
         incrementInput(event, 1);
-    }, 30, 30, 7);
+    }, 200, 40, 2);
 
-    $(".__minus").longPress(function (event) {
+    $(".__minus.hours").longPress(function (event) {
         incrementInput(event, -1);
-    }, 30, 60, 14);
+    }, 200, 40, 2);
+
+    $(".__plus.mins").longPress(function (event) {
+        incrementInput(event, 1);
+    }, 200, 80, 4);
+
+    $(".__minus.mins").longPress(function (event) {
+        incrementInput(event, -1);
+    }, 200, 80, 4);
 
 });

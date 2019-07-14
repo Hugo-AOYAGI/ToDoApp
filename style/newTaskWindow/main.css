@@ -223,7 +223,7 @@ body .header {
   background: linear-gradient(130deg, #5B9CFF, #619AF0);
 }
 
-.header .__title {
+.header .__title-main {
   margin-left: 2em;
   border-left: 1px solid #B8F5FF;
   color: white;
@@ -298,7 +298,7 @@ body .header {
 .main-container .__confirm-btn {
   bottom: 0;
   width: 20%;
-  height: 3.5rem;
+  height: 2.5rem;
   background: linear-gradient(135deg, #8AB5FF, #5B9CFF);
   border-top-left-radius: 0.5rem;
   border-top-right-radius: 0.5rem;
@@ -354,8 +354,8 @@ body .header {
   height: 2.25rem;
   background: linear-gradient(135deg, #8E84EB, #A5C3F7);
   border-radius: 1rem;
-  -webkit-transition: all 0.15s;
-  transition: all 0.15s;
+  -webkit-transition: all 0.05s;
+  transition: all 0.05s;
 }
 
 .time-input .__minutes-input {
@@ -368,8 +368,8 @@ body .header {
   height: 2.25rem;
   background: linear-gradient(-135deg, #8E84EB, #A5C3F7);
   border-radius: 1rem;
-  -webkit-transition: all 0.15s;
-  transition: all 0.15s;
+  -webkit-transition: all 0.05s;
+  transition: all 0.05s;
 }
 
 .time-input .__label {
@@ -387,7 +387,7 @@ body .header {
 }
 
 .time-input .__plus {
-  top: 2rem;
+  top: 4rem;
   width: 1.5rem;
   height: 1.5rem;
   border-radius: 0.5rem;
@@ -402,7 +402,7 @@ body .header {
 }
 
 .time-input .__minus {
-  bottom: 2rem;
+  bottom: 4rem;
   width: 1.5rem;
   height: 1.5rem;
   border-radius: 0.5rem;
@@ -414,6 +414,16 @@ body .header {
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
+}
+
+.time-input .__time-confirm-button {
+  width: 4.5rem;
+  height: 1.75rem;
+  bottom: 1rem;
+  font-size: 2.25em;
+  color: white;
+  background-color: #717AFF;
+  border-radius: 0.25rem;
 }
 
 input[type=number]::-webkit-inner-spin-button,
