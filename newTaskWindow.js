@@ -107,7 +107,6 @@ $(document).ready( () => {
     holdingPress = (args) => {
         // Incrementing the counter
         counter += (1/args['max_freq'])*1000;
-        console.log(click_freq);
         // Checking if the counter has passed the trigger time
         if (counter >= args['time_trigger']) {
             // Limiting the value of the click freq
@@ -165,5 +164,89 @@ $(document).ready( () => {
     $(".__minus.mins").longPress(function (event) {
         incrementInput(event, -1);
     }, 200, 80, 4);
+
+    // Getting the time input as values to display on the buttons
+    let time_to_update;
+    let $time_input_container = $(".time-input-container");
+    let $start_time_btn = $(".__start-time");
+    let $end_time_btn = $(".__end-time");
+    
+
+    resetTimeInput = () => {
+        $hours_input.val("");
+        $minutes_input.val("");
+        let hours, minutes;
+        // Checking if a value as already been entered, if so, set that value for the inputs
+        if (time_to_update.hasClass("__end-time") && $end_time_btn.html() != "N/A"){
+            hours = $end_time_btn.html().split(":")[0];
+            minutes =  $end_time_btn.html().split(":")[1];
+            $hours_input.val(hours);
+            $minutes_input.val(minutes);
+        } else if (time_to_update.hasClass("__start-time") && $start_time_btn.html() != "N/A") {
+            hours = $start_time_btn.html().split(":")[0];
+            minutes =  $start_time_btn.html().split(":")[1];
+            $hours_input.val(hours);
+            $minutes_input.val(minutes);
+        }
+
+        updateHeight($hours_input, $hours_input.siblings(".bar"), 0.25);
+        updateHeight($minutes_input, $minutes_input.siblings(".bar"), 0.1);
+    }
+
+    changeStartTime = () => {
+        time_to_update = $(".__start-time");
+        resetTimeInput();
+        $time_input_container.css("display", "block");
+        
+    }
+
+    changeEndTime = () => {
+        time_to_update = $(".__end-time");
+        resetTimeInput();
+        $time_input_container.css("display", "block");
+    }
+
+    // Adding event listeners to the time buttons
+
+    $start_time_btn.on("click", changeStartTime);
+    $end_time_btn.on("click", changeEndTime);
+
+    // Adding event listener to time confirm button
+
+    updateTime = () => {
+        $time_input_container.css("display", "none");
+        time_to_update.html(`${$hours_input.val()}:${$minutes_input.val()}`);
+        if ($hours_input.val() == "" || $minutes_input.val() == "")
+            time_to_update.html("N/A");
+    }
+
+    $(".__time-confirm-button").on("click", updateTime);
+
+    // Add event listener to global confirm button
+
+    confirmTask = () => {
+        // Check if the title was entered
+        if ($(".__title").val() == "") {
+            alert("Please fill in the title.");
+            return 0;
+        }
+        // Format the data into an object
+        task_data = {
+            'title': $(".__title"),
+            'desc': $(".__desc").val() ? $("__description").val() : "None",
+            'start': $(".__start-time").html(),
+            'end': $(".__end-time").html(),
+            'important': true,
+            'checked': false,
+            'notify-setting': $(".__notification").val(),
+            'repeat-setting': $(".__repeat").val() 
+        }
+        ipcRenderer.send("new-task" , task_data);
+    }
+
+    $(".__confirm-btn").on("click", confirmTask);
+
+    
+
 
 });

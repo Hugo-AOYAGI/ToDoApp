@@ -267,7 +267,7 @@ body .header {
   border: 0.5px solid #707070;
   padding: 0.2rem;
   width: calc(100% - 0.4rem);
-  font-size: 1.2em;
+  font-size: 1.65em;
   color: #707070;
   font-family: 'Trebuchet MS', serif;
   margin-bottom: 1.5rem;
@@ -277,12 +277,13 @@ body .header {
   text-justify: left;
   width: calc(100% - 1rem);
   padding: 0.5rem;
-  font-size: 1.2em;
+  font-size: 1.45em;
   color: #707070;
   font-family: 'Trebuchet MS', serif;
   overflow: auto;
   border-radius: 0.5rem;
   margin-bottom: 1.5rem;
+  resize: none;
 }
 
 .main-container .__time-btn {
@@ -297,8 +298,8 @@ body .header {
 
 .main-container .__confirm-btn {
   bottom: 0;
-  width: 20%;
-  height: 2.5rem;
+  width: 15%;
+  height: 2rem;
   background: linear-gradient(135deg, #8AB5FF, #5B9CFF);
   border-top-left-radius: 0.5rem;
   border-top-right-radius: 0.5rem;
@@ -334,6 +335,7 @@ body .header {
   background: linear-gradient(160deg, rgba(165, 195, 247, 0.65), rgba(213, 255, 255, 0.65));
   width: 100%;
   height: 85vh;
+  display: none;
 }
 
 .time-input {

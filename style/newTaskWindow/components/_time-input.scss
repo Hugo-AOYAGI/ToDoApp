@@ -3,6 +3,7 @@
     background: linear-gradient(160deg, rgba($light-blue-1, 0.65), rgba($turquoise-2, 0.65));
     width: 100%;
     height: 85vh;
+    display: none;
 }
 
 @mixin increment-button {
