@@ -347,6 +347,7 @@ body .header {
 .time-input .__hours-input {
   height: 100%;
   width: 50%;
+  margin-top: -2rem;
 }
 
 .time-input .__hours-input .__hours-bar {
@@ -361,6 +362,7 @@ body .header {
 .time-input .__minutes-input {
   height: 100%;
   width: 50%;
+  margin-top: -2rem;
 }
 
 .time-input .__minutes-input .__minutes-bar {

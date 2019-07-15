@@ -13,9 +13,18 @@ let newTaskWindow;
 // Gets called when the app is set up
 app.on("ready", () => {
   // Creating the main window
-  mainWindow = new BrowserWindow({webPreferences: {
-    nodeIntegration: true
-  }});
+  mainWindow = new BrowserWindow({
+    webPreferences: {
+      nodeIntegration: true
+    },
+    show: false
+  });
+
+  // Waiting for the window to be ready to be shown
+  mainWindow.on("ready-to-show", () => {
+    mainWindow.show();
+  });
+
   //Load html into window
   mainWindow.loadURL(url.format({
     pathname: path.join(__dirname, "mainWindow.html"),
@@ -96,7 +105,8 @@ createNewTaskWindow = (title) => {
     height: 480,
     width: 600,
     frame: false,
-    alwaysOnTop: true
+    alwaysOnTop: true,
+    show: false
   });
 
   //Load html into window
@@ -106,19 +116,20 @@ createNewTaskWindow = (title) => {
     slashes: true
   }));
 
+  newTaskWindow.webContents.on('dom-ready', () => {
+    // Making sure the window is actually ready
+    setTimeout( () => {
+      newTaskWindow.webContents.send("change-new-task-window-title", title);
+      newTaskWindow.show();
+    }, 100);
+  });
+
   // Handling window closing
   newTaskWindow.on("close", () => {
     newTaskWindow = null;
   });
 
-  //Waiting for window to load
-  newTaskWindow.webContents.once('did-finish-load', () => {
-    // Making sure the window is actually ready
-    let arr = [];
-    for (i=0; i<10000; i++)
-      arr.push(i);
-    newTaskWindow.webContents.send("change-new-task-window-title", title);
-  });
+  
  
 
 }
