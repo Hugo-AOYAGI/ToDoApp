@@ -97,7 +97,7 @@ ipc.on("create-new-task-window", (event, title) => {
 });
 
 
-createNewTaskWindow = (title) => {
+createNewTaskWindow = (data) => {
 
   newTaskWindow = new BrowserWindow({
     webPreferences: {nodeIntegration: true},
@@ -119,7 +119,7 @@ createNewTaskWindow = (title) => {
   newTaskWindow.webContents.on('dom-ready', () => {
     // Making sure the window is actually ready
     setTimeout( () => {
-      newTaskWindow.webContents.send("change-new-task-window-title", title);
+      newTaskWindow.webContents.send("send-new-task-window-data", data);
       newTaskWindow.show();
     }, 100);
   });
@@ -127,6 +127,13 @@ createNewTaskWindow = (title) => {
   // Handling window closing
   newTaskWindow.on("close", () => {
     newTaskWindow = null;
+  });
+
+  ipc.on("new-task", (event, data) => {
+    console.log(data);
+    if (data[1] == "new_task") {
+      mainWindow.webContents.send("create-new-task", data[0]);
+    }
   });
 
   

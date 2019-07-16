@@ -9,11 +9,14 @@ lz = (n) => {
     return n < 10 ? "0"+n : n;
 } 
 
+let action;
+
 $(document).ready( () => {
     
     // Getting the title of the window (edit or add)
-    ipcRenderer.on("change-new-task-window-title", (event, title) => {
-        $(".__title-main").html(title);
+    ipcRenderer.on("send-new-task-window-data", (event, data) => {
+        $(".__title-main").html(data[0]);
+        action = data[1];
     });
 
     // Add event listener to the close button
@@ -232,8 +235,8 @@ $(document).ready( () => {
         }
         // Format the data into an object
         task_data = {
-            'title': $(".__title"),
-            'desc': $(".__desc").val() ? $("__description").val() : "None",
+            'title': $(".__title").val(),
+            'desc': $(".__desc").val() ? $(".__desc").val() : "None",
             'start': $(".__start-time").html(),
             'end': $(".__end-time").html(),
             'important': true,
@@ -241,7 +244,8 @@ $(document).ready( () => {
             'notify-setting': $(".__notification").val(),
             'repeat-setting': $(".__repeat").val() 
         }
-        ipcRenderer.send("new-task" , task_data);
+        ipcRenderer.send("new-task" , [task_data, action]);
+        electron.remote.getCurrentWindow().close();
     }
 
     $(".__confirm-btn").on("click", confirmTask);

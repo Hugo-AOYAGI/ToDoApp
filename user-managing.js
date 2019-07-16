@@ -58,7 +58,7 @@ class Day {
       url: "user-data/user-data.json", 
       dataType: "json",
       success: (json_data) => { 
-        this.tasks = Task.fromArray(this.id, this, json_data[this.id]);
+        this.tasks = Task.fromArray(this, json_data[this.id]);
 
       },
       error: () => {
@@ -74,7 +74,7 @@ class Day {
   }
 
   // Displays the tasks from a template card.
-  loadTasks = ($day_menu) => {
+  loadTasks = () => {
 
     // Displaying the day name and date
     $(".__day-name").html(this.day_name);
@@ -170,9 +170,9 @@ class Day {
 }
 
 class Task {
-  constructor (day_id, day, json) {
+  constructor (day, json) {
 
-    this.day_id = day_id;
+    this.day_id = day.id;
     this.day = day;
     this.data = json;
   }
@@ -271,12 +271,12 @@ class Task {
   }
 
   // Returns an array of tasks from an array of objects from a json file
-  static fromArray (day_id, day, array) {
+  static fromArray (day, array) {
     if (!array)
       return [];
     let tasks = [];
     array.forEach( (element) => {
-      tasks.push(new Task(day_id, day, element));
+      tasks.push(new Task(day, element));
     });
 
     return tasks;
