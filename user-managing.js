@@ -59,7 +59,6 @@ class Day {
       dataType: "json",
       success: (json_data) => { 
         this.tasks = Task.fromArray(this.id, this, json_data[this.id]);
-        console.log(this.tasks);
 
       },
       error: () => {
@@ -68,7 +67,7 @@ class Day {
       complete: () => {
         // Load tasks and schedule once the request is completed
         this.loadTasks($(".day-menu"));
-        // this.loadSchedule();
+        this.loadSchedule();
       }
     });
 
@@ -164,7 +163,7 @@ class Day {
 
     //Loops through every task of that day 
     for (let i=0; i<this.tasks.length; i++){
-      $tasks_spans_box.append(this.tasks[i].createScheduleSpan(this.tasks.length, i));
+      $tasks_spans_box.append(this.tasks[i].createScheduleSpan());
     }
   }
   
@@ -175,15 +174,7 @@ class Task {
 
     this.day_id = day_id;
     this.day = day;
-    this.json = json;
-
-    // Task information stored in the json file
-    this.desc = json["desc"];
-    this.start = json["start"];
-    this.end = json["end"];
-    this.title = json["title"];
-    this.important = json["important"];
-    this.checked = json["checked"];
+    this.data = json;
   }
 
   delete = () => {
@@ -239,17 +230,17 @@ class Task {
 
   loadData = () => {
     // Replacing the right information in the task card
-    this.$task_card.find(".__title").html(this.title);
-    this.$task_card.find(".__start-time").html(this.start);
+    this.$task_card.find(".__title").html(this.data.title);
+    this.$task_card.find(".__start-time").html(this.data.start);
 
     // Replacing the information in the task page
-    this.$task_page.find(".__description").html(this.desc);
-    this.$task_page.find(".__start-time").html(this.start);
-    this.$task_page.find(".__end-time").html(this.end);
+    this.$task_page.find(".__description").html(this.data.desc);
+    this.$task_page.find(".__start-time").html(this.data.start);
+    this.$task_page.find(".__end-time").html(this.data.end);
     this.$task_page.find(".__timer").html("N/A");
 
     // Displaying sticker if task is listed as important
-    if (this.important == "false")
+    if (this.data.important == "false")
         this.$task_page.find(".__sticker-important").css("display", "none");
 
 
@@ -257,26 +248,18 @@ class Task {
 
   createScheduleSpan = (len, i) => {
     // Create the span
+    console.log("test");
     let $span = $(document.createElement("span")).addClass("__task-span");
 
     // Calculating every position and dimensions and color
-    let width = 100/len - 1*len;
-    let left = width*i + 2*(i+1);
-    let height = 100*(subDates(this.end, this.start, false)/24);
-    let top = 100*(subDates(this.start, "0:0", false)/24);
+    let height = 100*(subDates(this.data.end, this.data.start, false)/24);
+    let top = 100*(subDates(this.data.start, "0:0", false)/24);
 
-    // Checking if the start or end time are not specified
-    if (!top || !height) {
-      height = 100
-      $span.css("opacity", "0.6");
-    }
-
-    // Getting a color from the array
-    let color = `dark${task_colors[i%task_colors.length]}`;
+    if (!height || !top)
+      $span.css("display", "none");
 
     // Adding the properties to the element
-    $span.css({"width": `${width}%`,"left": `${left}%`, "height": `${height}%`,"top": `${top}%`, 
-                    "background": `linear-gradient(110deg, linen, ${color} 550%)`});
+    $span.css({"height": `${height}%`,"top": `${top}%`});
 
     // Adds event listeners to the schedule spans
     $span.on("click", () => {

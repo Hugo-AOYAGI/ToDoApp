@@ -320,6 +320,7 @@
 .navigation-bar .__label {
   font-family: 'Trebuchet MS', serif;
   color: #707070;
+  margin-left: 0.25rem;
   font-size: 0.8rem;
   -ms-flex-preferred-size: 80%;
       flex-basis: 80%;
@@ -522,18 +523,11 @@
 
 .schedule .__hour-spans {
   height: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -ms-flex-line-pack: stretch;
-      align-content: stretch;
+  width: 100%;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: (1fr)[6];
+      grid-template-rows: repeat(6, 1fr);
 }
 
 .schedule .__hour-spans .__4-hours:not(:last-child) {
@@ -541,63 +535,23 @@
 }
 
 .schedule .__tasks-spans-box {
-  position: absolute;
-  left: 10%;
-  width: 90%;
+  width: 100%;
   height: 100%;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
 }
 
 .schedule .__tasks-spans-box .__task-span {
   position: absolute;
-  border-radius: 0rem;
-  border: 1px solid #86817C;
-  cursor: pointer;
+  border-radius: 5rem;
+  width: 80%;
+  background: linear-gradient(130deg, #C3D9FF, #FBC6FF);
+  border: 0.5px solid #707070;
   -webkit-transition: all 0.2s;
   transition: all 0.2s;
 }
 
 .schedule .__tasks-spans-box .__task-span:hover {
-  -webkit-box-shadow: 0.1rem 0.2rem rgba(134, 129, 124, 0.2);
-          box-shadow: 0.1rem 0.2rem rgba(134, 129, 124, 0.2);
-  border: 1px solid #D9D9D9;
-}
-
-.schedule .__tasks-spans-box #task1 {
-  -webkit-transform: translateX(0);
-          transform: translateX(0);
-  width: 5%;
-  height: 30%;
-  top: 33.6%;
-  background: linear-gradient(110deg, linen, darkred 550%);
-}
-
-.schedule .__tasks-spans-box #task2 {
-  -webkit-transform: translateX(120%);
-          transform: translateX(120%);
-  width: 5%;
-  height: 25%;
-  top: 16.7%;
-  background: linear-gradient(110deg, linen, darkblue 550%);
-}
-
-.schedule .__tasks-spans-box #task3 {
-  -webkit-transform: translateX(120%);
-          transform: translateX(120%);
-  width: 5%;
-  height: 15%;
-  top: 50.5%;
-  background: linear-gradient(110deg, linen, darkgreen 550%);
-}
-
-.schedule .__tasks-spans-box #task4 {
-  -webkit-transform: translateX(240%);
-          transform: translateX(240%);
-  width: 5%;
-  height: 25%;
-  top: 59.1%;
-  background: linear-gradient(110deg, linen, darkorange 550%);
+  -webkit-box-shadow: 0.1rem 0.2rem rgba(185, 185, 185, 0.1);
+          box-shadow: 0.1rem 0.2rem rgba(185, 185, 185, 0.1);
 }
 
 .task-page {

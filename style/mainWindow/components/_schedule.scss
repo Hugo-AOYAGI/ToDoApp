@@ -8,10 +8,9 @@
 
     & .__hour-spans {
         height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        align-content: stretch;
+        width: 100%;
+        display: grid;
+        grid-template-rows: repeat(6, 1fr);
 
         & .__4-hours {
 
@@ -24,57 +23,21 @@
     }
 
     & .__tasks-spans-box {
-        position: absolute;
-        left: 10%;
-        width: 90%;
+        width: 100%;
         height: 100%;
-        padding-left: 0.5rem;
-        padding-right: 0.5rem;
 
         & .__task-span {
             position: absolute;
-            border-radius: 0rem;
-            border: 1px solid $medium-grey-1;
-            cursor: pointer;
+            border-radius: 5rem;
+            width: 80%;
+            background: linear-gradient(130deg, $light-blue-6, $light-pink-1);
+            border: 0.5px solid $dark-grey-2;
             transition: all 0.2s;
 
             &:hover {
-                box-shadow: 0.1rem 0.2rem rgba($medium-grey-1, 0.2);
-                border: 1px solid $medium-grey-2;
+                box-shadow: 0.1rem 0.2rem rgba($medium-grey-3, 0.1);
             }
 
-        }
-
-        & #task1 {
-            transform: translateX(0);
-            width: 5%;
-            height: 30%;
-            top: 33.6%;
-            background: linear-gradient(110deg, linen, darkred 550%);
-        }
-
-        & #task2 {
-            transform: translateX(120%);
-            width: 5%;
-            height: 25%;
-            top: 16.7%;
-            background: linear-gradient(110deg, linen, darkblue 550%);
-        }
-
-        & #task3 {
-            transform: translateX(120%);
-            width: 5%;
-            height: 15%;
-            top: 50.5%;
-            background: linear-gradient(110deg, linen, darkgreen 550%);
-        }
-
-        & #task4 {
-            transform: translateX(240%);
-            width: 5%;
-            height: 25%;
-            top: 59.1%;
-            background: linear-gradient(110deg, linen, darkorange 550%);
         }
 
     }
