@@ -238,6 +238,8 @@ class Task {
     this.$task_page.find(".__start-time").html(this.data.start);
     this.$task_page.find(".__end-time").html(this.data.end);
     this.$task_page.find(".__timer").html("N/A");
+    this.$task_page.find(".__repeat").html(this.data.repeat_setting);
+    this.$task_page.find(".__notification").html(this.data.notify_setting);
 
     // Displaying sticker if task is listed as important
     if (this.data.important == "false")

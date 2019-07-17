@@ -73,14 +73,14 @@ $(document).ready(() => {
 
   // Sending event to main.js
   removeTask = (task) => {
-    ipc.send("remove-task", task);
+    ipcRenderer.send("remove-task", task);
   }
 
   // Edit option for the task
 
   // Sending event to main.js
   editTask = (modifiedTask) => {
-    ipc.send("edit-task", modifiedTask);
+    ipcRenderer.send("edit-task", modifiedTask);
   }
 
   /* LOAD THE FIRST DAY */
@@ -119,13 +119,12 @@ $(document).ready(() => {
   // Adding event listener to the new-task button
 
   newTask = () => {
-    ipcRenderer.send("create-new-task-window", ["Add a new task", "new_task"]);
+    ipcRenderer.send("create-new-task-window", ["Add a new task", "new_task", current_day.id]);
   }
 
   $(".__add-task-btn").on("click", newTask);
 
   ipcRenderer.on("create-new-task", (event, data) => {
-    console.log(data);
     let task = new Task(current_day, data);
     // Cloning the templates
     let $clone_task_card = $(".task-card.template").clone().removeClass("template");
@@ -138,7 +137,7 @@ $(document).ready(() => {
     // Loading the task data
     task.addCardAndPage($clone_task_card, $clone_task_page);
     task.loadData();
-    $(".__tasks-spans-box").append(this.tasks[i].createScheduleSpan());
+    $(".__tasks-spans-box").append(task.createScheduleSpan());
     current_day.tasks.append(task);
 
   });

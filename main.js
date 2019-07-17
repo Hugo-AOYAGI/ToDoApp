@@ -57,8 +57,8 @@ ipc.on("remove-task", (event, task_to_del) => {
       id = task_to_del.day_id;
 
       // Delete the task to delete
-      for (i in json_object[id]) {
-        if (areJSONEqual(task_to_del.json, json_object[id][i])){
+      for (i=0; i<json_object[id].length; i++) {
+        if (areJSONEqual(task_to_del.data, json_object[id][i])){
           json_object[id].splice(i, 1);
           break;
         }
@@ -72,7 +72,7 @@ ipc.on("remove-task", (event, task_to_del) => {
       // Convert it back to a json file
       json = JSON.stringify(json_object); 
       //Write the file
-      fs.writeFile('user-data/user-data.json', json, 'utf8', () => {console.log("done");});
+      fs.writeFile('user-data/user-data.json', json, 'utf8', () => {return 0});
     }
   });
 });
@@ -92,8 +92,8 @@ areJSONEqual = (a, b) => {
   }
 }
 
-ipc.on("create-new-task-window", (event, title) => {
-  createNewTaskWindow(title);
+ipc.on("create-new-task-window", (event, data) => {
+  createNewTaskWindow(data);
 });
 
 
@@ -129,14 +129,27 @@ createNewTaskWindow = (data) => {
     newTaskWindow = null;
   });
 
-  ipc.on("new-task", (event, data) => {
-    console.log(data);
-    if (data[1] == "new_task") {
-      mainWindow.webContents.send("create-new-task", data[0]);
-    }
-  });
-
-  
- 
-
 }
+
+ipc.on("new-task", (event, data) => {
+  if (data[1] == "new_task") {
+    mainWindow.webContents.send("create-new-task", data[0]);
+    // Add the task in the json file as well
+    fs.readFile('user-data/user-data.json', 'utf8', (error, json_data) => {
+      if (error) 
+        return 0;
+      // Convert data to object
+      id = data[2];
+      json_object = JSON.parse(json_data);
+      // Create the day in the json if it does not exist
+      if (json_object[id] == undefined)
+        json_object[id] = []
+      // Append the task at the right id
+      json_object[id].push(data[0]);
+      // Convert it back to a json file
+      json = JSON.stringify(json_object); 
+      //Write the file
+      fs.writeFile('user-data/user-data.json', json, 'utf8', () => {return 0;});
+    });
+  }
+});

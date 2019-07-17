@@ -9,7 +9,7 @@ lz = (n) => {
     return n < 10 ? "0"+n : n;
 } 
 
-let action;
+let action, day_id;
 
 $(document).ready( () => {
     
@@ -17,6 +17,7 @@ $(document).ready( () => {
     ipcRenderer.on("send-new-task-window-data", (event, data) => {
         $(".__title-main").html(data[0]);
         action = data[1];
+        day_id = data[2];
     });
 
     // Add event listener to the close button
@@ -241,10 +242,10 @@ $(document).ready( () => {
             'end': $(".__end-time").html(),
             'important': true,
             'checked': false,
-            'notify-setting': $(".__notification").val(),
-            'repeat-setting': $(".__repeat").val() 
+            'notify_setting': $(".__notification").val(),
+            'repeat_setting': $(".__repeat").val() 
         }
-        ipcRenderer.send("new-task" , [task_data, action]);
+        ipcRenderer.send("new-task" , [task_data, action, day_id]);
         electron.remote.getCurrentWindow().close();
     }
 
