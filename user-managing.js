@@ -113,8 +113,6 @@ class Day {
       // Loading the data of the task in the html elements
       task.loadData();
     }
-    
-    this.updateTimers();
 
   }
 
@@ -127,15 +125,19 @@ class Day {
 
     // Looping through every task of the day
     for (let task of this.tasks) {
+      
+      if (task.start == "N/A"){
+        task.$task_page.find(".__timer").html("N/A");
+        return 0;
+      }
 
       // Calculating the time left until the task in ms
-      let until_time = new Date(this.dateString.replace("[time]", task.start+":00")) - new Date();
+      let until_time = new Date(this.dateString.replace("[time]", task.data.start+":00")) - new Date();
 
       // Checking if the task has already passed
       if (until_time < 0) {
         task.$task_page.find(".__timer").html("Done !");
       } else {
-
         // Converting until_time in ms to a formatted time
         let hours = lz(Math.floor(until_time/3600000));
         let remainder = until_time%3600000;
@@ -248,9 +250,8 @@ class Task {
 
   }
 
-  createScheduleSpan = (len, i) => {
+  createScheduleSpan = () => {
     // Create the span
-    console.log("test");
     let $span = $(document.createElement("span")).addClass("__task-span");
 
     // Calculating every position and dimensions and color

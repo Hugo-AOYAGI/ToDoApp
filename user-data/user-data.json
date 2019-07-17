@@ -1,14 +1,1 @@
-{
-    "17072019": [
-        {
-            "checked": false,
-            "desc": "This is the task 2",
-            "end": "14:15",
-            "important": true,
-            "notify_setting": "One day before",
-            "repeat_setting": "Monthly",
-            "start": "13:30",
-            "title": "Task 2"
-        }
-    ]
-}
+{"17072019":[{"checked":false,"desc":"TFT Tournament with 125k price pool regrouping many streamers.","end":"N/A","important":true,"notify_setting":"10 minutes before","repeat_setting":"No Repeat","start":"19:00","title":"Twitch Rivals"}],"18072019":[{"checked":false,"desc":"Mécanique de check des taches ainsi que de l'option pour ne pas les afficher avec la checkbox.","end":"N/A","important":true,"notify_setting":"None","repeat_setting":"No Repeat","start":"N/A","title":"Ajouter la mécanique de check"},{"checked":false,"desc":"Importance ainsi que la checkbox correspondante","end":"N/A","important":true,"notify_setting":"None","repeat_setting":"No Repeat","start":"N/A","title":"Ajouter l'input d'importance dans la newTaskWindow"},{"checked":false,"desc":"Next task element dans le header avec le timer et le bouton vers la task page correspondante","end":"N/A","important":true,"notify_setting":"None","repeat_setting":"No Repeat","start":"N/A","title":"Gérer la next task"},{"checked":false,"desc":"Edit en utilisant la newTaskWindow mais préremplie avec les infos de la tâches à éditer","end":"N/A","important":true,"notify_setting":"None","repeat_setting":"No Repeat","start":"N/A","title":"Ajouter l'option edit pour les tâches"}]}

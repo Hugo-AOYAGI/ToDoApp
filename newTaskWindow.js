@@ -6,6 +6,8 @@ const ipcRenderer = electron.ipcRenderer;
 lz = (n) => {
     if (n == "" || n <= 0)
         return "00";
+    if (n[0] == "0" && n.length == 2)
+        return n;
     return n < 10 ? "0"+n : n;
 } 
 

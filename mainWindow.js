@@ -92,8 +92,9 @@ $(document).ready(() => {
   refreshCurrDay();
   
   // Interval for updating timers
-  let t1 = setInterval(current_day.updateTimers(), 1000);
-
+  let t1 = setInterval(() => {
+    current_day.updateTimers();
+  }, 1000);
 
 
 
@@ -138,7 +139,7 @@ $(document).ready(() => {
     task.addCardAndPage($clone_task_card, $clone_task_page);
     task.loadData();
     $(".__tasks-spans-box").append(task.createScheduleSpan());
-    current_day.tasks.append(task);
+    current_day.tasks.push(task);
 
   });
 
