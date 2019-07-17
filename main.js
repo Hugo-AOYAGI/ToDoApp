@@ -45,36 +45,7 @@ app.on("ready", () => {
 });
 
 ipc.on("remove-task", (event, task_to_del) => {
-  // Open json
-  fs.readFile('user-data/user-data.json', 'utf8', (error, data) => {
-    // Check if there was an error
-    if (error){
-        return 0;
-    } else {
-      // Convert it as an object
-      json_object = JSON.parse(data);
-
-      id = task_to_del.day_id;
-
-      // Delete the task to delete
-      for (i=0; i<json_object[id].length; i++) {
-        if (areJSONEqual(task_to_del.data, json_object[id][i])){
-          json_object[id].splice(i, 1);
-          break;
-        }
-      }
-
-      // Check if day is empty
-      if (json_object[id].length == 0) {
-        delete json_object[id];
-      }
-
-      // Convert it back to a json file
-      json = JSON.stringify(json_object); 
-      //Write the file
-      fs.writeFile('user-data/user-data.json', json, 'utf8', () => {return 0});
-    }
-  });
+  removeTaskJSON(task_to_del);
 });
 
 // Function to check if 2 json objects are equal even thought they don't have the same child order
@@ -135,21 +106,64 @@ ipc.on("new-task", (event, data) => {
   if (data[1] == "new_task") {
     mainWindow.webContents.send("create-new-task", data[0]);
     // Add the task in the json file as well
-    fs.readFile('user-data/user-data.json', 'utf8', (error, json_data) => {
-      if (error) 
-        return 0;
-      // Convert data to object
-      id = data[2];
-      json_object = JSON.parse(json_data);
-      // Create the day in the json if it does not exist
-      if (json_object[id] == undefined)
-        json_object[id] = []
-      // Append the task at the right id
-      json_object[id].push(data[0]);
-      // Convert it back to a json file
-      json = JSON.stringify(json_object); 
-      //Write the file
-      fs.writeFile('user-data/user-data.json', json, 'utf8', () => {return 0;});
-    });
+    addTaskJSON(data);
+  } else if (data[1] == "edit") {
+    mainWindow.webContents.send("edit-task", [data[0], data[3]]);
+    // Edit the task in the json file as well
+    editTaskJSON(data);
   }
 });
+
+addTaskJSON = (data) => {
+  fs.readFile('user-data/user-data.json', 'utf8', (error, json_data) => {
+    if (error) 
+      return 0;
+    // Convert data to object
+    id = data[2];
+    json_object = JSON.parse(json_data);
+    // Create the day in the json if it does not exist
+    if (json_object[id] == undefined)
+      json_object[id] = []
+    // Append the task at the right id
+    json_object[id].push(data[0]);
+    // Convert it back to a json file
+    json = JSON.stringify(json_object); 
+    //Write the file
+    fs.writeFile('user-data/user-data.json', json, 'utf8', () => {return 0;});
+  });
+}
+
+removeTaskJSON = (task) => {
+  // Open json
+  fs.readFile('user-data/user-data.json', 'utf8', (error, data) => {
+    // Check if there was an error
+    if (error)
+      return 0;
+    // Convert it as an object
+    json_object = JSON.parse(data);
+
+    id = task.day_id;
+    // Delete the task to delete
+    for (i=0; i<json_object[id].length; i++) {
+      if (areJSONEqual(task.data, json_object[id][i])){
+        json_object[id].splice(i, 1);
+        break;
+      }
+    }
+    // Check if day is empty
+    if (json_object[id].length == 0)
+      delete json_object[id];
+
+    // Convert it back to a json file
+    json = JSON.stringify(json_object); 
+    //Write the file
+    fs.writeFile('user-data/user-data.json', json, 'utf8', () => {return 0});
+  });
+}
+
+editTaskJSON = (data) => {
+    // Delete the previous task
+    removeTaskJSON(data[3]);
+    // Create the edited task
+    setTimeout( () => {addTaskJSON(data);}, 100);
+}

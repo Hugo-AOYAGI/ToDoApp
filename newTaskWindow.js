@@ -11,15 +11,26 @@ lz = (n) => {
     return n < 10 ? "0"+n : n;
 } 
 
-let action, day_id;
+let action, day_id, task;
 
 $(document).ready( () => {
     
     // Getting the title of the window (edit or add)
-    ipcRenderer.on("send-new-task-window-data", (event, data) => {
-        $(".__title-main").html(data[0]);
-        action = data[1];
-        day_id = data[2];
+    ipcRenderer.on("send-new-task-window-data", (event, message) => {
+        $(".__title-main").html(message[0]);
+        console.log(message);
+        action = message[1];
+        day_id = message[2];
+        if (action == "edit") {
+            task = message[3];
+            // Changing the value of the input elements
+            $(".__title").val(task.data.title);
+            $(".__desc").val(task.data.desc);
+            $(".__start-time").html(task.data.start);
+            $(".__end-time").html(task.data.end)
+            $(".__repeat").val(task.data.repeat_setting);
+            $(".__notification").val(task.data.notify_setting);
+        }
     });
 
     // Add event listener to the close button
@@ -247,7 +258,7 @@ $(document).ready( () => {
             'notify_setting': $(".__notification").val(),
             'repeat_setting': $(".__repeat").val() 
         }
-        ipcRenderer.send("new-task" , [task_data, action, day_id]);
+        ipcRenderer.send("new-task" , [task_data, action, day_id, task]);
         electron.remote.getCurrentWindow().close();
     }
 

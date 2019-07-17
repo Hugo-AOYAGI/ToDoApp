@@ -193,7 +193,9 @@ class Task {
   }
 
   edit = () => {
-
+    editTask(this);
+    this.loadData();
+    this.day.loadSchedule();
   }
 
   check = () => {

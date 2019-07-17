@@ -3,6 +3,8 @@
 const electron = require("electron");
 const ipcRenderer = electron.ipcRenderer;
 
+let newTaskWindowOpen = false;
+
 // Wait for window to load
 $(document).ready(() => { 
 
@@ -73,15 +75,11 @@ $(document).ready(() => {
 
   // Sending event to main.js
   removeTask = (task) => {
+    resetAllCards();
     ipcRenderer.send("remove-task", task);
   }
 
   // Edit option for the task
-
-  // Sending event to main.js
-  editTask = (modifiedTask) => {
-    ipcRenderer.send("edit-task", modifiedTask);
-  }
 
   /* LOAD THE FIRST DAY */
   let day_counter = 0;
@@ -121,11 +119,29 @@ $(document).ready(() => {
 
   newTask = () => {
     ipcRenderer.send("create-new-task-window", ["Add a new task", "new_task", current_day.id]);
+    newTaskWindowOpen = true;
+  }
+
+  editTask = (task) => {
+    ipcRenderer.send("create-new-task-window", ["Edit the Task", "edit", current_day.id, task]);
+    newTaskWindowOpen = true;
   }
 
   $(".__add-task-btn").on("click", newTask);
 
   ipcRenderer.on("create-new-task", (event, data) => {
+    createNewTask(data);
+  });
+
+  ipcRenderer.on("edit-task", (event, data) => {
+    createNewTask(data[0]);
+    // Deleting the html elements of the previous task
+    data[1].day.tasks = data[1].day.tasks.filter(item => item !== this);
+    refreshCurrDay();
+    current_day.loadSchedule();
+  });
+
+  createNewTask = (data) => {
     let task = new Task(current_day, data);
     // Cloning the templates
     let $clone_task_card = $(".task-card.template").clone().removeClass("template");
@@ -140,7 +156,6 @@ $(document).ready(() => {
     task.loadData();
     $(".__tasks-spans-box").append(task.createScheduleSpan());
     current_day.tasks.push(task);
-
-  });
+  }
 
 }); 
