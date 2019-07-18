@@ -8,5 +8,12 @@ Feel free to use it or change it however you want to.
 Please note that any feedback is appreciated, I'm still learning   
 and I'd love to know what I could improve on in my code or even on my git hub repo.
 
-Here are some concept designs, The app should look something like that in the end: 
-![design](designs/design-main-1.PNG) ![design](designs/design-main-2.PNG)
+Things left to do:  
+   __- Calendar__  
+   __- Task Repeat function__  
+   __- Task notification__    
+   __- Next Task Element__    
+   __- Add save for checkbox settings__   
+   __- CSS hover and active animations__   
+   __(- Dark mode)__  
+   
