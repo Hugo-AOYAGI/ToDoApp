@@ -1,3 +1,4 @@
+@charset "UTF-8";
 .upper {
   text-transform: uppercase;
 }
@@ -451,6 +452,41 @@
           transform: rotateZ(45deg);
 }
 
+.task-card .__main .__uncheck-btn {
+  right: 1rem;
+  top: 1rem;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  color: #C0FFB5;
+  display: none;
+  font-size: 2.5em;
+}
+
+.task-card .__main .__uncheck-btn::after {
+  content: "☑";
+}
+
+.task-card .__main .__uncheck-btn:hover::after {
+  content: "☐";
+}
+
+.task-card .__main .__important-mark {
+  left: 0.5rem;
+  bottom: 0.5rem;
+  height: 0.5rem;
+  width: 0.5rem;
+  background-color: #FF8080;
+  opacity: 0.6;
+}
+
+.task-card .completed {
+  border: 1px solid #C0FFB5;
+}
+
 .task-card .__side-button-box {
   width: 2.5rem;
   -webkit-box-ordinal-group: 3;
@@ -555,6 +591,10 @@
 .schedule .__tasks-spans-box .__task-span:hover {
   -webkit-box-shadow: 0.1rem 0.2rem rgba(185, 185, 185, 0.1);
           box-shadow: 0.1rem 0.2rem rgba(185, 185, 185, 0.1);
+}
+
+.schedule .__tasks-spans-box .completed {
+  border: 1px solid #C0FFB5;
 }
 
 .task-page {

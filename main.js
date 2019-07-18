@@ -48,6 +48,10 @@ ipc.on("remove-task", (event, task_to_del) => {
   removeTaskJSON(task_to_del);
 });
 
+ipc.on("check-task", (event, message) => {
+  changeTaskPropertyJSON(message['task'], "checked", message['val']);
+});
+
 // Function to check if 2 json objects are equal even thought they don't have the same child order
 areJSONEqual = (a, b) => {
   let difference = false;
@@ -102,34 +106,67 @@ createNewTaskWindow = (data) => {
 
 }
 
-ipc.on("new-task", (event, data) => {
-  if (data[1] == "new_task") {
-    mainWindow.webContents.send("create-new-task", data[0]);
-    // Add the task in the json file as well
-    addTaskJSON(data);
-  } else if (data[1] == "edit") {
-    mainWindow.webContents.send("edit-task", [data[0], data[3]]);
+ipc.on("new-task-window-reply", (event, message) => {
+  if (message['action'] == "new_task") {
+    // Add the task in the json file
+    addTaskJSON(message['day_id'], message['task_info']);
+  } else {
     // Edit the task in the json file as well
-    editTaskJSON(data);
+    editTaskJSON(message['day_id'], message['task_info'], message['past_info']);
   }
 });
 
-addTaskJSON = (data) => {
+findTaskIndex = (task_info, json) => {
+  for (i=0; i<json.length; i++) {
+    if (areJSONEqual(task_info, json[i])){
+      return i;
+    }
+  }
+  return false;
+}
+
+changeTaskPropertyJSON = (task, prop, new_val) => {
+  // Open json
+  fs.readFile('user-data/user-data.json', 'utf8', (error, data) => {
+    // Check if there was an error
+    if (error)
+      return 0;
+    // Convert it to an object
+    json_object = JSON.parse(data);
+    id = task.day_id;
+    // Find the task to delete and delete it
+    index = findTaskIndex(task.info, json_object[id]);
+    if (index !== false) {
+      json_object[id][i][prop] = new_val;
+    }
+    // Convert it back to a json file
+    json = JSON.stringify(json_object); 
+    //Write the file
+    fs.writeFile('user-data/user-data.json', json, 'utf8', () => {
+      // Send message to update day tasks 
+      mainWindow.webContents.send("update-day", null);
+    });
+  });
+}
+
+addTaskJSON = (day_id, task_info) => {
   fs.readFile('user-data/user-data.json', 'utf8', (error, json_data) => {
     if (error) 
       return 0;
     // Convert data to object
-    id = data[2];
     json_object = JSON.parse(json_data);
     // Create the day in the json if it does not exist
-    if (json_object[id] == undefined)
-      json_object[id] = []
+    if (json_object[day_id] == undefined)
+      json_object[day_id] = []
     // Append the task at the right id
-    json_object[id].push(data[0]);
+    json_object[day_id].push(task_info);
     // Convert it back to a json file
     json = JSON.stringify(json_object); 
     //Write the file
-    fs.writeFile('user-data/user-data.json', json, 'utf8', () => {return 0;});
+    fs.writeFile('user-data/user-data.json', json, 'utf8', () => {
+      // Send message to update day tasks 
+      mainWindow.webContents.send("update-day", null);
+    });
   });
 }
 
@@ -139,31 +176,46 @@ removeTaskJSON = (task) => {
     // Check if there was an error
     if (error)
       return 0;
-    // Convert it as an object
+    // Convert it to an object
     json_object = JSON.parse(data);
-
     id = task.day_id;
-    // Delete the task to delete
-    for (i=0; i<json_object[id].length; i++) {
-      if (areJSONEqual(task.data, json_object[id][i])){
-        json_object[id].splice(i, 1);
-        break;
-      }
+    // Find the task to delete and delete it
+    index = findTaskIndex(task.info, json_object[id]);
+    if (index !== false) {
+      json_object[id].splice(i, 1);
     }
-    // Check if day is empty
+    // Check if day is empty, if so, delete it
     if (json_object[id].length == 0)
       delete json_object[id];
-
     // Convert it back to a json file
     json = JSON.stringify(json_object); 
     //Write the file
-    fs.writeFile('user-data/user-data.json', json, 'utf8', () => {return 0});
+    fs.writeFile('user-data/user-data.json', json, 'utf8', () => {
+      // Send message to update day tasks 
+      mainWindow.webContents.send("update-day", null);
+    });
   });
 }
 
-editTaskJSON = (data) => {
-    // Delete the previous task
-    removeTaskJSON(data[3]);
-    // Create the edited task
-    setTimeout( () => {addTaskJSON(data);}, 100);
+editTaskJSON = (day_id, new_info, past_info) => {
+  // Open json
+  fs.readFile('user-data/user-data.json', 'utf8', (error, data) => {
+    // Check if there was an error
+    if (error)
+      return 0;
+    // Convert it to an object
+    json_object = JSON.parse(data);
+    // Find the task to edit with the info before it was edited
+    index = findTaskIndex(past_info, json_object[day_id]);
+    if (index !== false) {
+      json_object[day_id][i] = new_info;
+    }
+    // Convert it back to a json file
+    json = JSON.stringify(json_object); 
+    //Write the file
+    fs.writeFile('user-data/user-data.json', json, 'utf8', () => {
+      // Send message to update day tasks 
+      mainWindow.webContents.send("update-day", null);
+    });
+  });
 }

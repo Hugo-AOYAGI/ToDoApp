@@ -52,6 +52,11 @@ class Day {
     // Get the information to display in the day-card
     this.day_name = days[date.getDay()];
 
+    this.getTasks();
+
+  }
+
+  getTasks = () => {
     // Load the tasks at the date with an ajax request
     $.ajax({ 
       type: 'GET',
@@ -70,7 +75,6 @@ class Day {
         this.loadSchedule();
       }
     });
-
   }
 
   // Displays the tasks from a template card.
@@ -110,8 +114,8 @@ class Day {
       // Adding the task card and page to the task object
       task.addCardAndPage($clone_task_card, $clone_task_page);
       
-      // Loading the data of the task in the html elements
-      task.loadData();
+      // Loading the info of the task in the html elements
+      task.loadInfo();
     }
 
   }
@@ -132,7 +136,7 @@ class Day {
       }
 
       // Calculating the time left until the task in ms
-      let until_time = new Date(this.dateString.replace("[time]", task.data.start+":00")) - new Date();
+      let until_time = new Date(this.dateString.replace("[time]", task.info.start+":00")) - new Date();
 
       // Checking if the task has already passed
       if (until_time < 0) {
@@ -176,30 +180,7 @@ class Task {
 
     this.day_id = day.id;
     this.day = day;
-    this.data = json;
-  }
-
-  delete = () => {
-
-    // Deleting the html elements
-    this.$task_card.remove();
-    this.$task_page.remove();
-
-    removeTask(this);
-
-    // Reset the schedule
-    this.day.tasks = this.day.tasks.filter(item => item !== this);
-    this.day.loadSchedule();
-  }
-
-  edit = () => {
-    editTask(this);
-    this.loadData();
-    this.day.loadSchedule();
-  }
-
-  check = () => {
-
+    this.info = json;
   }
 
   addCardAndPage = (card, page) => {
@@ -215,50 +196,79 @@ class Task {
     // For the task page
     this.$task_card.find(".__more-button").on("click", () => {
       toggleTaskPage(this);
-    })
+    });
 
     // For the remove, check and edit button
     this.$task_card.find(".__remove-btn").on("click", () => {
-      this.delete();
-    })
+      sendRemoveTaskMsg(this);
+    });
 
     this.$task_page.find(".__edit-btn").on("click", () => {
-      this.edit();
-    })
+      sendEditTaskMsg(this);
+    });
 
     this.$task_card.find(".__complete-btn").on("click", () => {
-      this.check();
-    })
+      sendCheckTaskMsg(this, true);
+    });
+
+    this.$task_card.find(".__uncheck-btn").on("click", () => {
+      sendCheckTaskMsg(this, false);
+    });
 
   }
 
-  loadData = () => {
+  loadInfo = () => {
+    // Check if the task should be displayed
+    if ( (this.info.checked && !seeCheckedTasks) || (!this.info.important && seeImportantOnly) ) {
+      // Delete the task card and page
+      this.$task_card.css("display", "none");
+      this.$task_page.css("display", "none");
+      return 0;
+    }
+
     // Replacing the right information in the task card
-    this.$task_card.find(".__title").html(this.data.title);
-    this.$task_card.find(".__start-time").html(this.data.start);
+    this.$task_card.find(".__title").html(this.info.title);
+    this.$task_card.find(".__start-time").html(this.info.start);
 
     // Replacing the information in the task page
-    this.$task_page.find(".__description").html(this.data.desc);
-    this.$task_page.find(".__start-time").html(this.data.start);
-    this.$task_page.find(".__end-time").html(this.data.end);
+    this.$task_page.find(".__description").html(this.info.desc);
+    this.$task_page.find(".__start-time").html(this.info.start);
+    this.$task_page.find(".__end-time").html(this.info.end);
     this.$task_page.find(".__timer").html("N/A");
-    this.$task_page.find(".__repeat").html(this.data.repeat_setting);
-    this.$task_page.find(".__notification").html(this.data.notify_setting);
+    this.$task_page.find(".__repeat").html(this.info.repeat_setting);
+    this.$task_page.find(".__notification").html(this.info.notify_setting);
+
+    // Adding checked styling if the task is checked
+    if (this.info.checked) {
+      this.$task_card.find(".__main").addClass("completed");
+      // Removing the check button
+      this.$task_card.find(".__complete-btn").remove();
+      // Showing the checked label
+      this.$task_card.find(".__uncheck-btn").css("display", "unset");
+    } 
 
     // Displaying sticker if task is listed as important
-    if (this.data.important == "false")
-        this.$task_page.find(".__sticker-important").css("display", "none");
+    if (this.info.important == false) {
+      this.$task_page.find(".__sticker-important").css("display", "none");
+      this.$task_card.find(".__important-mark").css("opacity", "0");
+    }
 
 
   }
 
   createScheduleSpan = () => {
+    // Check if the task should be displayed
+    if ( (this.info.checked && !seeCheckedTasks) || (!this.info.important && seeImportantOnly) )
+      return "";
     // Create the span
     let $span = $(document.createElement("span")).addClass("__task-span");
 
+    if (this.info.checked)
+      $span.addClass("completed");
+
     // Calculating every position and dimensions and color
-    let height = 100*(subDates(this.data.end, this.data.start, false)/24);
-    let top = 100*(subDates(this.data.start, "0:0", false)/24);
+    let height = 100*(subDates(this.info.end, this.info.start, false)/24);
+    let top = 100*(subDates(this.info.start, "0:0", false)/24);
 
     if (!height || !top)
       $span.css("display", "none");

@@ -11,25 +11,25 @@ lz = (n) => {
     return n < 10 ? "0"+n : n;
 } 
 
-let action, day_id, task;
+let message;
 
 $(document).ready( () => {
     
-    // Getting the title of the window (edit or add)
-    ipcRenderer.on("send-new-task-window-data", (event, message) => {
-        $(".__title-main").html(message[0]);
-        console.log(message);
-        action = message[1];
-        day_id = message[2];
-        if (action == "edit") {
-            task = message[3];
+    
+    ipcRenderer.on("send-new-task-window-data", (event, _message) => {
+        // Getting the title of the window (edit or add)
+        message = _message;
+        title = message["action"] == "edit_task" ? "Edit the task" : "Create a new task";
+        $(".__title-main").html(title);
+        if (message["action"] == "edit_task") {
+            info = message["past_info"];
             // Changing the value of the input elements
-            $(".__title").val(task.data.title);
-            $(".__desc").val(task.data.desc);
-            $(".__start-time").html(task.data.start);
-            $(".__end-time").html(task.data.end)
-            $(".__repeat").val(task.data.repeat_setting);
-            $(".__notification").val(task.data.notify_setting);
+            $(".__title").val(info.title);
+            $(".__desc").val(info.desc);
+            $(".__start-time").html(info.start);
+            $(".__end-time").html(info.end)
+            $(".__repeat").val(info.repeat_setting);
+            $(".__notification").val(info.notify_setting);
         }
     });
 
@@ -248,7 +248,7 @@ $(document).ready( () => {
             return 0;
         }
         // Format the data into an object
-        task_data = {
+        task_info = {
             'title': $(".__title").val(),
             'desc': $(".__desc").val() ? $(".__desc").val() : "None",
             'start': $(".__start-time").html(),
@@ -258,7 +258,7 @@ $(document).ready( () => {
             'notify_setting': $(".__notification").val(),
             'repeat_setting': $(".__repeat").val() 
         }
-        ipcRenderer.send("new-task" , [task_data, action, day_id, task]);
+        ipcRenderer.send("new-task-window-reply" , {...{'task_info': task_info}, ...message});
         electron.remote.getCurrentWindow().close();
     }
 

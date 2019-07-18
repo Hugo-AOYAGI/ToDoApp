@@ -3,17 +3,41 @@
 const electron = require("electron");
 const ipcRenderer = electron.ipcRenderer;
 
-let newTaskWindowOpen = false;
+let seeCheckedTasks = false;
+let seeImportantOnly = false;
 
 // Wait for window to load
 $(document).ready(() => { 
-
-  const $body = $("body");
 
   //Fonction that adds a leading zero to time and date values for formatting
   lz = (n) => {
     return n < 10 ? "0"+n : n;
   } 
+
+  /* ===Adding event listeners to the checkboxes=== */
+  $(".__important-tasks").on('click', (event) => {
+    seeImportantOnly = seeImportantOnly ? false : true;
+    // Checking the box visually
+    if (seeImportantOnly) {
+      $(event.target).addClass("checked");
+    } else {
+      $(event.target).removeClass("checked");
+    }
+    // Refreshing the tasks
+    current_day.getTasks();
+  });
+
+  $(".__completed-tasks").on('click', (event) => {
+    seeCheckedTasks = seeCheckedTasks ? false : true;
+    // Checking the box visually
+    if (seeCheckedTasks) {
+      $(event.target).addClass("checked");
+    } else {
+      $(event.target).removeClass("checked");
+    }
+    // Refreshing the tasks
+    current_day.getTasks();
+  });
 
   /* ===Managing the next-task element=== */
 
@@ -71,16 +95,6 @@ $(document).ready(() => {
     }
   }
 
-  // Remove option for the task
-
-  // Sending event to main.js
-  removeTask = (task) => {
-    resetAllCards();
-    ipcRenderer.send("remove-task", task);
-  }
-
-  // Edit option for the task
-
   /* LOAD THE FIRST DAY */
   let day_counter = 0;
   let current_day;
@@ -115,47 +129,35 @@ $(document).ready(() => {
     refreshCurrDay();
   });
 
-  // Adding event listener to the new-task button
-
-  newTask = () => {
-    ipcRenderer.send("create-new-task-window", ["Add a new task", "new_task", current_day.id]);
-    newTaskWindowOpen = true;
+  // Sending event to main.js
+  sendRemoveTaskMsg = (task) => {
+    ipcRenderer.send("remove-task", task);
   }
 
-  editTask = (task) => {
-    ipcRenderer.send("create-new-task-window", ["Edit the Task", "edit", current_day.id, task]);
-    newTaskWindowOpen = true;
+  sendCheckTaskMsg = (task, val) => {
+    ipcRenderer.send("check-task", {'task': task, 'val': val});
   }
 
-  $(".__add-task-btn").on("click", newTask);
+  // Sends message to the main process to open the new task window
+  sendNewTaskMsg = () => {
+    ipcRenderer.send("create-new-task-window", 
+                    {'action': 'new_task',
+                     'day_id': current_day.id});
+  }
 
-  ipcRenderer.on("create-new-task", (event, data) => {
-    createNewTask(data);
+  // Sends message to the main process to open the new task window
+  sendEditTaskMsg = (task) => {
+    ipcRenderer.send("create-new-task-window", 
+                    {'action': 'edit_task',
+                     'day_id': current_day.id,
+                    'past_info': task.info});
+  }
+
+   // Adding event listener to the new-task button
+  $(".__add-task-btn").on("click", sendNewTaskMsg);
+
+  ipcRenderer.on("update-day", (event, data) => {
+    current_day.getTasks();
   });
-
-  ipcRenderer.on("edit-task", (event, data) => {
-    createNewTask(data[0]);
-    // Deleting the html elements of the previous task
-    data[1].day.tasks = data[1].day.tasks.filter(item => item !== this);
-    refreshCurrDay();
-    current_day.loadSchedule();
-  });
-
-  createNewTask = (data) => {
-    let task = new Task(current_day, data);
-    // Cloning the templates
-    let $clone_task_card = $(".task-card.template").clone().removeClass("template");
-    let $clone_task_page = $(".task-page.template").clone().removeClass("template");
-
-    // Appending the clones to the html page
-    $(".tasks-box").append($clone_task_card);
-    $(".tasks-box").append($clone_task_page);
-
-    // Loading the task data
-    task.addCardAndPage($clone_task_card, $clone_task_page);
-    task.loadData();
-    $(".__tasks-spans-box").append(task.createScheduleSpan());
-    current_day.tasks.push(task);
-  }
 
 }); 

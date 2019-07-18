@@ -4,8 +4,6 @@
     position: relative;
     border-top: none;
     
-    
-
     & .__hour-spans {
         height: 100%;
         width: 100%;
@@ -40,6 +38,11 @@
             }
 
         }
+
+        & .completed {
+            border: 1px solid $light-green-1;       
+        }
+     
 
     }
 

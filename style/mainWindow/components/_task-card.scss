@@ -46,6 +46,37 @@
             background: linear-gradient(30deg, $dark-blue-3, $dark-blue-4);
             transform: rotateZ(45deg);
         }
+
+        & .__uncheck-btn {
+            right: 1rem;
+            top: 1rem;
+            width: fit-content;
+            height: fit-content;
+            color: $light-green-1;
+            display: none;
+            font-size: 2.5em;
+
+            &::after {
+                content: "☑";
+            }
+
+            &:hover::after {
+                content : "☐";
+            }
+        }
+        
+        & .__important-mark {
+            left: 0.5rem;
+            bottom: 0.5rem;
+            height: 0.5rem;
+            width: 0.5rem;
+            background-color: $light-red-1;
+            opacity: 0.6;
+        }
+    }
+
+    & .completed {
+       border: 1px solid $light-green-1;       
     }
 
     & .__side-button-box {
