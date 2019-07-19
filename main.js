@@ -52,6 +52,7 @@ ipc.on("check-task", (event, message) => {
   changeTaskPropertyJSON(message['task'], "checked", message['val']);
 });
 
+
 // Function to check if 2 json objects are equal even thought they don't have the same child order
 areJSONEqual = (a, b) => {
   let difference = false;

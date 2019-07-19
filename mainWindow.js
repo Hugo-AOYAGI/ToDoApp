@@ -2,6 +2,7 @@
 // Importing of all the modules
 const electron = require("electron");
 const ipcRenderer = electron.ipcRenderer;
+const fs = require("fs");
 
 let seeCheckedTasks = false;
 let seeImportantOnly = false;
@@ -15,6 +16,36 @@ $(document).ready(() => {
   } 
 
   /* ===Adding event listeners to the checkboxes=== */
+
+  // Function to change the settings in the save.json
+  changeSave = (setting, value) => {
+    fs.readFile('user-data/save.json', 'utf8', (error, data) => {
+      // Check if there was an error
+      if (error)
+        return 0;
+      json_object = JSON.parse(data);
+      json_object[setting] = value;
+      json = JSON.stringify(json_object); 
+      fs.writeFile('user-data/save.json', json, current_day.getTasks);
+    });
+  }
+
+  loadSave = () => {
+    fs.readFile('user-data/save.json', 'utf8', (error, data) => {
+      if (error)
+        return 0;
+      json_object = JSON.parse(data);
+      seeImportantOnly = json_object["important-tasks-only"];
+      seeCheckedTasks = json_object["see-completed-tasks"];
+      if (seeImportantOnly)
+        $(".__important-tasks").find(".__check-box").addClass("checked");
+      if (seeCheckedTasks)
+        $(".__completed-tasks").find(".__check-box").addClass("checked");
+    });
+  }
+
+  loadSave();
+
   $(".__important-tasks").on('click', (event) => {
     seeImportantOnly = seeImportantOnly ? false : true;
     // Checking the box visually
@@ -23,8 +54,7 @@ $(document).ready(() => {
     } else {
       $(".__important-tasks").find(".__check-box").removeClass("checked");
     }
-    // Refreshing the tasks
-    current_day.getTasks();
+    changeSave("important-tasks-only", seeImportantOnly);
   });
 
   $(".__completed-tasks").on('click', (event) => {
@@ -35,8 +65,7 @@ $(document).ready(() => {
     } else {
       $(".__completed-tasks").find(".__check-box").removeClass("checked");
     }
-    // Refreshing the tasks
-    current_day.getTasks();
+    changeSave("see-completed-tasks", seeCheckedTasks);
   });
 
   /* ===Managing the next-task element=== */
