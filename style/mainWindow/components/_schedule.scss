@@ -13,7 +13,7 @@
         & .__4-hours {
 
             &:not(:last-child) {
-                border-bottom: 0.5px solid $medium-grey-1;
+                border-bottom: 0.5px solid #A9A9A9;
             }
     
         }        
@@ -30,11 +30,11 @@
             width: 80%;
             cursor: pointer;
             background: linear-gradient(130deg, $light-blue-6, $light-pink-1);
-            border: 0.5px solid $dark-grey-2;
+            border: 0.5px solid $dark-grey-1;
             transition: all 0.2s;
 
             &:hover {
-                box-shadow: 0.1rem 0.2rem rgba($medium-grey-3, 0.1);
+                box-shadow: 0.1rem 0.2rem rgba(#B9B9B9, 0.1);
             }
 
         }

@@ -19,9 +19,9 @@ $(document).ready(() => {
     seeImportantOnly = seeImportantOnly ? false : true;
     // Checking the box visually
     if (seeImportantOnly) {
-      $(event.target).addClass("checked");
+      $(".__important-tasks").find(".__check-box").addClass("checked");
     } else {
-      $(event.target).removeClass("checked");
+      $(".__important-tasks").find(".__check-box").removeClass("checked");
     }
     // Refreshing the tasks
     current_day.getTasks();
@@ -31,9 +31,9 @@ $(document).ready(() => {
     seeCheckedTasks = seeCheckedTasks ? false : true;
     // Checking the box visually
     if (seeCheckedTasks) {
-      $(event.target).addClass("checked");
+      $(".__completed-tasks").find(".__check-box").addClass("checked");
     } else {
-      $(event.target).removeClass("checked");
+      $(".__completed-tasks").find(".__check-box").removeClass("checked");
     }
     // Refreshing the tasks
     current_day.getTasks();

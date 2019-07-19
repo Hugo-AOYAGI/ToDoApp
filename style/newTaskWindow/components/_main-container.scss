@@ -5,7 +5,7 @@
     width: calc(100vw - 2rem);
     height: calc(85vh - 2rem);
     overflow: auto;
-    color: $dark-grey-2;
+    color: $dark-grey-1;
     font-weight: 300;
     font-family: 'Ebrima', serif;
     display: flex;
@@ -23,11 +23,11 @@
 
     & .__title {
         border-radius: 0.5rem;
-        border: 0.5px solid $dark-grey-2;
+        border: 0.5px solid $dark-grey-1;
         padding: 0.2rem;
         width: calc(100% - 0.4rem);
         font-size: 1.65em;
-        color: $dark-grey-2;
+        color: $dark-grey-1;
         font-family: 'Trebuchet MS', serif;
         margin-bottom: 1.5rem;
     }
@@ -37,7 +37,7 @@
         width: calc(100% - 1rem);
         padding: 0.5rem;
         font-size: 1.45em;
-        color: $dark-grey-2;
+        color: $dark-grey-1;
         font-family: 'Trebuchet MS', serif;
         overflow: auto;
         border-radius: 0.5rem;
@@ -71,7 +71,7 @@
     & .listbox {
         width: 50%;
         font-size: 1.3em;
-        color: $dark-grey-2;
+        color: $dark-grey-1;
     }
 
     &::-webkit-scrollbar {

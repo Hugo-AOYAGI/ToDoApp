@@ -59,7 +59,7 @@
 
     & .__label {
         font-family: 'Trebuchet MS', serif;
-        color: $dark-grey-2;
+        color: $dark-grey-1;
         margin-left: 0.25rem;
         font-size: 0.8rem;
         flex-basis: 80%;
@@ -69,12 +69,12 @@
         width: 0.8rem;
         height: 0.8rem;
         border-radius: 0.25rem;
-        border: 0.5px solid $dark-grey-2;
+        border: 0.5px solid $dark-grey-1;
         background-color: white;
     }
 
     & .checked {
-        background-color: $dark-blue-1;
+        background-color: $medium-blue-1;
     }
 
     & .__nav-button-box {

@@ -336,7 +336,7 @@
 }
 
 .navigation-bar .checked {
-  background-color: #717AFF;
+  background-color: #5B9CFF;
 }
 
 .navigation-bar .__nav-button-box {
@@ -569,7 +569,7 @@
 }
 
 .schedule .__hour-spans .__4-hours:not(:last-child) {
-  border-bottom: 0.5px solid #86817C;
+  border-bottom: 0.5px solid #A9A9A9;
 }
 
 .schedule .__tasks-spans-box {
@@ -741,7 +741,6 @@ body {
   padding: 0px;
   overflow: hidden;
   margin: 0px;
-  background: linear-gradient(110deg, #D9D9D9 20%, #F9F9F9 250%);
   font-family: "Calibri", serif;
   height: 100vh;
   grid-template: "head head head" 1fr "nav  main schedule" 6fr / 1fr 3.5fr 1fr;
