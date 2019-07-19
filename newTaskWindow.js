@@ -256,6 +256,7 @@ $(document).ready( () => {
             'important': true,
             'checked': false,
             'notify_setting': $(".__notification").val(),
+            'notif_sent': false,
             'repeat_setting': $(".__repeat").val() 
         }
         ipcRenderer.send("new-task-window-reply" , {...{'task_info': task_info}, ...message});

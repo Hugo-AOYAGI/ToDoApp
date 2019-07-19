@@ -5,6 +5,15 @@ lz = (n) => {
   return n < 10 ? "0"+n : n;
 }
 
+// Formats a time in ms to a hours:minutes
+formatTime = (n) => {
+  // Converting until_time in ms to a formatted time
+  let hours = lz(Math.floor(n/3600000));
+  let remainder = n%3600000;
+  let minutes = lz(Math.trunc(remainder/60000));
+  return `${hours}:${minutes}`;
+}
+
 // Function that adds dates together with the option to return a formatted string
 addDates = (a, b, asStr = true) => {
   let date1 = a.split(":"), date2 = b.split(":");
@@ -134,22 +143,14 @@ class Day {
         task.$task_page.find(".__timer").html("N/A");
         return 0;
       }
-
       // Calculating the time left until the task in ms
       let until_time = new Date(this.dateString.replace("[time]", task.info.start+":00")) - new Date();
-
       // Checking if the task has already passed
       if (until_time < 0) {
         task.$task_page.find(".__timer").html("Done !");
       } else {
-        // Converting until_time in ms to a formatted time
-        let hours = lz(Math.floor(until_time/3600000));
-        let remainder = until_time%3600000;
-        let minutes = lz(Math.trunc(remainder/60000));
-        let formatted_time =`${hours}:${minutes}`;
-
         // Updating the timer in the task card with the formatted time
-        task.$task_page.find(".__timer").html(formatted_time);
+        task.$task_page.find(".__timer").html(formatTime(until_time));
       }
     }
   }

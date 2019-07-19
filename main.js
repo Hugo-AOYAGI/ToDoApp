@@ -5,13 +5,14 @@ const path = require("path");
 const ipc = electron.ipcMain;
 const fs = require("fs");
 // Extracting objects from the electron module
-const {app, BrowserWindow} = electron;
+const {app, BrowserWindow, Notification} = electron;
 
 let mainWindow;
 let newTaskWindow;
 
 // Gets called when the app is set up
 app.on("ready", () => {
+  app.setAppUserModelId(process.execPath);
   // Creating the main window
   mainWindow = new BrowserWindow({
     webPreferences: {
@@ -49,9 +50,12 @@ ipc.on("remove-task", (event, task_to_del) => {
 });
 
 ipc.on("check-task", (event, message) => {
-  changeTaskPropertyJSON(message['task'], "checked", message['val']);
+  changeTaskPropertyJSON(message['task'].info, message['task'].day_id, "checked", message['val']);
 });
 
+ipc.on('notification-sent', (event, message) => {
+  changeTaskPropertyJSON(message['task'], message["id"], "notif_sent", true);
+});
 
 // Function to check if 2 json objects are equal even thought they don't have the same child order
 areJSONEqual = (a, b) => {
@@ -126,7 +130,7 @@ findTaskIndex = (task_info, json) => {
   return false;
 }
 
-changeTaskPropertyJSON = (task, prop, new_val) => {
+changeTaskPropertyJSON = (task, id, prop, new_val) => {
   // Open json
   fs.readFile('user-data/user-data.json', 'utf8', (error, data) => {
     // Check if there was an error
@@ -134,9 +138,8 @@ changeTaskPropertyJSON = (task, prop, new_val) => {
       return 0;
     // Convert it to an object
     json_object = JSON.parse(data);
-    id = task.day_id;
     // Find the task to delete and delete it
-    index = findTaskIndex(task.info, json_object[id]);
+    index = findTaskIndex(task, json_object[id]);
     if (index !== false) {
       json_object[id][i][prop] = new_val;
     }

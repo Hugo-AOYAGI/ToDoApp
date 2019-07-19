@@ -3,6 +3,7 @@
 const electron = require("electron");
 const ipcRenderer = electron.ipcRenderer;
 const fs = require("fs");
+const path = require("path");
 
 let seeCheckedTasks = false;
 let seeImportantOnly = false;
@@ -189,4 +190,71 @@ $(document).ready(() => {
     current_day.getTasks();
   });
 
-}); 
+  /*==MANAGE THE NOTIFICATION OF THE TASKS*/
+  // let notif = setInterval( () => {
+  //   // Get the tasks through ajax
+    
+  // }, 60000);
+
+  sendNotifications = () => {
+    $.ajax({ 
+      type: 'GET',
+      url: "user-data/user-data.json", 
+      dataType: "json",
+      success: (json_data) => { 
+        for (day of Object.keys(json_data)) {
+          for (task of json_data[day]) {
+            // Calculate the time until the task
+            task_start_date = new Date(day.substring(4,8), 
+                                       day.substring(2,4) - 1, 
+                                       day.substring(0,2), 
+                                       task["start"].substring(0,2), 
+                                       task["start"].substring(3,5));
+            let until_time = task_start_date - new Date();
+            // Check if the task has already sent a notif or if it does not require a notif
+            if (!task["notif_sent"] && task['notify_setting'] != "None") {
+              let notif_setting;
+              // Get the notification setting of the task
+              switch (task['notify_setting']) {
+                case "10 minutes before":
+                  notif_setting = 600000;
+                  break;
+                case "30 minutes before":
+                  notif_setting = 1800000;
+                  break;
+                case "One hour before":
+                  notify_setting = 3600000;
+                  break;
+                case "One day before":
+                  notify_setting = 86400000;
+                  break;
+              }
+              // Not sending if it's already been 10 minutes since the task started
+              if ( until_time < notif_setting + 60000 && until_time > -600000) {
+                // Format the description of the task
+                desc = task['desc'] == "None" ? "" : task["desc"] + "\n";
+                if (task['desc'].length > 30) {
+                  desc = desc.substring(0, 30) + "...\n";
+                } 
+                // Modify the json to indicate that the notif was already sent
+                ipcRenderer.send("notification-sent", {'task': task, 'id': day});
+                // Set a timeout for a precise notification
+                setTimeout( () => {
+                  // Create the notification
+                  let notification = new Notification(task["title"], {
+                    body: desc + task['start'],
+                    icon: path.join(__dirname, "assets/notif-icon.png")
+                  });
+                }, until_time - notif_setting);
+              }
+            }
+          }
+        }
+      }
+    });
+  }
+
+  sendNotifications();
+  t = setInterval(sendNotifications,  60000);
+
+});
