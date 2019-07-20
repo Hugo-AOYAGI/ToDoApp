@@ -12,14 +12,14 @@ let newTaskWindow;
 
 // Gets called when the app is set up
 app.on("ready", () => {
-  é
   app.setAppUserModelId(process.execPath);
   // Creating the main window
   mainWindow = new BrowserWindow({
     webPreferences: {
       nodeIntegration: true
     },
-    title: "Tasks And Events Manager",
+    title: "Insert Title Here",
+    icon: "assets/app-icon.png",
     show: false,
     autoHideMenuBar: true
   });
