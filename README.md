@@ -11,9 +11,9 @@ and I'd love to know what I could improve on in my code or even on my git hub re
 Things left to do:  
    __- Calendar__  
    __- Task Repeat function__  
-   __- Task notification__    
+   __- ~~Task notification~~__    
    __- Next Task Element__    
-   __- Add save for checkbox settings__   
+   __- ~~Add save for checkbox settings~~__   
    __- CSS hover and active animations__   
    __(- Dark mode)__  
    
