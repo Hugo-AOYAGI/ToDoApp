@@ -1,1 +1,15 @@
-{}
+{
+    "20072019": [
+        {
+            "checked": false,
+            "desc": "Description of the Task 1",
+            "end": "15:15",
+            "important": true,
+            "notif_sent": true,
+            "notify_setting": "10 minutes before",
+            "repeat_setting": "No Repeat",
+            "start": "11:05",
+            "title": "Task 1"
+        }
+    ]
+}

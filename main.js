@@ -5,20 +5,23 @@ const path = require("path");
 const ipc = electron.ipcMain;
 const fs = require("fs");
 // Extracting objects from the electron module
-const {app, BrowserWindow, Notification} = electron;
+const {app, BrowserWindow, Tray, Menu} = electron;
 
 let mainWindow;
 let newTaskWindow;
 
 // Gets called when the app is set up
 app.on("ready", () => {
+  é
   app.setAppUserModelId(process.execPath);
   // Creating the main window
   mainWindow = new BrowserWindow({
     webPreferences: {
       nodeIntegration: true
     },
-    show: false
+    title: "Tasks And Events Manager",
+    show: false,
+    autoHideMenuBar: true
   });
 
   // Waiting for the window to be ready to be shown

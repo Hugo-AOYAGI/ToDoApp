@@ -279,27 +279,46 @@
   width: 4.5rem;
   margin-top: 12%;
   background: linear-gradient(145deg, #717AFF, #A1FFFF);
-  -webkit-box-shadow: 5px 5px 4px rgba(52, 0, 255, 0.2);
-          box-shadow: 5px 5px 4px rgba(52, 0, 255, 0.2);
+  -webkit-box-shadow: 2px 2px 4px rgba(52, 0, 255, 0.2);
+          box-shadow: 2px 2px 4px rgba(52, 0, 255, 0.2);
+}
+
+.navigation-bar .__add-task-btn:hover {
+  -webkit-box-shadow: 4px 4px 4px rgba(52, 0, 255, 0.2);
+          box-shadow: 4px 4px 4px rgba(52, 0, 255, 0.2);
+  border: 0.5px solid #A9A9A9;
+}
+
+.navigation-bar .__add-task-btn:active .__icon {
+  color: white;
 }
 
 .navigation-bar .__add-task-btn .__icon {
-  color: white;
-  height: 4.5rem;
+  color: #F1F1F1;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
   width: 4.5rem;
+  height: 4.25rem;
   font-family: 'Trebuchet MS', serif;
-  font-size: 6.25em;
+  font-size: 7.25em;
 }
 
 .navigation-bar .__calendar-btn {
   height: 2.75rem;
-  width: 65%;
+  width: 75%;
   margin-top: 12%;
   color: white;
-  border-radius: 0.75rem;
+  border-radius: 0.5rem;
   background: linear-gradient(145deg, #8AB5FF, #6CA3FF);
   -webkit-box-shadow: 3px 3px 4px rgba(52, 0, 255, 0.2);
           box-shadow: 3px 3px 4px rgba(52, 0, 255, 0.2);
+}
+
+.navigation-bar .__calendar-btn:hover {
+  border-radius: 0.75rem;
+  border: 0.5px solid #A9A9A9;
 }
 
 .navigation-bar .__completed-tasks {
@@ -321,7 +340,7 @@
 .navigation-bar .__label {
   font-family: 'Trebuchet MS', serif;
   color: #707070;
-  margin-left: 0.25rem;
+  margin-left: 0.5rem;
   font-size: 0.8rem;
   -ms-flex-preferred-size: 80%;
       flex-basis: 80%;
@@ -333,6 +352,8 @@
   border-radius: 0.25rem;
   border: 0.5px solid #707070;
   background-color: white;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
 }
 
 .navigation-bar .checked {
@@ -353,14 +374,30 @@
 .navigation-bar .nav-btn {
   height: 4rem;
   width: 4rem;
-  background: linear-gradient(145deg, #717AFF, #A4AAF9);
-  border-radius: 1rem;
+  background: linear-gradient(145deg, rgba(113, 122, 255, 0.5), rgba(164, 170, 249, 0.5));
+  border-radius: 0.5rem;
   cursor: pointer;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  -webkit-box-shadow: inset 1px 1px 1px 1px rgba(113, 122, 255, 0.4);
+          box-shadow: inset 1px 1px 1px 1px rgba(113, 122, 255, 0.4);
+}
+
+.navigation-bar .nav-btn:hover .__icon {
+  width: 55%;
+  height: 55%;
+}
+
+.navigation-bar .nav-btn:active {
+  -webkit-box-shadow: inset 1px 1px 5px 5px rgba(113, 122, 255, 0.4);
+          box-shadow: inset 1px 1px 5px 5px rgba(113, 122, 255, 0.4);
 }
 
 .navigation-bar .nav-btn .__icon {
   width: 50%;
   height: 50%;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
 }
 
 .tasks-box {
@@ -479,8 +516,7 @@
   bottom: 0.5rem;
   height: 0.5rem;
   width: 0.5rem;
-  background-color: #FF8080;
-  opacity: 0.6;
+  background-color: rgba(255, 128, 128, 0.6);
 }
 
 .task-card .completed {
@@ -579,7 +615,7 @@
 
 .schedule .__tasks-spans-box .__task-span {
   position: absolute;
-  border-radius: 5rem;
+  border-radius: 2rem;
   width: 80%;
   cursor: pointer;
   background: linear-gradient(130deg, #C3D9FF, #FBC6FF);
@@ -589,8 +625,7 @@
 }
 
 .schedule .__tasks-spans-box .__task-span:hover {
-  -webkit-box-shadow: 0.1rem 0.2rem rgba(185, 185, 185, 0.1);
-          box-shadow: 0.1rem 0.2rem rgba(185, 185, 185, 0.1);
+  border: 0.5px solid #A9A9A9;
 }
 
 .schedule .__tasks-spans-box .completed {

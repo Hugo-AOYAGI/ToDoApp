@@ -24,25 +24,40 @@
         width: 4.5rem;
         margin-top: 12%;
         background: linear-gradient(145deg, $dark-blue-1, $turquoise-1);
-        box-shadow: 5px 5px 4px rgba($dark-blue-2, 0.2);
+        box-shadow: 2px 2px 4px rgba($dark-blue-2, 0.2);
+
+        &:hover  {
+            box-shadow: 4px 4px 4px rgba($dark-blue-2, 0.2);
+            border: 0.5px solid #A9A9A9;
+        }
+
+        &:active .__icon {
+            color: white;
+        }
 
         & .__icon {
-            color: white;
-            height: 4.5rem;
+            color: #F1F1F1;
+            user-select: none;
             width: 4.5rem;
+            height: 4.25rem;
             font-family: 'Trebuchet MS', serif;
-            font-size: 6.25em;
+            font-size: 7.25em;
         }
     }
 
     & .__calendar-btn {
         height: 2.75rem;
-        width: 65%;
+        width: 75%;
         margin-top: 12%;
         color: white;
-        border-radius: 0.75rem;
+        border-radius: 0.5rem;
         background: linear-gradient(145deg, $light-blue-3, $light-blue-4);
         box-shadow: 3px 3px 4px rgba($dark-blue-2, 0.2);
+
+        &:hover {
+            border-radius: 0.75rem;
+            border: 0.5px solid #A9A9A9;
+        }
     }
     
     & .__completed-tasks {
@@ -60,7 +75,7 @@
     & .__label {
         font-family: 'Trebuchet MS', serif;
         color: $dark-grey-1;
-        margin-left: 0.25rem;
+        margin-left: 0.5rem;
         font-size: 0.8rem;
         flex-basis: 80%;
     }
@@ -71,6 +86,7 @@
         border-radius: 0.25rem;
         border: 0.5px solid $dark-grey-1;
         background-color: white;
+        transition: all 0.3s;
     }
 
     & .checked {
@@ -87,13 +103,25 @@
     & .nav-btn {
         height: 4rem;
         width: 4rem;
-        background: linear-gradient(145deg, $dark-blue-1, $medium-blue-3);
-        border-radius: 1rem;
+        background: linear-gradient(145deg, rgba($dark-blue-1, 0.5), rgba($medium-blue-3, 0.5));
+        border-radius: 0.5rem;
         cursor: pointer;
+        transition: all 0.3s;
+        box-shadow: inset 1px 1px 1px 1px rgba($dark-blue-1, 0.4);
+
+        &:hover .__icon {
+            width: 55%;
+            height: 55%;
+        }
+
+        &:active {
+            box-shadow: inset 1px 1px 5px 5px rgba($dark-blue-1, 0.4);
+        }
 
         & .__icon {
             width: 50%;
             height: 50%;
+            transition: all 0.3s;
         }
         
     }
