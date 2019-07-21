@@ -233,6 +233,12 @@ body .header {
 .header .__close-btn {
   color: #E0F9FF;
   right: 2rem;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+}
+
+.header .__close-btn:hover {
+  color: #FF8080;
 }
 
 .main-container {
@@ -294,6 +300,34 @@ body .header {
   font-size: 1.5em;
   background: linear-gradient(135deg, #6CA3FF, #A4AAF9);
   margin-bottom: 1.5rem;
+}
+
+.main-container .__important-container {
+  top: 5px;
+  right: 5px;
+  width: 6rem;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.main-container .__important-container h3 {
+  -ms-flex-preferred-size: 70%;
+      flex-basis: 70%;
+}
+
+.main-container .__important-container .__checkbox {
+  width: 0.7rem;
+  height: 0.7rem;
+  margin-top: 0.25rem;
+  background: transparent;
+}
+
+.main-container .__important-container .checked {
+  background: linear-gradient(145deg, #A5C3F7, #A1FFFF);
 }
 
 .main-container .__confirm-btn {

@@ -12,5 +12,10 @@
     & .__close-btn {
         color: $lighter-blue-4;
         right: 2rem;
+        transition: all 0.2s;
+
+        &:hover {
+          color: $light-red-1;
+        }
     }
 }

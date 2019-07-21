@@ -1,15 +1,1 @@
-{
-    "20072019": [
-        {
-            "checked": false,
-            "desc": "Description of the Task 1",
-            "end": "15:15",
-            "important": true,
-            "notif_sent": true,
-            "notify_setting": "10 minutes before",
-            "repeat_setting": "No Repeat",
-            "start": "11:05",
-            "title": "Task 1"
-        }
-    ]
-}
+{"20072019":[{"checked":false,"desc":"Description of the Task 1","end":"15:15","important":true,"notif_sent":true,"notify_setting":"10 minutes before","repeat_setting":"No Repeat","start":"11:05","title":"Task 1"}],"21072019":[{"checked":false,"desc":"<a href='http://www.twitch.tv/lck'>www.twitch.tv/lck</a><iframe src=\"https://player.twitch.tv/?channel=lck\" min-height=\"250px\",  frameborder=\"0\" allowfullscreen=\"true\" scrolling=\"no\" width=\"100%\"></iframe>","end":"N/A","important":false,"notif_sent":false,"notify_setting":"None","repeat_setting":"No Repeat","start":"N/A","title":"eus"}]}

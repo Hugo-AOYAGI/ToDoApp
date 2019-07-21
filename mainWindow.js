@@ -4,6 +4,7 @@ const electron = require("electron");
 const ipcRenderer = electron.ipcRenderer;
 const fs = require("fs");
 const path = require("path");
+const shell = electron.shell;
 
 let seeCheckedTasks = false;
 let seeImportantOnly = false;
@@ -67,6 +68,13 @@ $(document).ready(() => {
       $(".__completed-tasks").find(".__check-box").removeClass("checked");
     }
     changeSave("see-completed-tasks", seeCheckedTasks);
+  });
+
+  // Handle links
+  $(document).on('click', 'a', function(event){
+    event.preventDefault();
+    link = event.target.href;
+    shell.openExternal(link);
   });
 
   /* ===Managing the next-task element=== */

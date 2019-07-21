@@ -223,6 +223,11 @@ $(document).ready( () => {
         $time_input_container.css("display", "block");
     }
 
+    // Managing the important checkbox
+    $(".__important-container").on("click", (event) => {
+        ($(".__checkbox").hasClass("checked")) ? $(".__checkbox").removeClass("checked") : $(".__checkbox").addClass("checked");
+    });
+
     // Adding event listeners to the time buttons
 
     $start_time_btn.on("click", changeStartTime);
@@ -239,6 +244,45 @@ $(document).ready( () => {
 
     $(".__time-confirm-button").on("click", updateTime);
 
+    // Format the description to support links
+
+    let youtube_player = '<iframe width="100%" height="250px" src="https://www.youtube.com/embed/[VIDEO_ID]" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+    let twitch_player =  '<iframe src="https://player.twitch.tv/?channel=[CHANNEL]" height="250px",  frameborder="0" allowfullscreen="true" scrolling="no" width="100%"></iframe>';
+    
+    // Check if a string is an URL with a regular expression
+    isURL = (str) => {
+        if (str.match(/^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/gm)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    formatDesc = (desc) => {
+        words = desc.split(" ");
+        for (word of words) {
+            if (isURL(word)) {
+                // Adds url support
+                link = word.includes("http") ? word : "http://" + word
+                new_word = "<a href='"+ link +"'>" + word.replace("https://", "").replace("http://", "") + "</a>";
+                // Add a youtube embed player if it is a youtube video
+                if (word.includes("youtube.com") && word.includes("watch")) {
+                    video_id = word.split("watch?v=")[1].split("&")[0];  
+                    new_word += youtube_player.replace("[VIDEO_ID]", video_id);
+                // Add a twitch embed player if it is a twitch channel
+                } else if (word.includes("twitch.tv") && word.substring(word.indexOf("tv") + 3) != "") {
+                    channel = word.substring(word.indexOf("tv") + 3);
+                    ban_words = ["directory", "subscriptions", "payment", "friends", "inventory"];
+                    if (!channel.includes["/"] && !ban_words.includes(channel))
+                        new_word += twitch_player.replace("[CHANNEL]", channel);
+                }
+                desc = desc.replace(word, new_word);
+            }
+        }
+        return desc;
+    }
+
+
     // Add event listener to global confirm button
 
     confirmTask = () => {
@@ -250,10 +294,10 @@ $(document).ready( () => {
         // Format the data into an object
         task_info = {
             'title': $(".__title").val(),
-            'desc': $(".__desc").val() ? $(".__desc").val() : "None",
+            'desc': $(".__desc").val() ? formatDesc($(".__desc").val()) : "None",
             'start': $(".__start-time").html(),
             'end': $(".__end-time").html(),
-            'important': true,
+            'important': $(".__checkbox").hasClass("checked") ? true : false,
             'checked': false,
             'notify_setting': $(".__notification").val(),
             'notif_sent': false,

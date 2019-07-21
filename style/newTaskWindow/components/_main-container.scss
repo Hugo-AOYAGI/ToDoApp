@@ -55,6 +55,29 @@
         margin-bottom: 1.5rem;
     }
 
+    & .__important-container {
+        top: 5px;
+        right: 5px;
+        width: 6rem;
+        height: fit-content;
+        display: flex;
+
+        & h3 {
+            flex-basis: 70%;
+        }
+
+        & .__checkbox  {
+            width: 0.7rem;
+            height: 0.7rem;
+            margin-top: 0.25rem;
+            background: transparent;
+        }
+
+        & .checked {
+            background: linear-gradient(145deg,$light-blue-1, $turquoise-1);
+        }
+    }
+
     & .__confirm-btn {
         bottom: 0;
         width: 15%;
