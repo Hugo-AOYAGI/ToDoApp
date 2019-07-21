@@ -17,6 +17,38 @@ $(document).ready(() => {
     return n < 10 ? "0"+n : n;
   } 
 
+  /* LOAD THE FIRST DAY */
+  let day_counter = 0;
+  let current_day;
+  refreshCurrDay = () => {
+    current_day = new Day(new Date(Date.now() + day_counter*one_day));
+  }
+  refreshCurrDay();
+  
+  // Interval for updating timers
+  let t1 = setInterval(() => {
+    current_day.updateTimers();
+  }, 1000);
+
+  /* ===Adding footer events listeners=== */
+
+  $(".__next-day").on("click", () => {
+    day_counter += 1;
+    refreshCurrDay();
+  });
+  $(".__prev-day").on("click", () => {
+    day_counter -= 1;
+    refreshCurrDay();
+  });
+  $(".__next-week").on("click", () => {
+    day_counter += 7 - current_day.date.getDay() + 1;
+    refreshCurrDay();
+  });
+  $(".__prev-week").on("click", () => {
+    day_counter -= 7 + current_day.date.getDay() - 1;
+    refreshCurrDay();
+  });
+
   /* ===Adding event listeners to the checkboxes=== */
 
   // Function to change the settings in the save.json
@@ -79,11 +111,68 @@ $(document).ready(() => {
 
   /* ===Managing the next-task element=== */
 
-  // Display the time left until the next task/event
+  timeToInt = (string) => {
+    string = string.split(":");
+    return parseInt(string[0])*60 + parseInt(string[1]);
+  }
 
+  compareDates = (day_id1, day_id2) => {
+    date1 = new Date(day_id1.substring(4,8), day_id1.substring(2,4) - 1, day_id1.substring(0,2));
+    date2 = new Date(day_id2.substring(4,8), day_id2.substring(2,4) - 1, day_id2.substring(0,2));
+    return date1 - date2;
+  }
 
-  // Add event listener to the next-task element thats redirects to the corresponding task card
+  getClosestTask = () => {
+    let closest_task = 0;
+    let closest_task_day = 0;
+    $.ajax({ 
+      type: 'GET',
+      url: "user-data/user-data.json", 
+      dataType: "json",
+      success: (json_data) => { 
+        for (day of Object.keys(json_data)) {
+          if (json_data[day].length != 0 && compareDates(day, current_day.id) >= 0) {
+            closest_task = json_data[day][0];
+            closest_task_day = day;
+            for (task of json_data[day]) {
+              if (timeToInt(task["start"]) < timeToInt(closest_task["start"]))
+                closest_task = task;
+                closest_task_day = day;
+            }
+          }
+        }
+      },
+      complete: () => {
+        updateNextTask(closest_task, closest_task_day);
+      }
+    });
+  }
 
+  getTaskDate = (day_id, task_start) => {
+    return new Date(day_id.substring(4,8), day_id.substring(2,4) - 1, day_id.substring(0,2), 
+                    task_start.substring(0,2), task_start.substring(3,5));
+  }
+
+  let next_task_div = $(".__next-task");
+
+  updateNextTask = (closest_task, day_id) => {
+     // Display the time left until the next task/event
+     if (closest_task) {
+       next_task_div.find(".__task-title").html(closest_task["title"]);
+       let task_start_date = getTaskDate(day_id, closest_task["start"]);
+       let until_time = task_start_date - new Date();
+       let formatted_time = formatTime(until_time);
+       next_task_div.find(".__timer").html(formatted_time);
+     } else {
+       next_task_div.find(".__task-title").html("No task yet ! ");
+       next_task_div.find(".__timer").html("None");
+     }
+  }
+
+  getClosestTask();
+
+  let next_task = setInterval( getClosestTask, 60000);
+  
   /* ===Managing the task card=== */
 
   // Add event listeners to go to task card with the more-info button
@@ -133,40 +222,6 @@ $(document).ready(() => {
     }
   }
 
-  /* LOAD THE FIRST DAY */
-  let day_counter = 0;
-  let current_day;
-  refreshCurrDay = () => {
-    current_day = new Day(new Date(Date.now() + day_counter*one_day));
-  }
-  refreshCurrDay();
-  
-  // Interval for updating timers
-  let t1 = setInterval(() => {
-    current_day.updateTimers();
-  }, 1000);
-
-
-
-  /* ===Adding footer events listeners=== */
-
-  $(".__next-day").on("click", () => {
-    day_counter += 1;
-    refreshCurrDay();
-  });
-  $(".__prev-day").on("click", () => {
-    day_counter -= 1;
-    refreshCurrDay();
-  });
-  $(".__next-week").on("click", () => {
-    day_counter += 7 - current_day.date.getDay() + 1;
-    refreshCurrDay();
-  });
-  $(".__prev-week").on("click", () => {
-    day_counter -= 7 + current_day.date.getDay() - 1;
-    refreshCurrDay();
-  });
-
   // Sending event to main.js
   sendRemoveTaskMsg = (task) => {
     ipcRenderer.send("remove-task", task);
@@ -196,6 +251,7 @@ $(document).ready(() => {
 
   ipcRenderer.on("update-day", (event, data) => {
     current_day.getTasks();
+    getClosestTask();
   });
 
   /*==MANAGE THE NOTIFICATION OF THE TASKS*/
@@ -203,6 +259,19 @@ $(document).ready(() => {
   //   // Get the tasks through ajax
     
   // }, 60000);
+
+  getNotificationSetting = (string) => {
+    switch (string) {
+      case "10 minutes before":
+        return 600000;
+      case "30 minutes before":
+        return 1800000;
+      case "One hour before":
+        return 3600000;
+      case "One day before":
+        return 86400000;
+    }
+  }
 
   sendNotifications = () => {
     $.ajax({ 
@@ -213,30 +282,12 @@ $(document).ready(() => {
         for (day of Object.keys(json_data)) {
           for (task of json_data[day]) {
             // Calculate the time until the task
-            task_start_date = new Date(day.substring(4,8), 
-                                       day.substring(2,4) - 1, 
-                                       day.substring(0,2), 
-                                       task["start"].substring(0,2), 
-                                       task["start"].substring(3,5));
+            task_start_date = getTaskDate(day, task['start']);
             let until_time = task_start_date - new Date();
             // Check if the task has already sent a notif or if it does not require a notif
             if (!task["notif_sent"] && task['notify_setting'] != "None") {
-              let notif_setting;
+              let notif_setting = getNotificationSetting(task["notify_setting"]);
               // Get the notification setting of the task
-              switch (task['notify_setting']) {
-                case "10 minutes before":
-                  notif_setting = 600000;
-                  break;
-                case "30 minutes before":
-                  notif_setting = 1800000;
-                  break;
-                case "One hour before":
-                  notify_setting = 3600000;
-                  break;
-                case "One day before":
-                  notify_setting = 86400000;
-                  break;
-              }
               // Not sending if it's already been 10 minutes since the task started
               if ( until_time < notif_setting + 60000 && until_time > -600000) {
                 // Format the description of the task

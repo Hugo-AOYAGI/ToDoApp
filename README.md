@@ -12,7 +12,7 @@ Things left to do:
    __- Calendar__  
    __- Task Repeat function__  
    __- ~~Task notification~~__    
-   __- Next Task Element__    
+   __- ~~Next Task Element~~__    
    __- ~~Add save for checkbox settings~~__   
    __- CSS hover and active animations__   
    __(- Dark mode)__  
