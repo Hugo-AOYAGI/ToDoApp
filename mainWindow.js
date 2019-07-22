@@ -122,30 +122,16 @@ $(document).ready(() => {
     return date1 - date2;
   }
 
-  getClosestTask = () => {
-    let closest_task = 0;
-    let closest_task_day = 0;
-    $.ajax({ 
-      type: 'GET',
-      url: "user-data/user-data.json", 
-      dataType: "json",
-      success: (json_data) => { 
-        for (day of Object.keys(json_data)) {
-          if (json_data[day].length != 0 && compareDates(day, current_day.id) >= 0) {
-            closest_task = json_data[day][0];
-            closest_task_day = day;
-            for (task of json_data[day]) {
-              if (timeToInt(task["start"]) < timeToInt(closest_task["start"]))
-                closest_task = task;
-                closest_task_day = day;
-            }
-          }
-        }
-      },
-      complete: () => {
-        updateNextTask(closest_task, closest_task_day);
+  getClosestTask = (day, json_data) => {
+    if (json_data[day].length != 0 && compareDates(day, current_day.id) >= 0) {
+      closest_task = json_data[day][0];
+      closest_task_day = day;
+      for (task of json_data[day]) {
+        if (timeToInt(task["start"]) < timeToInt(closest_task["start"]))
+          closest_task = task;
+          closest_task_day = day;
       }
-    });
+    }
   }
 
   getTaskDate = (day_id, task_start) => {
@@ -169,9 +155,6 @@ $(document).ready(() => {
      }
   }
 
-  getClosestTask();
-
-  let next_task = setInterval( getClosestTask, 60000);
   
   /* ===Managing the task card=== */
 
@@ -251,7 +234,7 @@ $(document).ready(() => {
 
   ipcRenderer.on("update-day", (event, data) => {
     current_day.getTasks();
-    getClosestTask();
+    manageTasks();
   });
 
   /*==MANAGE THE NOTIFICATION OF THE TASKS*/
@@ -273,7 +256,42 @@ $(document).ready(() => {
     }
   }
 
-  sendNotifications = () => {
+  sendNotifications = (task, day) => {
+    // Calculate the time until the task
+    task_start_date = getTaskDate(day, task['start']);
+    let until_time = task_start_date - new Date();
+    // Check if the task has already sent a notif or if it does not require a notif
+    if (!task["notif_sent"] && task['notify_setting'] != "None") {
+      let notif_setting = getNotificationSetting(task["notify_setting"]);
+      // Get the notification setting of the task
+      // Not sending if it's already been 10 minutes since the task started
+      if ( until_time < notif_setting + 60000 && until_time > -600000) {
+        // Format the description of the task
+        desc = task['desc'] == "None" ? "" : task["desc"] + "\n";
+        if (task['desc'].length > 30) {
+          desc = desc.substring(0, 30) + "...\n";
+        } 
+        // Modify the json to indicate that the notif was already sent
+        ipcRenderer.send("notification-sent", {'task': task, 'id': day});
+        // Set a timeout for a precise notification
+        setTimeout( () => {
+          // Create the notification
+          let notification = new Notification(task["title"], {
+            body: desc + task['start'],
+            icon: path.join(__dirname, "assets/notif-icon.png")
+          });
+        }, until_time - notif_setting);
+      }
+    }
+  }
+
+  let closest_task = 0;
+  let closest_task_day = 0;
+
+  manageTasks = () => {
+    console.log("Managing Tasks...");
+    closest_task = 0;
+    closest_task_day = 0;
     $.ajax({ 
       type: 'GET',
       url: "user-data/user-data.json", 
@@ -281,39 +299,18 @@ $(document).ready(() => {
       success: (json_data) => { 
         for (day of Object.keys(json_data)) {
           for (task of json_data[day]) {
-            // Calculate the time until the task
-            task_start_date = getTaskDate(day, task['start']);
-            let until_time = task_start_date - new Date();
-            // Check if the task has already sent a notif or if it does not require a notif
-            if (!task["notif_sent"] && task['notify_setting'] != "None") {
-              let notif_setting = getNotificationSetting(task["notify_setting"]);
-              // Get the notification setting of the task
-              // Not sending if it's already been 10 minutes since the task started
-              if ( until_time < notif_setting + 60000 && until_time > -600000) {
-                // Format the description of the task
-                desc = task['desc'] == "None" ? "" : task["desc"] + "\n";
-                if (task['desc'].length > 30) {
-                  desc = desc.substring(0, 30) + "...\n";
-                } 
-                // Modify the json to indicate that the notif was already sent
-                ipcRenderer.send("notification-sent", {'task': task, 'id': day});
-                // Set a timeout for a precise notification
-                setTimeout( () => {
-                  // Create the notification
-                  let notification = new Notification(task["title"], {
-                    body: desc + task['start'],
-                    icon: path.join(__dirname, "assets/notif-icon.png")
-                  });
-                }, until_time - notif_setting);
-              }
-            }
+            sendNotifications(task, day);
           }
+          getClosestTask(day, json_data);
         }
+      },
+      complete: () => {
+        updateNextTask(closest_task, closest_task_day);
       }
     });
   }
 
-  sendNotifications();
-  t = setInterval(sendNotifications,  60000);
+  let t = setInterval(manageTasks, 60000);
+  manageTasks();
 
 });
