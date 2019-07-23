@@ -37,6 +37,7 @@
         width: calc(100% - 1rem);
         padding: 0.5rem;
         font-size: 1.45em;
+        height: 30%;
         color: $dark-grey-1;
         font-family: 'Trebuchet MS', serif;
         overflow: auto;
@@ -44,12 +45,6 @@
         margin-bottom: 1.5rem;
         resize: none;
 
-        & .__add-image {
-            bottom: 0.2rem;
-            right: 0.2rem;
-            height: 0.7rem;
-            width: 0.9rem;
-        }
     }
 
     & .__time-btn {

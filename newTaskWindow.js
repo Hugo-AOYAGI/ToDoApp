@@ -229,22 +229,6 @@ $(document).ready( () => {
         ($(".__checkbox").hasClass("checked")) ? $(".__checkbox").removeClass("checked") : $(".__checkbox").addClass("checked");
     });
 
-    // Managing the add Image button
-    $(".__add-image").on("click", () => {
-        dialog.showOpenDialog(electron.remote.getCurrentWindow(), {
-            filters: [
-                {name: "Images", extensions: ['jpg', 'png', 'gif']}
-            ],
-            properties: [
-                'openFile',
-                'multiSelections'
-            ],
-            title: "Add an Image"
-        },
-        (paths) => {
-            $(".__desc").val($(".__desc").val() + "<img src="+ paths[0] +" alt='Image could not load.'>");
-        });
-    });
 
     // Adding event listeners to the time buttons
 
@@ -295,7 +279,12 @@ $(document).ready( () => {
                         new_word += twitch_player.replace("[CHANNEL]", channel);
                 }
                 desc = desc.replace(word, new_word);
+            } else if (word.startsWith("IMG[")) {
+                path = word.split("[").pop().replace("]", "");
+                desc = desc.replace(word, "<img src='" + path + "' alt='Image could not load !'>")
             }
+                
+                
         }
         return desc;
     }

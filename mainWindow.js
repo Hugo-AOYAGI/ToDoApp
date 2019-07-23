@@ -244,11 +244,29 @@ $(document).ready(() => {
     manageTasks();
   });
 
-  /*==MANAGE THE NOTIFICATION OF THE TASKS*/
-  // let notif = setInterval( () => {
-  //   // Get the tasks through ajax
-    
-  // }, 60000);
+  getDateId = (date) => {
+    return `${lz(date.getDate())}${lz(date.getMonth())}${lz(date.getFullYear())}`;
+  }
+
+  repeat_settings_vals = [[0, 0, -1], [0, 0, -7], [0, -1, 0], [-1, 0, 0]];
+  
+  // Manage the task Repeat
+  checkTaskRepeat = (day, json_data) => {
+    let id;
+    let days = parseInt(day.substring(0,2));
+    let months = parseInt(day.substring(2,4)) - 1;
+    let years = parseInt(day.substring(4,8));
+    // Daily repeat
+    for (setting of repeat_setting) {
+      id = getDateId(new Date(years + setting[0], months + setting[1], days + setting[2]));
+      let day_before = json_data[id];
+      for (task of day_before) {
+        if (task['repeat_setting'] == 'Daily') {
+          ipcRenderer.send('new-task-window-reply', {'action': 'new_task', 'day_id': id, 'task_info': task});
+        }
+      }
+    }
+  }
 
   notifsettings = {"10 minutes before": 600000, "30 minutes before": 1800000, "One hour before": 3600000, "One day before": 86400000};
   notifstrings = {"10 minutes before": ", In 10 minutes.", "30 minutes before": ", In half an hour.", "One hour before": ", In an hour.", "One day before": ", In 24 hours."}

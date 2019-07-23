@@ -284,6 +284,7 @@ body .header {
   width: calc(100% - 1rem);
   padding: 0.5rem;
   font-size: 1.45em;
+  height: 30%;
   color: #707070;
   font-family: 'Trebuchet MS', serif;
   overflow: auto;

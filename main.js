@@ -5,7 +5,7 @@ const path = require("path");
 const ipc = electron.ipcMain;
 const fs = require("fs");
 // Extracting objects from the electron module
-const {app, BrowserWindow, Tray, Menu} = electron;
+const {app, BrowserWindow, Tray, Menu, dialog} = electron;
 
 let mainWindow;
 let newTaskWindow;
@@ -88,7 +88,6 @@ createNewTaskWindow = (data) => {
     height: 480,
     width: 600,
     frame: false,
-    alwaysOnTop: true,
     show: false
   });
 
