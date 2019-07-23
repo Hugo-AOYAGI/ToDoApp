@@ -116,20 +116,27 @@ $(document).ready(() => {
     return parseInt(string[0])*60 + parseInt(string[1]);
   }
 
-  compareDates = (day_id1, day_id2) => {
-    date1 = new Date(day_id1.substring(4,8), day_id1.substring(2,4) - 1, day_id1.substring(0,2));
-    date2 = new Date(day_id2.substring(4,8), day_id2.substring(2,4) - 1, day_id2.substring(0,2));
-    return date1 - date2;
+  compareDates = (date1, date2) => {
+    return date1 - date2 > 0 ? true : false;
+  }
+
+  compareDateIDs = (id1, id2) => {
+    date1 = new Date(id1.substring(4,8), id1.substring(2,4), id1.substring(0,2));
+    date2 = new Date(id2.substring(4,8), id2.substring(2,4), id2.substring(0,2));
+    return date1 - date2 > 0 ? true : false;
   }
 
   getClosestTask = (day, json_data) => {
-    if (json_data[day].length != 0 && compareDates(day, current_day.id) >= 0) {
-      closest_task = json_data[day][0];
-      closest_task_day = day;
-      for (task of json_data[day]) {
-        if (timeToInt(task["start"]) < timeToInt(closest_task["start"]))
+    for (task of json_data[day]) { 
+      if (compareDates(getTaskDate(day, task['start']), new Date()) && !task['checked']) {
+        console.log("Later : ", task['start']);
+        if (closest_task == 0) {
           closest_task = task;
           closest_task_day = day;
+        }else if (timeToInt(task["start"]) < timeToInt(closest_task["start"]) && !compareDateIDs(day, closest_task_day)) {
+          closest_task = task;
+          closest_task_day = day;
+        }
       }
     }
   }
@@ -243,18 +250,8 @@ $(document).ready(() => {
     
   // }, 60000);
 
-  getNotificationSetting = (string) => {
-    switch (string) {
-      case "10 minutes before":
-        return 600000;
-      case "30 minutes before":
-        return 1800000;
-      case "One hour before":
-        return 3600000;
-      case "One day before":
-        return 86400000;
-    }
-  }
+  notifsettings = {"10 minutes before": 600000, "30 minutes before": 1800000, "One hour before": 3600000, "One day before": 86400000};
+  notifstrings = {"10 minutes before": ", In 10 minutes.", "30 minutes before": ", In half an hour.", "One hour before": ", In an hour.", "One day before": ", In 24 hours."}
 
   sendNotifications = (task, day) => {
     // Calculate the time until the task
@@ -262,7 +259,8 @@ $(document).ready(() => {
     let until_time = task_start_date - new Date();
     // Check if the task has already sent a notif or if it does not require a notif
     if (!task["notif_sent"] && task['notify_setting'] != "None") {
-      let notif_setting = getNotificationSetting(task["notify_setting"]);
+      let notif_setting = notifsettings[task["notify_setting"]];
+      let notif_string = notifstrings[task["notify_setting"]];
       // Get the notification setting of the task
       // Not sending if it's already been 10 minutes since the task started
       if ( until_time < notif_setting + 60000 && until_time > -600000) {
@@ -277,7 +275,7 @@ $(document).ready(() => {
         setTimeout( () => {
           // Create the notification
           let notification = new Notification(task["title"], {
-            body: desc + task['start'],
+            body: desc + task['start'] + notif_string,
             icon: path.join(__dirname, "assets/notif-icon.png")
           });
         }, until_time - notif_setting);
@@ -289,7 +287,7 @@ $(document).ready(() => {
   let closest_task_day = 0;
 
   manageTasks = () => {
-    console.log("Managing Tasks...");
+    console.log("*********** Managing Tasks... ************");
     closest_task = 0;
     closest_task_day = 0;
     $.ajax({ 
@@ -301,7 +299,11 @@ $(document).ready(() => {
           for (task of json_data[day]) {
             sendNotifications(task, day);
           }
-          getClosestTask(day, json_data);
+          console.log("Day Id : --> ", day);
+          if (json_data[day].length != 0) {
+            console.log("Not Null");
+            getClosestTask(day, json_data);
+          }
         }
       },
       complete: () => {
@@ -312,5 +314,11 @@ $(document).ready(() => {
 
   let t = setInterval(manageTasks, 60000);
   manageTasks();
+
+  // FOR TEST PURPOSES
+  $(".__mainTitle").on("click", () => {
+    current_day.getTasks();
+    manageTasks();
+  });
 
 });

@@ -1,6 +1,7 @@
 // Importing of all the modules
 const electron = require("electron");
 const ipcRenderer = electron.ipcRenderer;
+const dialog = electron.dialog;
 
 //Fonction that adds a leading zero to time and date values for formatting
 lz = (n) => {
@@ -226,6 +227,23 @@ $(document).ready( () => {
     // Managing the important checkbox
     $(".__important-container").on("click", (event) => {
         ($(".__checkbox").hasClass("checked")) ? $(".__checkbox").removeClass("checked") : $(".__checkbox").addClass("checked");
+    });
+
+    // Managing the add Image button
+    $(".__add-image").on("click", () => {
+        dialog.showOpenDialog(electron.remote.getCurrentWindow(), {
+            filters: [
+                {name: "Images", extensions: ['jpg', 'png', 'gif']}
+            ],
+            properties: [
+                'openFile',
+                'multiSelections'
+            ],
+            title: "Add an Image"
+        },
+        (paths) => {
+            $(".__desc").val($(".__desc").val() + "<img src="+ paths[0] +" alt='Image could not load.'>");
+        });
     });
 
     // Adding event listeners to the time buttons

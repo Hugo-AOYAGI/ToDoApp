@@ -43,6 +43,13 @@
         border-radius: 0.5rem;
         margin-bottom: 1.5rem;
         resize: none;
+
+        & .__add-image {
+            bottom: 0.2rem;
+            right: 0.2rem;
+            height: 0.7rem;
+            width: 0.9rem;
+        }
     }
 
     & .__time-btn {
