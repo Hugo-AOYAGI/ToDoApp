@@ -19,35 +19,14 @@ $(document).ready(() => {
 
   /* LOAD THE FIRST DAY */
   let day_counter = 0;
-  let current_day;
-  refreshCurrDay = () => {
-    current_day = new Day(new Date(Date.now() + day_counter*one_day));
-  }
-  refreshCurrDay();
+  let current_day = new Date();;
   
   // Interval for updating timers
   let t1 = setInterval(() => {
     current_day.updateTimers();
   }, 1000);
 
-  /* ===Adding footer events listeners=== */
-
-  $(".__next-day").on("click", () => {
-    day_counter += 1;
-    refreshCurrDay();
-  });
-  $(".__prev-day").on("click", () => {
-    day_counter -= 1;
-    refreshCurrDay();
-  });
-  $(".__next-week").on("click", () => {
-    day_counter += 7 - current_day.date.getDay() + 1;
-    refreshCurrDay();
-  });
-  $(".__prev-week").on("click", () => {
-    day_counter -= 7 + current_day.date.getDay() - 1;
-    refreshCurrDay();
-  });
+  
 
   /* ===Adding event listeners to the checkboxes=== */
 
@@ -129,7 +108,6 @@ $(document).ready(() => {
   getClosestTask = (day, json_data) => {
     for (task of json_data[day]) { 
       if (compareDates(getTaskDate(day, task['start']), new Date()) && !task['checked']) {
-        console.log("Later : ", task['start']);
         if (closest_task == 0) {
           closest_task = task;
           closest_task_day = day;
@@ -240,14 +218,15 @@ $(document).ready(() => {
   $(".__add-task-btn").on("click", sendNewTaskMsg);
 
   ipcRenderer.on("update-day", (event, data) => {
-    current_day.getTasks();
     manageTasks();
+    current_day.getTasks();  
   });
 
   getDateId = (date) => {
-    return `${lz(date.getDate())}${lz(date.getMonth())}${lz(date.getFullYear())}`;
+    return `${lz(date.getDate())}${lz(date.getMonth() + 1)}${lz(date.getFullYear())}`;
   }
 
+  repeat_setting = ['Daily', 'Weekly', 'Monthly', 'Yearly']
   repeat_settings_vals = [[0, 0, -1], [0, 0, -7], [0, -1, 0], [-1, 0, 0]];
   
   // Manage the task Repeat
@@ -257,12 +236,23 @@ $(document).ready(() => {
     let months = parseInt(day.substring(2,4)) - 1;
     let years = parseInt(day.substring(4,8));
     // Daily repeat
-    for (setting of repeat_setting) {
+    for (setting of repeat_settings_vals) {
       id = getDateId(new Date(years + setting[0], months + setting[1], days + setting[2]));
       let day_before = json_data[id];
-      for (task of day_before) {
-        if (task['repeat_setting'] == 'Daily') {
-          ipcRenderer.send('new-task-window-reply', {'action': 'new_task', 'day_id': id, 'task_info': task});
+      if (day_before) {
+        for (task of day_before) {
+          if (task['repeat_setting'] == repeat_setting[repeat_settings_vals.indexOf(setting)]) {
+            // Check if task has already been copied on that day
+            let already_exists = false;
+            if (json_data[day]) {
+              for (day_to_check_task of json_data[day]) {
+                if (day_to_check_task['repeat_id'] == task['repeat_id'])
+                  already_exists = true;
+              }
+            }
+            if (!already_exists)
+              ipcRenderer.send('new-task-window-reply', {'action': 'new_task', 'day_id': day, 'task_info': task, 'repeat_id': task['repeat_id']});
+          }
         }
       }
     }
@@ -305,21 +295,24 @@ $(document).ready(() => {
   let closest_task_day = 0;
 
   manageTasks = () => {
-    console.log("*********** Managing Tasks... ************");
     closest_task = 0;
     closest_task_day = 0;
     $.ajax({ 
       type: 'GET',
       url: "user-data/user-data.json", 
       dataType: "json",
-      success: (json_data) => { 
+      success: (json_data) => {
+        // Check task repeat for the current day
+        checkTaskRepeat(current_day.id, json_data);
+        // Check task repeat for today and tommorow
+        checkTaskRepeat(getDateId(new Date()), json_data);
+        checkTaskRepeat(getDateId(new Date(Date.now() + one_day)), json_data);
         for (day of Object.keys(json_data)) {
+          // Check task repeat for the first two days
           for (task of json_data[day]) {
             sendNotifications(task, day);
           }
-          console.log("Day Id : --> ", day);
           if (json_data[day].length != 0) {
-            console.log("Not Null");
             getClosestTask(day, json_data);
           }
         }
@@ -332,6 +325,31 @@ $(document).ready(() => {
 
   let t = setInterval(manageTasks, 60000);
   manageTasks();
+
+  refreshCurrDay = () => {
+    current_day = new Day(new Date(Date.now() + day_counter*one_day));
+    manageTasks();
+  }
+  refreshCurrDay();
+
+  /* ===Adding footer events listeners=== */
+
+  $(".__next-day").on("click", () => {
+    day_counter += 1;
+    refreshCurrDay();
+  });
+  $(".__prev-day").on("click", () => {
+    day_counter -= 1;
+    refreshCurrDay();
+  });
+  $(".__next-week").on("click", () => {
+    day_counter += 7;
+    refreshCurrDay();
+  });
+  $(".__prev-week").on("click", () => {
+    day_counter -= 7;
+    refreshCurrDay();
+  });
 
   // FOR TEST PURPOSES
   $(".__mainTitle").on("click", () => {

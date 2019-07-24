@@ -308,9 +308,10 @@ $(document).ready( () => {
             'checked': false,
             'notify_setting': $(".__notification").val(),
             'notif_sent': false,
-            'repeat_setting': $(".__repeat").val() 
+            'repeat_setting': $(".__repeat").val(),
+            'repeat_id': false
         }
-        ipcRenderer.send("new-task-window-reply" , {...{'task_info': task_info}, ...message});
+        ipcRenderer.send("new-task-window-reply" , {...{'task_info': task_info, 'repeat_id': false}, ...message});
         electron.remote.getCurrentWindow().close();
     }
 

@@ -10,7 +10,7 @@ and I'd love to know what I could improve on in my code or even on my git hub re
 
 Things left to do:  
    __- Calendar__  
-   __- Task Repeat function__  
+   __- ~~Task Repeat function~~__  
    __- ~~Task notification~~__    
    __- ~~Next Task Element~~__    
    __- ~~Add save for checkbox settings~~__   

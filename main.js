@@ -116,7 +116,7 @@ createNewTaskWindow = (data) => {
 ipc.on("new-task-window-reply", (event, message) => {
   if (message['action'] == "new_task") {
     // Add the task in the json file
-    addTaskJSON(message['day_id'], message['task_info']);
+    addTaskJSON(message['day_id'], message['task_info'], message['repeat_id']);
   } else {
     // Edit the task in the json file as well
     editTaskJSON(message['day_id'], message['task_info'], message['past_info']);
@@ -155,7 +155,24 @@ changeTaskPropertyJSON = (task, id, prop, new_val) => {
   });
 }
 
-addTaskJSON = (day_id, task_info) => {
+generateId = (data) => {
+  // Create id
+  let id = 0;
+  for (i=0; i<6; i++) {
+    id += 10**i*Math.floor(Math.random()*10);
+  }
+  // Check if id already exists
+  for (day of Object.keys(data)) {
+    for (task of data[day]) {
+      if (task['repeat_id'] == id) {
+        return generateId(tasks);
+      }
+    }
+    return id;
+  }
+}
+
+addTaskJSON = (day_id, task_info, repeat_id = false) => {
   fs.readFile('user-data/user-data.json', 'utf8', (error, json_data) => {
     if (error) 
       return 0;
@@ -164,6 +181,9 @@ addTaskJSON = (day_id, task_info) => {
     // Create the day in the json if it does not exist
     if (json_object[day_id] == undefined)
       json_object[day_id] = []
+    // Create the repeat id for the task
+    if (task_info['repeat_setting'] != 'No Repeat')
+      task_info['repeat_id'] = repeat_id ? repeat_id : generateId(json_object);
     // Append the task at the right id
     json_object[day_id].push(task_info);
     // Convert it back to a json file
@@ -188,7 +208,16 @@ removeTaskJSON = (task) => {
     // Find the task to delete and delete it
     index = findTaskIndex(task.info, json_object[id]);
     if (index !== false) {
-      json_object[id].splice(i, 1);
+      // Delete all instances of the task if it has a repeat setting
+      if (task.info.repeat_setting != 'No Repeat') {
+        for (day of Object.keys(json_object)) {
+          for (j=0; j<json_object[day].length; j++) {
+            if (json_object[day][j]['repeat_id'] == task.info.repeat_id)
+              json_object[day].splice(j, 1);
+          }
+        }
+      }
+      json_object[id].splice(index, 1);
     }
     // Check if day is empty, if so, delete it
     if (json_object[id].length == 0)
