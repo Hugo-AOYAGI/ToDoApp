@@ -6,8 +6,10 @@
   </head>
   <body>
     <div class="header of-hidden no-padd vt-align-flex rel border-grey-1">
-      <div class="__mainTitle wp-pre h-fit fs-3 upper fw-1 w-fit">Your Week</div>
-      <div class="__next-task abs border-grey-05 pointer">
+      <!-- <div class="__mainTitle wp-pre h-fit fs-25 upper fw-1 w-fit">Your Week</div> -->
+      <div class="__mainTitle wp-pre h-fit fs-25 upper fw-1 w-fit">Calendar</div>
+      <div class="__quit-calendar-btn vt-align-flex pointer abs">⤾</div>
+      <div class="__next-task abs border-grey-05">
         <div class="__task-title h-100 vt-align-flex fs-175 of-y-hidden ws-pre">No Task Yet.</div>
         <div class="__timer vt-align-flex hz-align-flex fs-2">N/A</div>
       </div>
@@ -89,7 +91,41 @@
         <div class="__4-hours"></div>
       </div>
       <div class="__tasks-spans-box abs hz-align-flex">
-    
+        <!-- Container for the future tasks to be displayed in the schedule -->
+      </div>
+    </div>
+    <div class="calendar abs">
+      <div class="__main-container">
+        <div class="__mondays __day">
+          <h4 class="__title">Monday</h4> 
+          <span class="__day-box">1
+            <div class="__curr-day-mark"></div>
+            <div class="__today-mark"></div>
+          </span>     
+        </div>
+        <div class="__tuesdays __day">
+          <h4 class="__title">Tuesday</h4>
+        </div>
+        <div class="__wednesdays __day">
+          <h4 class="__title">Wednesday</h4>
+        </div>
+        <div class="__thursdays __day">
+          <h4 class="__title">Thursday</h4>
+        </div>
+        <div class="__fridays __day">
+          <h4 class="__title">Friday</h4>
+        </div>
+        <div class="__saturdays __day">
+          <h4 class="__title">Saturday</h4>
+        </div>
+        <div class="__sundays __day">
+          <h4 class="__title">Sunday</h4>
+        </div>
+      </div>
+      <div class="__footer border-grey-1">
+        <div class="__prevbutton __btn hz-align-flex vt-align-flex pointer">➣</div>
+        <div class="__month-title hz-align-flex vt-align-flex">July <b>2019</b></div>
+        <div class="__nextbutton __btn hz-align-flex vt-align-flex pointer">➣</div>  
       </div>
     </div>
   </body>

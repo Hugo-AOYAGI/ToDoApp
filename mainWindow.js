@@ -140,7 +140,113 @@ $(document).ready(() => {
      }
   }
 
+  ignoreHours = (date) => {
+    return new Date(date.getFullYear(), date.getMonth(), date.getDate());
+  }
+
+  areDatesEqual = (date1, date2) => {
+    if (date1.getDate() == date2.getDate() && date1.getMonth() == date2.getMonth() && date1.getFullYear() == date2.getFullYear())
+      return true;
+    else
+      return false;
+  }
+
   
+  /* ===Managing the calendar=== */
+
+  // Adding event listener to the toggle buttons
+  let curr_month;
+  let curr_year;
+
+  let $calendar = $('.calendar');
+
+  const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+  loadMonth = () => {
+    // Empty the days
+    let d = new Date(curr_year, curr_month);
+    $('.__day-box').remove();
+    $calendar.find('.__month-title').html(months[d.getMonth()] + "<b>" + d.getFullYear() + "</b>");
+    // Find number of days in the month
+    n = new Date(curr_year, curr_month + 1, 0).getDate();
+    // Put placeholders
+    for (let j=0; j<days_in_order.indexOf(days[d.getDay()]); j++) {
+      console.log('TesT');
+      let $span = $(document.createElement("span")).addClass("__day-box hz-align-margins");
+      $span.css('opacity', '0');
+      $(".__" + days_in_order[j].toLowerCase() + "s").append($span);
+    }
+    for (let i=1; i<n + 1; i++) {
+      let day = new Date(curr_year, curr_month, i);
+      // Create the day span
+      let $div = $(document.createElement("div")).addClass("__day-box hz-align-margins");
+      $div.html(day.getDate());
+      // Indicated what the selected day is
+      if (areDatesEqual(day, current_day.date)) {
+        $div.append($(document.createElement('span')).addClass('__curr-day-mark'));
+      }
+
+      if (areDatesEqual(day, new Date())) {
+        $div.append($(document.createElement('span')).addClass('__today-mark'));
+      }
+
+      // Add event listener to span
+      $div.on('click', (event) => {
+        hideCalendar();
+        let date = current_day.date;
+        date = ignoreHours(date);
+        day_counter -= Math.floor((date - day)/one_day);
+        refreshCurrDay();
+      });
+      // Append span to container
+      $(".__" + days[day.getDay()].toLowerCase() + "s").append($div);
+    }
+  }
+
+  showCalendar = () => {
+    // Changing header
+    $(".__next-task").css('display', 'none');
+    $(".header").find(".__mainTitle").html("Calendar");
+    $(".header").find(".__quit-calendar-btn").css("C");
+    // Showing calendar
+    $calendar.css('display', 'unset');
+    // Loading the days
+
+    curr_month = current_day.date.getMonth();
+    curr_year = current_day.date.getFullYear();
+    
+    loadMonth();
+  }
+
+  hideCalendar = () => {
+    // Changing header
+    $(".__next-task").css('display', 'flex');
+    $(".header").find(".__mainTitle").html("Your Week");
+    $(".header").find(".__mainTitle").html("Your Week");
+    // Showing calendar
+    $calendar.css('display', 'none');
+  }
+
+  $(".__calendar-btn").on("click", () => {
+    showCalendar();
+  });
+
+  $(".__quit-calendar-btn").on("click", () => {
+    hideCalendar();
+  });
+
+  $calendar.find(".__prevbutton").on('click', () => {
+    curr_month--;
+    loadMonth();
+  });
+
+  $calendar.find(".__nextbutton").on('click', () => {
+    curr_month++;
+    loadMonth();
+  });
+
+  // Adding event listeners to next and prev months
+
   /* ===Managing the task card=== */
 
   // Add event listeners to go to task card with the more-info button

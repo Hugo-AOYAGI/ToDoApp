@@ -39,6 +39,7 @@ subDates = (a, b, asStr = true) => {
 const one_day = 86400000;
 
 const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+const days_in_order = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 const task_colors = ["blue", "cyan", "goldenrod", "green", "magenta", "orchid", "red", "slategrey", "turquoise"];
 const $day_menu_template = $(".day-menu").clone();
 

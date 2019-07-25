@@ -1,6 +1,7 @@
 
 .header {
   background: linear-gradient(130deg, $medium-blue-1, $medium-blue-2);
+  height: 14.3vh;
 
   & .__mainTitle {
     margin-left: 2em;
@@ -36,6 +37,14 @@
     & ::-webkit-scrollbar {
       display: none;
     }
+  }
+
+  & .__quit-calendar-btn {
+    color: white;
+    font-size: 6em;
+    height: 100%;
+    right: 2rem;
+    top: 0.5rem;
   }
     
 } 
