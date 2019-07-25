@@ -94,7 +94,7 @@
     }
 
     & .__nav-button-box {
-        margin-top: 15%;
+        margin-top: 30%;
         width: 100%;
         display: flex;
         justify-content: space-evenly;
@@ -105,25 +105,27 @@
         width: 4rem;
         background: linear-gradient(145deg, rgba($dark-blue-1, 0.5), rgba($medium-blue-3, 0.5));
         border-radius: 0.5rem;
+        font-size: 3em;
+        padding-bottom: 3px;
+        color: white;
         cursor: pointer;
         transition: all 0.3s;
         box-shadow: inset 1px 1px 1px 1px rgba($dark-blue-1, 0.4);
 
-        &:hover .__icon {
-            width: 55%;
-            height: 55%;
+        &:hover {
+            font-size: 3.2em;
         }
 
         &:active {
             box-shadow: inset 1px 1px 5px 5px rgba($dark-blue-1, 0.4);
         }
-
-        & .__icon {
-            width: 50%;
-            height: 50%;
-            transition: all 0.3s;
-        }
         
+    }
+
+    & .__prev-day {
+        transform: rotateZ(180deg);
+        box-shadow: inset -1px -1px 1px 1px rgba($dark-blue-1, 0.4);
+        background: linear-gradient(145deg, rgba($medium-blue-3, 0.5), rgba($dark-blue-1, 0.5));
     }
 
 }

@@ -448,19 +448,5 @@ $(document).ready(() => {
     day_counter -= 1;
     refreshCurrDay();
   });
-  $(".__next-week").on("click", () => {
-    day_counter += 7;
-    refreshCurrDay();
-  });
-  $(".__prev-week").on("click", () => {
-    day_counter -= 7;
-    refreshCurrDay();
-  });
-
-  // FOR TEST PURPOSES
-  $(".__mainTitle").on("click", () => {
-    current_day.getTasks();
-    manageTasks();
-  });
 
 });

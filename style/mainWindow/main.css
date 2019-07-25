@@ -370,7 +370,7 @@
 }
 
 .navigation-bar .__nav-button-box {
-  margin-top: 15%;
+  margin-top: 30%;
   width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -385,6 +385,9 @@
   width: 4rem;
   background: linear-gradient(145deg, rgba(113, 122, 255, 0.5), rgba(164, 170, 249, 0.5));
   border-radius: 0.5rem;
+  font-size: 3em;
+  padding-bottom: 3px;
+  color: white;
   cursor: pointer;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
@@ -392,9 +395,8 @@
           box-shadow: inset 1px 1px 1px 1px rgba(113, 122, 255, 0.4);
 }
 
-.navigation-bar .nav-btn:hover .__icon {
-  width: 55%;
-  height: 55%;
+.navigation-bar .nav-btn:hover {
+  font-size: 3.2em;
 }
 
 .navigation-bar .nav-btn:active {
@@ -402,11 +404,12 @@
           box-shadow: inset 1px 1px 5px 5px rgba(113, 122, 255, 0.4);
 }
 
-.navigation-bar .nav-btn .__icon {
-  width: 50%;
-  height: 50%;
-  -webkit-transition: all 0.3s;
-  transition: all 0.3s;
+.navigation-bar .__prev-day {
+  -webkit-transform: rotateZ(180deg);
+          transform: rotateZ(180deg);
+  -webkit-box-shadow: inset -1px -1px 1px 1px rgba(113, 122, 255, 0.4);
+          box-shadow: inset -1px -1px 1px 1px rgba(113, 122, 255, 0.4);
+  background: linear-gradient(145deg, rgba(164, 170, 249, 0.5), rgba(113, 122, 255, 0.5));
 }
 
 .tasks-box {
@@ -507,7 +510,7 @@
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
-  color: #C0FFB5;
+  color: #6CA3FF;
   display: none;
   font-size: 2.5em;
 }
@@ -529,7 +532,7 @@
 }
 
 .task-card .completed {
-  border: 1px solid #C0FFB5;
+  border: 1px solid #448CF8;
 }
 
 .task-card .__side-button-box {
@@ -561,11 +564,11 @@
 }
 
 .task-card .__complete-btn {
-  color: #C0FFB5;
+  color: #8AB5FF;
 }
 
 .task-card .__remove-btn {
-  color: #FF8080;
+  color: #448CF8;
 }
 
 .small-task-card {
@@ -638,7 +641,7 @@
 }
 
 .schedule .__tasks-spans-box .completed {
-  border: 1px solid #C0FFB5;
+  border: 1px solid #448CF8;
 }
 
 .task-page {
@@ -783,6 +786,7 @@
   width: 100%;
   top: 14.3%;
   height: 85.7%;
+  z-index: 100;
   background-color: white;
 }
 
@@ -851,13 +855,13 @@
 
 .calendar .__main-container .__day .__day-box .__curr-day-mark {
   position: absolute;
-  left: 4px;
-  font-size: 0.5em;
+  bottom: 3px;
+  font-size: 0.4em;
   border: none;
 }
 
 .calendar .__main-container .__day .__day-box .__curr-day-mark::after {
-  content: "➼";
+  content: "✵";
 }
 
 .calendar .__main-container .__day .__day-box .__today-mark {

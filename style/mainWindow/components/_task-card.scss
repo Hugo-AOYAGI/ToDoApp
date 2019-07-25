@@ -52,7 +52,8 @@
             top: 1rem;
             width: fit-content;
             height: fit-content;
-            color: $light-green-1;
+            color: $light-blue-4;
+            // color: $light-green-1;
             display: none;
             font-size: 2.5em;
 
@@ -75,7 +76,7 @@
     }
 
     & .completed {
-       border: 1px solid $light-green-1;       
+       border: 1px solid $medium-blue-4;       
     }
 
     & .__side-button-box {
@@ -98,11 +99,11 @@
     }
 
     & .__complete-btn {
-        color: $light-green-1;
+        color: $light-blue-3;
     }
 
     & .__remove-btn {
-        color: $light-red-1;
+        color: $medium-blue-4;
     }
     
 }
