@@ -5,15 +5,16 @@ I'm am only making it to learn programmation and mainly the **electron** framewo
 
 Feel free to use it or change it however you want to.
 
-Please note that any feedback is appreciated, I'm still learning   
+Please note that any feedback is appreciated, I'm still learning programming   
 and I'd love to know what I could improve on in my code or even on my git hub repo.
 
 Things left to do:  
-   __- Calendar__  
+   __- ~~Calendar~~__  
    __- ~~Task Repeat function~~__  
    __- ~~Task notification~~__    
    __- ~~Next Task Element~~__    
    __- ~~Add save for checkbox settings~~__   
    __- CSS hover and active animations__   
    __(- Dark mode)__  
+   __- Make the app more adaptative when resized__    
    
