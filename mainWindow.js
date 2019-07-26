@@ -6,8 +6,14 @@ const fs = require("fs");
 const path = require("path");
 const shell = electron.shell;
 
-let seeCheckedTasks = false;
-let seeImportantOnly = false;
+let settings = {
+  'seeImportantOnly': false,
+  'seeCompletedTasks': false,
+  'darkModeEnabled': false,
+  'notificationsEnabled': true,
+  'minimizeWhenClosed': true,
+  'launchOnStartup': true
+}
 
 // Wait for window to load
 $(document).ready(() => { 
@@ -19,14 +25,12 @@ $(document).ready(() => {
 
   /* LOAD THE FIRST DAY */
   let day_counter = 0;
-  let current_day = new Date();;
+  let current_day = new Day(new Date());
   
   // Interval for updating timers
   let t1 = setInterval(() => {
     current_day.updateTimers();
   }, 1000);
-
-  
 
   /* ===Adding event listeners to the checkboxes=== */
 
@@ -46,40 +50,30 @@ $(document).ready(() => {
   loadSave = () => {
     fs.readFile('user-data/save.json', 'utf8', (error, data) => {
       if (error)
-        return 0;
+        console.log(error);
       json_object = JSON.parse(data);
-      seeImportantOnly = json_object["important-tasks-only"];
-      seeCheckedTasks = json_object["see-completed-tasks"];
-      if (seeImportantOnly)
-        $(".__important-tasks").find(".__check-box").addClass("checked");
-      if (seeCheckedTasks)
-        $(".__completed-tasks").find(".__check-box").addClass("checked");
+      for (key of Object.keys(settings)) {
+        settings[key] = json_object[key];
+        if (settings[key])
+          $(".__" + key).find('.__check-box').addClass('checked');
+      }
     });
+    setTimeout(current_day.getTasks, 100);
   }
 
-  loadSave();
+  // Adding event listeners to all checkboxes
 
-  $(".__important-tasks").on('click', (event) => {
-    seeImportantOnly = seeImportantOnly ? false : true;
-    // Checking the box visually
-    if (seeImportantOnly) {
-      $(".__important-tasks").find(".__check-box").addClass("checked");
-    } else {
-      $(".__important-tasks").find(".__check-box").removeClass("checked");
-    }
-    changeSave("important-tasks-only", seeImportantOnly);
-  });
-
-  $(".__completed-tasks").on('click', (event) => {
-    seeCheckedTasks = seeCheckedTasks ? false : true;
-    // Checking the box visually
-    if (seeCheckedTasks) {
-      $(".__completed-tasks").find(".__check-box").addClass("checked");
-    } else {
-      $(".__completed-tasks").find(".__check-box").removeClass("checked");
-    }
-    changeSave("see-completed-tasks", seeCheckedTasks);
-  });
+  for (key of Object.keys(settings)) {
+    $(".__" + key).on('click', (event) => {
+      let $self = $(event.target).siblings('.__check-box');
+      key_ = $self.parent().attr("class").replace("__", "").replace(" pointer", "");
+      settings[key_] = settings[key_] ? false : true;
+      if (settings[key_]) $self.addClass('checked');
+      else $self.removeClass('checked')
+      changeSave(key_, settings[key_]);
+      current_day.getTasks();
+    });
+  }
 
   // Managing the settings
 
@@ -96,7 +90,6 @@ $(document).ready(() => {
   }
 
   toggleSettings = () => {
-    console.log($(".__settings").css('left'));
     if ($(".__settings").css('left') == '0px') {
       hideSettings();
     } else {
@@ -111,7 +104,8 @@ $(document).ready(() => {
   // Handle links
   $(document).on('click', 'a', function(event){
     event.preventDefault();
-    link = event.target.href;
+    link = $(event.target).closest('a').attr('href');
+    console.log(link);
     shell.openExternal(link);
   });
 
@@ -464,6 +458,8 @@ $(document).ready(() => {
     manageTasks();
   }
   refreshCurrDay();
+
+  loadSave();
 
   /* ===Adding footer events listeners=== */
 

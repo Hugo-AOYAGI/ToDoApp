@@ -63,13 +63,13 @@
         }
     }
     
-    & .__completed-tasks {
+    & .__seeCompletedTasks {
         margin-top: 15%;
         display: flex;
         margin-left: 15%;
     }
 
-    & .__important-tasks {
+    & .__seeImportantOnly {
         margin-top: 5%; 
         display: flex;
         margin-left: 15%;

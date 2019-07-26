@@ -221,7 +221,7 @@ class Task {
 
   loadInfo = () => {
     // Check if the task should be displayed
-    if ( (this.info.checked && !seeCheckedTasks) || (!this.info.important && seeImportantOnly) ) {
+    if ( (this.info.checked && !settings['seeCompletedTasks']) || (!this.info.important && settings['seeImportantOnly']) ) {
       // Delete the task card and page
       this.$task_card.css("display", "none");
       this.$task_page.css("display", "none");
@@ -260,7 +260,7 @@ class Task {
 
   createScheduleSpan = () => {
     // Check if the task should be displayed
-    if ( (this.info.checked && !seeCheckedTasks) || (!this.info.important && seeImportantOnly) )
+    if ( (this.info.checked && !settings['seeCompletedTasks']) || (!this.info.important && settings['seeImportantOnly']) )
       return "";
     // Create the span
     let $span = $(document.createElement("span")).addClass("__task-span");

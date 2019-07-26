@@ -338,7 +338,7 @@
   border: 0.5px solid #A9A9A9;
 }
 
-.navigation-bar .__completed-tasks {
+.navigation-bar .__seeCompletedTasks {
   margin-top: 15%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -346,7 +346,7 @@
   margin-left: 15%;
 }
 
-.navigation-bar .__important-tasks {
+.navigation-bar .__seeImportantOnly {
   margin-top: 5%;
   display: -webkit-box;
   display: -ms-flexbox;
