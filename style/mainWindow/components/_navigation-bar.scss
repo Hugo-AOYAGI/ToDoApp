@@ -25,6 +25,7 @@
         margin-top: 12%;
         background: linear-gradient(145deg, $dark-blue-1, $turquoise-1);
         box-shadow: 2px 2px 4px rgba($dark-blue-2, 0.2);
+        transition: border 0.3s, box-shadow 0.3s;
 
         &:hover  {
             box-shadow: 4px 4px 4px rgba($dark-blue-2, 0.2);
@@ -42,6 +43,7 @@
             height: 4.25rem;
             font-family: 'Trebuchet MS', serif;
             font-size: 7.25em;
+            transition: color 0.3s;
         }
     }
 
@@ -53,6 +55,7 @@
         border-radius: 0.5rem;
         background: linear-gradient(145deg, $light-blue-3, $light-blue-4);
         box-shadow: 3px 3px 4px rgba($dark-blue-2, 0.2);
+        transition: border-radius 0.3s, border 0.3s;
 
         &:hover {
             border-radius: 0.75rem;

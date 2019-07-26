@@ -290,6 +290,10 @@
   background: linear-gradient(145deg, #717AFF, #A1FFFF);
   -webkit-box-shadow: 2px 2px 4px rgba(52, 0, 255, 0.2);
           box-shadow: 2px 2px 4px rgba(52, 0, 255, 0.2);
+  -webkit-transition: border 0.3s, -webkit-box-shadow 0.3s;
+  transition: border 0.3s, -webkit-box-shadow 0.3s;
+  transition: border 0.3s, box-shadow 0.3s;
+  transition: border 0.3s, box-shadow 0.3s, -webkit-box-shadow 0.3s;
 }
 
 .navigation-bar .__add-task-btn:hover {
@@ -312,6 +316,8 @@
   height: 4.25rem;
   font-family: 'Trebuchet MS', serif;
   font-size: 7.25em;
+  -webkit-transition: color 0.3s;
+  transition: color 0.3s;
 }
 
 .navigation-bar .__calendar-btn {
@@ -323,6 +329,8 @@
   background: linear-gradient(145deg, #8AB5FF, #6CA3FF);
   -webkit-box-shadow: 3px 3px 4px rgba(52, 0, 255, 0.2);
           box-shadow: 3px 3px 4px rgba(52, 0, 255, 0.2);
+  -webkit-transition: border-radius 0.3s, border 0.3s;
+  transition: border-radius 0.3s, border 0.3s;
 }
 
 .navigation-bar .__calendar-btn:hover {
