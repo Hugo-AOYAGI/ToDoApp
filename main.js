@@ -5,10 +5,13 @@ const path = require("path");
 const ipc = electron.ipcMain;
 const fs = require("fs");
 // Extracting objects from the electron module
-const {app, BrowserWindow, Tray, Menu, dialog} = electron;
+const {app, BrowserWindow, Tray, Menu} = electron;
 
 let mainWindow;
 let newTaskWindow;
+let tray;
+
+let forceClose = false;
 
 // Gets called when the app is set up
 app.on("ready", () => {
@@ -36,17 +39,52 @@ app.on("ready", () => {
     slashes: true
   }));
 
+  mainWindow.setOverlayIcon('assets/app-icon.png', 'To Do App');
+
   mainWindow.maximize();
 
+  // Adding window tray
+  tray = new Tray('assets/app-icon.png');
+  const contextMenu = Menu.buildFromTemplate([
+    { label: 'Open', click() {
+      mainWindow.setSkipTaskbar(false);
+      mainWindow.maximize();
+    }},
+    { label: 'Exit', click() {
+      forceCloseMainWindow();
+    }}
+  ]);
+  tray.setToolTip('To Do App');
+  tray.setContextMenu(contextMenu);
+
   // Handling the window closing
-  mainWindow.on("close", () => {
-    if (newTaskWindow)
+  mainWindow.on("close", (event) => {
+    event.preventDefault();
+    if (newTaskWindow) {
       newTaskWindow.close();
-    mainWindow = null;
-    newTaskWindow = null;
+      newTaskWindow = null;
+    }
+    // Get the setting
+    fs.readFile('user-data/save.json', 'utf8', (error, data) => {
+      json_object = JSON.parse(data);
+      if (json_object['minimizeWhenClosed'] || !forceClose) {
+        mainWindow.minimize();
+        mainWindow.blur();
+        mainWindow.setSkipTaskbar(true);
+      } else {
+        mainWindow.destroy();
+        mainWindow = null;
+      }
+    });
   });
 
 });
+
+forceCloseMainWindow = () => {
+  forceClose = true;
+  mainWindow.close();
+}
+
 
 ipc.on("remove-task", (event, task_to_del) => {
   removeTaskJSON(task_to_del);
@@ -123,6 +161,7 @@ ipc.on("new-task-window-reply", (event, message) => {
   }
 });
 
+// Find the index of a task in the json file
 findTaskIndex = (task_info, json) => {
   for (i=0; i<json.length; i++) {
     if (areJSONEqual(task_info, json[i])){
@@ -132,6 +171,7 @@ findTaskIndex = (task_info, json) => {
   return false;
 }
 
+// Change any property of a task in the json file
 changeTaskPropertyJSON = (task, id, prop, new_val) => {
   // Open json
   fs.readFile('user-data/user-data.json', 'utf8', (error, data) => {
@@ -155,6 +195,7 @@ changeTaskPropertyJSON = (task, id, prop, new_val) => {
   });
 }
 
+// Generate a random number for the repeat feature
 generateId = (data) => {
   // Create id
   let id = 0;
@@ -172,6 +213,7 @@ generateId = (data) => {
   }
 }
 
+// Adds a task in the json file
 addTaskJSON = (day_id, task_info, repeat_id = false) => {
   fs.readFile('user-data/user-data.json', 'utf8', (error, json_data) => {
     if (error) 
@@ -196,6 +238,7 @@ addTaskJSON = (day_id, task_info, repeat_id = false) => {
   });
 }
 
+// Delete a task in the json
 removeTaskJSON = (task) => {
   // Open json
   fs.readFile('user-data/user-data.json', 'utf8', (error, data) => {
@@ -232,6 +275,7 @@ removeTaskJSON = (task) => {
   });
 }
 
+// Edit a task in the json
 editTaskJSON = (day_id, new_info, past_info) => {
   // Open json
   fs.readFile('user-data/user-data.json', 'utf8', (error, data) => {

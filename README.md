@@ -15,7 +15,7 @@ Things left to do:
    __- ~~Next Task Element~~__    
    __- ~~Add save for checkbox settings~~__   
    __- CSS hover and active animations__   
-   __- Settings__  
+   __- ~~Settings~~__  
    __(- Dark mode)__  
    __- Make the app more adaptative when resized__    
    

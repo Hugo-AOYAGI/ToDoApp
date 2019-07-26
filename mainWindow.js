@@ -11,8 +11,7 @@ let settings = {
   'seeCompletedTasks': false,
   'darkModeEnabled': false,
   'notificationsEnabled': true,
-  'minimizeWhenClosed': true,
-  'launchOnStartup': true
+  'minimizeWhenClosed': true
 }
 
 // Wait for window to load
@@ -47,10 +46,11 @@ $(document).ready(() => {
     });
   }
 
+  // Loads all the user settings from user-save.json
   loadSave = () => {
     fs.readFile('user-data/save.json', 'utf8', (error, data) => {
       if (error)
-        console.log(error);
+        return 0;
       json_object = JSON.parse(data);
       for (key of Object.keys(settings)) {
         settings[key] = json_object[key];
@@ -66,10 +66,13 @@ $(document).ready(() => {
   for (key of Object.keys(settings)) {
     $(".__" + key).on('click', (event) => {
       let $self = $(event.target).siblings('.__check-box');
-      key_ = $self.parent().attr("class").replace("__", "").replace(" pointer", "");
+      // Getting the key of the checkbox that was pressed
+      key_ = $self.closest('.__input').attr("class").replace("__", "").replace(" pointer __input", "");
       settings[key_] = settings[key_] ? false : true;
+      // Filling or emptying the check box
       if (settings[key_]) $self.addClass('checked');
       else $self.removeClass('checked')
+      // Changing setting in the json_file
       changeSave(key_, settings[key_]);
       current_day.getTasks();
     });
@@ -105,27 +108,30 @@ $(document).ready(() => {
   $(document).on('click', 'a', function(event){
     event.preventDefault();
     link = $(event.target).closest('a').attr('href');
-    console.log(link);
     shell.openExternal(link);
   });
 
   /* ===Managing the next-task element=== */
 
+  // Convert a time to an integer, ex: 18:30 = 18*60 + 30 = 1110
   timeToInt = (string) => {
     string = string.split(":");
     return parseInt(string[0])*60 + parseInt(string[1]);
   }
 
+  // Compare two dates 
   compareDates = (date1, date2) => {
     return date1 - date2 > 0 ? true : false;
   }
 
+  // Compare two dates based on their id : ex: July 26th 2019 --> 26072019
   compareDateIDs = (id1, id2) => {
     date1 = new Date(id1.substring(4,8), id1.substring(2,4), id1.substring(0,2));
     date2 = new Date(id2.substring(4,8), id2.substring(2,4), id2.substring(0,2));
     return date1 - date2 > 0 ? true : false;
   }
 
+  // Find the date closest to the current local time
   getClosestTask = (day, json_data) => {
     for (task of json_data[day]) { 
       if (compareDates(getTaskDate(day, task['start']), new Date()) && !task['checked']) {
@@ -140,6 +146,7 @@ $(document).ready(() => {
     }
   }
 
+  // Get the Date object at some task start time
   getTaskDate = (day_id, task_start) => {
     return new Date(day_id.substring(4,8), day_id.substring(2,4) - 1, day_id.substring(0,2), 
                     task_start.substring(0,2), task_start.substring(3,5));
@@ -147,6 +154,7 @@ $(document).ready(() => {
 
   let next_task_div = $(".__next-task");
 
+  // Updates the next task element in the header
   updateNextTask = (closest_task, day_id) => {
      // Display the time left until the next task/event
      if (closest_task) {
@@ -161,10 +169,12 @@ $(document).ready(() => {
      }
   }
 
+  // Return a date that has 00:00:00 as hours:minutes:seconds
   ignoreHours = (date) => {
     return new Date(date.getFullYear(), date.getMonth(), date.getDate());
   }
 
+  // Checks if two dates are equal
   areDatesEqual = (date1, date2) => {
     if (date1.getDate() == date2.getDate() && date1.getMonth() == date2.getMonth() && date1.getFullYear() == date2.getFullYear())
       return true;
@@ -183,6 +193,7 @@ $(document).ready(() => {
 
   const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
+  // Load a month in the calendar
   loadMonth = () => {
     // Empty the days
     let d = new Date(curr_year, curr_month);
@@ -192,7 +203,6 @@ $(document).ready(() => {
     n = new Date(curr_year, curr_month + 1, 0).getDate();
     // Put placeholders
     for (let j=0; j<days_in_order.indexOf(days[d.getDay()]); j++) {
-      console.log('TesT');
       let $span = $(document.createElement("span")).addClass("__day-box hz-align-margins");
       $span.css('opacity', '0');
       $(".__" + days_in_order[j].toLowerCase() + "s").append($span);
@@ -349,6 +359,7 @@ $(document).ready(() => {
     current_day.getTasks();  
   });
 
+  // Get the id of a date
   getDateId = (date) => {
     return `${lz(date.getDate())}${lz(date.getMonth() + 1)}${lz(date.getFullYear())}`;
   }
@@ -356,7 +367,7 @@ $(document).ready(() => {
   repeat_setting = ['Daily', 'Weekly', 'Monthly', 'Yearly']
   repeat_settings_vals = [[0, 0, -1], [0, 0, -7], [0, -1, 0], [-1, 0, 0]];
   
-  // Manage the task Repeat
+  // Manage the task Repeat feature
   checkTaskRepeat = (day, json_data) => {
     let id;
     let days = parseInt(day.substring(0,2));
@@ -388,6 +399,7 @@ $(document).ready(() => {
   notifsettings = {"10 minutes before": 600000, "30 minutes before": 1800000, "One hour before": 3600000, "One day before": 86400000};
   notifstrings = {"10 minutes before": ", In 10 minutes.", "30 minutes before": ", In half an hour.", "One hour before": ", In an hour.", "One day before": ", In 24 hours."}
 
+  // Send notifications based on the settings chosen by the user
   sendNotifications = (task, day) => {
     // Calculate the time until the task
     task_start_date = getTaskDate(day, task['start']);
@@ -407,13 +419,15 @@ $(document).ready(() => {
         // Modify the json to indicate that the notif was already sent
         ipcRenderer.send("notification-sent", {'task': task, 'id': day});
         // Set a timeout for a precise notification
-        setTimeout( () => {
-          // Create the notification
-          let notification = new Notification(task["title"], {
-            body: desc + task['start'] + notif_string,
-            icon: path.join(__dirname, "assets/notif-icon.png")
-          });
-        }, until_time - notif_setting);
+        if (settings['notificationsEnabled']) {
+          setTimeout( () => {
+            // Create the notification
+            let notification = new Notification(task["title"], {
+              body: desc + task['start'] + notif_string,
+              icon: path.join(__dirname, "assets/notif-icon.png")
+            });
+          }, until_time - notif_setting);
+        }
       }
     }
   }
@@ -421,6 +435,7 @@ $(document).ready(() => {
   let closest_task = 0;
   let closest_task_day = 0;
 
+  // Function called every 60 seconds that send notifications and updates the next task element as well as the task repeat
   manageTasks = () => {
     closest_task = 0;
     closest_task_day = 0;
