@@ -81,6 +81,33 @@ $(document).ready(() => {
     changeSave("see-completed-tasks", seeCheckedTasks);
   });
 
+  // Managing the settings
+
+  // Adding event listener to settings button
+
+  hideSettings = () => {
+    $('.__settings').css('left', '-150%');
+    $('.__settings-btn').css('transform', 'rotateZ(0deg)');
+  }
+
+  showSettings = () => {
+    $('.__settings').css('left', '0');
+    $('.__settings-btn').css('transform', 'rotateZ(45deg)');
+  }
+
+  toggleSettings = () => {
+    console.log($(".__settings").css('left'));
+    if ($(".__settings").css('left') == '0px') {
+      hideSettings();
+    } else {
+      showSettings();
+    }
+  }
+
+  $(".__settings-btn").on('click', () => {
+    toggleSettings();
+  });
+
   // Handle links
   $(document).on('click', 'a', function(event){
     event.preventDefault();
@@ -235,6 +262,8 @@ $(document).ready(() => {
     hideCalendar();
   });
 
+   // Adding event listeners to next and prev months
+
   $calendar.find(".__prevbutton").on('click', () => {
     curr_month--;
     loadMonth();
@@ -244,8 +273,6 @@ $(document).ready(() => {
     curr_month++;
     loadMonth();
   });
-
-  // Adding event listeners to next and prev months
 
   /* ===Managing the task card=== */
 

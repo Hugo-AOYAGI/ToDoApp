@@ -109,7 +109,7 @@
         padding-bottom: 3px;
         color: white;
         cursor: pointer;
-        transition: all 0.3s;
+        transition: font-size 0.3s, box-shadow 0.3s;
         box-shadow: inset 1px 1px 1px 1px rgba($dark-blue-1, 0.4);
 
         &:hover {
@@ -126,6 +126,75 @@
         transform: rotateZ(180deg);
         box-shadow: inset -1px -1px 1px 1px rgba($dark-blue-1, 0.4);
         background: linear-gradient(145deg, rgba($medium-blue-3, 0.5), rgba($dark-blue-1, 0.5));
+    }
+
+    & .__settings-btn {
+        left: 0.2rem;
+        bottom: 0.2rem;
+        width: 1.5rem;
+        height: 1.5rem;
+        z-index: 100;
+        transform: none;
+        transition: transform 0.5s;
+
+        & img {
+            left: 0;
+            width: 1.5rem;
+            height: 1.5rem;
+
+        }
+    
+    }
+
+    & .__settings {
+        position: absolute;
+        z-index: 50;
+        background: linear-gradient(10deg, $light-blue-1, $lighter-blue-2);
+        left: -150%;
+        width: calc(100% - 1rem);
+        height: calc(100% - 1rem);
+        padding: 0.5rem;
+        display: flex;
+        flex-direction: column;
+        transition: left 1s;
+
+        & .__title {
+            color: white;
+            margin-top: 0;
+            font-size: 1.35em;
+            text-decoration: underline;
+        }
+
+        & .__disclaimer {
+            font-size: 1.15em;
+            color: #303030;
+            padding: 0.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        & .__input {
+            padding: 0.5rem;
+            display: flex;
+            margin-bottom: 1rem;
+
+        }
+
+        & .__bug-report {
+            position: relative;
+            margin-top: 0.5rem;
+
+            & span {
+                font-size: 1.25em;
+            }
+
+            & img {
+                position: absolute;
+                left: 1.5rem;
+                width: 1rem;
+                height: 1rem;
+            }
+        }
     }
 
 }
