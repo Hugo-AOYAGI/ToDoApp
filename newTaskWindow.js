@@ -280,8 +280,11 @@ $(document).ready( () => {
                 }
                 desc = desc.replace(word, new_word);
             } else if (word.startsWith("IMG[")) {
-                path = word.split("[").pop().replace("]", "");
-                desc = desc.replace(word, "<img src='" + path + "' alt='Image could not load !'>")
+                let info = word.split("[").pop().replace("]", "");
+                alert(info);
+                info = info.split(",")
+                alert(info);
+                desc = desc.replace(word, `<img src='${info[0]}' alt='Image could not load !' width='${info[1]}' height='${info[2]}'>`)
             }
                 
                 

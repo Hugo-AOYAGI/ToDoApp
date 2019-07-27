@@ -9,7 +9,6 @@ const shell = electron.shell;
 let settings = {
   'seeImportantOnly': false,
   'seeCompletedTasks': false,
-  'darkModeEnabled': false,
   'notificationsEnabled': true,
   'minimizeWhenClosed': true
 }

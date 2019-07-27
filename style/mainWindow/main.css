@@ -1082,7 +1082,8 @@ body {
   display: -ms-grid;
   display: grid;
   padding: 0px;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
   margin: 0px;
   font-family: "Calibri", serif;
   height: 100vh;
@@ -1137,8 +1138,21 @@ body {
     width: 2.5rem;
     height: 2.5rem;
   }
+  .navigation-bar .__settings .__bug-report {
+    margin-left: 0.7rem;
+  }
+  .navigation-bar .__settings .__bug-report img {
+    left: -0.35rem;
+  }
   .task-page {
     width: 68%;
+  }
+}
+
+@media (max-height: 550px) {
+  .navigation-bar .__nav-button-box {
+    margin-top: 15%;
+    margin-bottom: 15%;
   }
 }
 /*# sourceMappingURL=main.css.map */

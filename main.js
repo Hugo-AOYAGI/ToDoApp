@@ -252,21 +252,28 @@ removeTaskJSON = (task) => {
     id = task.day_id;
     // Find the task to delete and delete it
     index = findTaskIndex(task.info, json_object[id]);
+    let to_delete = [];
     if (index !== false) {
       // Delete all instances of the task if it has a repeat setting
       if (task.info.repeat_setting != 'No Repeat') {
         for (day of Object.keys(json_object)) {
           for (j=0; j<json_object[day].length; j++) {
-            if (json_object[day][j]['repeat_id'] == task.info.repeat_id)
+            if (json_object[day][j]['repeat_id'] == task.info.repeat_id) {
               json_object[day].splice(j, 1);
+              to_delete.push(day);
+            }
           }
         }
+      } else {
+        json_object[id].splice(index, 1);
+        if (json_object[id].length == 0)
+          to_delete.append(id);
       }
-      json_object[id].splice(index, 1);
     }
-    // Check if day is empty, if so, delete it
-    if (json_object[id].length == 0)
-      delete json_object[id];
+    for ( day of to_delete) {
+      if (json_object[day].length == 0)
+        delete json_object[day];
+    }
     // Convert it back to a json file
     json = JSON.stringify(json_object); 
     //Write the file
@@ -287,10 +294,21 @@ editTaskJSON = (day_id, new_info, past_info) => {
     // Convert it to an object
     json_object = JSON.parse(data);
     // Find the task to edit with the info before it was edited
-    index = findTaskIndex(past_info, json_object[day_id]);
-    if (index !== false) {
-      json_object[day_id][i] = new_info;
+    if (past_info['repeat_id'] != false) {
+      new_info['repeat_id'] = past_info['repeat_id'];
+      for (day of Object.keys(json_object)) {
+        let index = findTaskIndex(past_info, json_object[day]);
+        if (index !== false) {
+          json_object[day][i] = new_info;
+        }
+      }
+    } else {
+      let index = findTaskIndex(past_info, json_object[day]);
+      if (index !== false) {
+        json_object[day][i] = new_info;
+      }
     }
+    
     // Convert it back to a json file
     json = JSON.stringify(json_object); 
     //Write the file
