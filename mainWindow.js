@@ -13,6 +13,8 @@ let settings = {
   'minimizeWhenClosed': true
 }
 
+const user_path = path.join(__dirname, '../../user-data/user-data.json');
+
 // Wait for window to load
 $(document).ready(() => { 
 
@@ -23,7 +25,7 @@ $(document).ready(() => {
 
   /* LOAD THE FIRST DAY */
   let day_counter = 0;
-  let current_day = new Day(new Date());
+  let current_day = new Day(new Date(), user_path);
   
   // Interval for updating timers
   let t1 = setInterval(() => {
@@ -34,20 +36,20 @@ $(document).ready(() => {
 
   // Function to change the settings in the save.json
   changeSave = (setting, value) => {
-    fs.readFile('user-data/save.json', 'utf8', (error, data) => {
+    fs.readFile(path.join(__dirname, '../../user-data/save.json'), 'utf8', (error, data) => {
       // Check if there was an error
       if (error)
         return 0;
       json_object = JSON.parse(data);
       json_object[setting] = value;
       json = JSON.stringify(json_object); 
-      fs.writeFile('user-data/save.json', json, current_day.getTasks);
+      fs.writeFile(path.join(__dirname, '../../user-data/save.json'), json, current_day.getTasks);
     });
   }
 
   // Loads all the user settings from user-save.json
   loadSave = () => {
-    fs.readFile('user-data/save.json', 'utf8', (error, data) => {
+    fs.readFile(path.join(__dirname, '../../user-data/save.json'), 'utf8', (error, data) => {
       if (error)
         return 0;
       json_object = JSON.parse(data);
@@ -440,7 +442,7 @@ $(document).ready(() => {
     closest_task_day = 0;
     $.ajax({ 
       type: 'GET',
-      url: "user-data/user-data.json", 
+      url: path.join(__dirname, "../../user-data/user-data.json"), 
       dataType: "json",
       success: (json_data) => {
         // Check task repeat for the current day
@@ -465,10 +467,10 @@ $(document).ready(() => {
   }
 
   let t = setInterval(manageTasks, 60000);
-  manageTasks();
+  setTimeout(manageTasks, 100);
 
   refreshCurrDay = () => {
-    current_day = new Day(new Date(Date.now() + day_counter*one_day));
+    current_day = new Day(new Date(Date.now() + day_counter*one_day), user_path);
     manageTasks();
   }
   refreshCurrDay();

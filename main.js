@@ -5,7 +5,7 @@ const path = require("path");
 const ipc = electron.ipcMain;
 const fs = require("fs");
 // Extracting objects from the electron module
-const {app, BrowserWindow, Tray, Menu} = electron;
+const {app, BrowserWindow, Tray, Menu, nativeImage} = electron;
 
 let mainWindow;
 let newTaskWindow;
@@ -15,6 +15,9 @@ let forceClose = false;
 
 // Gets called when the app is set up
 app.on("ready", () => {
+
+  let icon = nativeImage.createFromPath(path.join(__dirname, 'assets/icons/png/icon.png'));
+
   app.setAppUserModelId(process.execPath);
   // Creating the main window
   mainWindow = new BrowserWindow({
@@ -22,7 +25,7 @@ app.on("ready", () => {
       nodeIntegration: true
     },
     title: "ReMind",
-    icon: path.join(__dirname, "assets/app-icon-dark.png"),
+    icon: icon,
     show: false,
     autoHideMenuBar: true,
     minWidth: 500,
@@ -41,14 +44,14 @@ app.on("ready", () => {
     slashes: true
   }));
 
-  mainWindow.setOverlayIcon(path.join(__dirname, "assets/app-icon-dark.png"), 'To Do App');
+  mainWindow.setOverlayIcon(icon, 'ReMind')
 
   mainWindow.maximize();
 
   // Adding window tray
-  tray = new Tray('assets/app-icon-light.png');
+  tray = new Tray(icon);
   const contextMenu = Menu.buildFromTemplate([
-    { label: 'Remind'},
+    { label: 'ReMind'},
     { type: "separator"},
     { label: 'Open', click() {
       mainWindow.setSkipTaskbar(false);
@@ -69,7 +72,7 @@ app.on("ready", () => {
       newTaskWindow = null;
     }
     // Get the setting
-    fs.readFile('user-data/save.json', 'utf8', (error, data) => {
+    fs.readFile(path.join(__dirname, '../../user-data/save.json'), 'utf8', (error, data) => {
       json_object = JSON.parse(data);
       if (json_object['minimizeWhenClosed'] && !forceClose) {
         mainWindow.minimize();
@@ -178,7 +181,7 @@ findTaskIndex = (task_info, json) => {
 // Change any property of a task in the json file
 changeTaskPropertyJSON = (task, id, prop, new_val) => {
   // Open json
-  fs.readFile('user-data/user-data.json', 'utf8', (error, data) => {
+  fs.readFile(path.join(__dirname, '../../user-data/user-data.json'), 'utf8', (error, data) => {
     // Check if there was an error
     if (error)
       return 0;
@@ -192,7 +195,7 @@ changeTaskPropertyJSON = (task, id, prop, new_val) => {
     // Convert it back to a json file
     json = JSON.stringify(json_object); 
     //Write the file
-    fs.writeFile('user-data/user-data.json', json, 'utf8', () => {
+    fs.writeFile(path.join(__dirname, '../../user-data/user-data.json'), json, 'utf8', () => {
       // Send message to update day tasks 
       mainWindow.webContents.send("update-day", null);
     });
@@ -219,7 +222,7 @@ generateId = (data) => {
 
 // Adds a task in the json file
 addTaskJSON = (day_id, task_info, repeat_id = false) => {
-  fs.readFile('user-data/user-data.json', 'utf8', (error, json_data) => {
+  fs.readFile(path.join(__dirname, '../../user-data/user-data.json'), 'utf8', (error, json_data) => {
     if (error) 
       return 0;
     // Convert data to object
@@ -235,7 +238,7 @@ addTaskJSON = (day_id, task_info, repeat_id = false) => {
     // Convert it back to a json file
     json = JSON.stringify(json_object); 
     //Write the file
-    fs.writeFile('user-data/user-data.json', json, 'utf8', () => {
+    fs.writeFile(path.join(__dirname, '../../user-data/user-data.json'), json, 'utf8', () => {
       // Send message to update day tasks 
       mainWindow.webContents.send("update-day", null);
     });
@@ -245,7 +248,7 @@ addTaskJSON = (day_id, task_info, repeat_id = false) => {
 // Delete a task in the json
 removeTaskJSON = (task) => {
   // Open json
-  fs.readFile('user-data/user-data.json', 'utf8', (error, data) => {
+  fs.readFile(path.join(__dirname, '../../user-data/user-data.json'), 'utf8', (error, data) => {
     // Check if there was an error
     if (error)
       return 0;
@@ -279,7 +282,7 @@ removeTaskJSON = (task) => {
     // Convert it back to a json file
     json = JSON.stringify(json_object); 
     //Write the file
-    fs.writeFile('user-data/user-data.json', json, 'utf8', () => {
+    fs.writeFile(path.join(__dirname, '../../user-data/user-data.json'), json, 'utf8', () => {
       // Send message to update day tasks 
       mainWindow.webContents.send("update-day", null);
     });
@@ -289,7 +292,7 @@ removeTaskJSON = (task) => {
 // Edit a task in the json
 editTaskJSON = (day_id, new_info, past_info) => {
   // Open json
-  fs.readFile('user-data/user-data.json', 'utf8', (error, data) => {
+  fs.readFile(path.join(__dirname, '../../user-data/user-data.json'), 'utf8', (error, data) => {
     // Check if there was an error
     if (error)
       return 0;
@@ -314,7 +317,7 @@ editTaskJSON = (day_id, new_info, past_info) => {
     // Convert it back to a json file
     json = JSON.stringify(json_object); 
     //Write the file
-    fs.writeFile('user-data/user-data.json', json, 'utf8', () => {
+    fs.writeFile(path.join(__dirname, '../../user-data/user-data.json'), json, 'utf8', () => {
       // Send message to update day tasks 
       mainWindow.webContents.send("update-day", null);
     });

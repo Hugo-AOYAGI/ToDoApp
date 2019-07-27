@@ -1,3 +1,4 @@
+// const path = require(path)
 /* UTILITY FUNCTION */
 
 //Fonction that adds a leading zero to time and date values for formatting
@@ -47,11 +48,12 @@ const $day_menu_template = $(".day-menu").clone();
 class Day {
 
   // Creates a day from an existing day, loading its saved tasks
-  constructor (date) {
+  constructor (date, path_) {
     // Defining the object variables
     this.$task_cards = [];
     this.$task_pages = [];
     this.date = date;
+    this.path = path_;
     this.dateString = date.toString().replace(
         `${lz(date.getHours())}:${lz(date.getMinutes())}:${lz(date.getSeconds())}`,
          "[time]");
@@ -68,16 +70,18 @@ class Day {
 
   getTasks = () => {
     // Load the tasks at the date with an ajax request
+    console.log(this, this.path);
     $.ajax({ 
       type: 'GET',
-      url: "user-data/user-data.json", 
+      url: this.path, 
       dataType: "json",
       success: (json_data) => { 
+        console.log("Success ! -> Data => ", json_data);
         this.tasks = Task.fromArray(this, json_data[this.id]);
 
       },
-      error: () => {
-        alert("Your tasks could not be retrieved!");
+      error: (error) => {
+        console.log("Error => ", error);
       },
       complete: () => {
         // Load tasks and schedule once the request is completed

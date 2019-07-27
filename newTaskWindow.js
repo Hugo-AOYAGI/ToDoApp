@@ -289,6 +289,7 @@ $(document).ready( () => {
                 
                 
         }
+        desc = desc.replace(/\n/g, "</br>");
         return desc;
     }
 
