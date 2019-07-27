@@ -21,7 +21,7 @@ app.on("ready", () => {
     webPreferences: {
       nodeIntegration: true
     },
-    title: "Insert Title Here",
+    title: "ReMind",
     icon: path.join(__dirname, "assets/app-icon-dark.png"),
     show: false,
     autoHideMenuBar: true,
@@ -48,6 +48,8 @@ app.on("ready", () => {
   // Adding window tray
   tray = new Tray('assets/app-icon-light.png');
   const contextMenu = Menu.buildFromTemplate([
+    { label: 'Remind'},
+    { type: "separator"},
     { label: 'Open', click() {
       mainWindow.setSkipTaskbar(false);
       mainWindow.maximize();

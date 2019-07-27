@@ -6,7 +6,7 @@
       border-left: 1px solid $lighter-blue-1;
       color: white;
       padding-left: 0.8em;
-  
+      -webkit-app-region: drag;
     }
 
     & .__close-btn {

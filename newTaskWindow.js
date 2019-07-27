@@ -262,8 +262,10 @@ $(document).ready( () => {
 
     formatDesc = (desc) => {
         words = desc.split(" ");
+        escape_urls = words[0] == "escape_urls" ? true : false;
+        if (escape_urls) desc = desc.replace("escape_urls", "");
         for (word of words) {
-            if (isURL(word)) {
+            if (isURL(word) && !escape_urls) {
                 // Adds url support
                 link = word.includes("http") ? word : "http://" + word
                 new_word = "<a href='"+ link +"'>" + word.replace("https://", "").replace("http://", "") + "</a>";
@@ -281,10 +283,8 @@ $(document).ready( () => {
                 desc = desc.replace(word, new_word);
             } else if (word.startsWith("IMG[")) {
                 let info = word.split("[").pop().replace("]", "");
-                alert(info);
-                info = info.split(",")
-                alert(info);
-                desc = desc.replace(word, `<img src='${info[0]}' alt='Image could not load !' width='${info[1]}' height='${info[2]}'>`)
+                info = info.split(",");
+                desc = desc.replace(word, `<img src='${info[0]}' alt='Image could not load !' width='${info[1]}px' height='${info[2]}px'>`)
             }
                 
                 

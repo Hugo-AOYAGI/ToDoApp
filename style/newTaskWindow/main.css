@@ -228,6 +228,7 @@ body .header {
   border-left: 1px solid #B8F5FF;
   color: white;
   padding-left: 0.8em;
+  -webkit-app-region: drag;
 }
 
 .header .__close-btn {
