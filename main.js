@@ -24,7 +24,9 @@ app.on("ready", () => {
     title: "Insert Title Here",
     icon: path.join(__dirname, "assets/app-icon-dark.png"),
     show: false,
-    autoHideMenuBar: true
+    autoHideMenuBar: true,
+    minWidth: 500,
+    minHeight: 500
   });
 
   // Waiting for the window to be ready to be shown

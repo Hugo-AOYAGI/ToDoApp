@@ -10,6 +10,7 @@ body {
   grid-template: "head head head" 1fr
                  "nav  main schedule" 6fr
                  / 1fr 3.5fr 1fr;
+
 }
 
 .header {
@@ -31,5 +32,56 @@ body {
 
 .template {
   display: none;
+}
+
+@media (max-width: 1000px) {
+  body {
+    font-size: 60%;
+  }
+
+  .navigation-bar {
+    & .nav-btn {
+      width: 3.25rem;
+      height: 3.25rem;
+    }
+  }
+
+  .task-page {
+    width: 72%;
+  }
+}
+
+@media (max-width: 800px) {
+  body {
+    font-size: 55%;
+    grid-template: "head head" 1fr
+                 "nav  main" 6fr
+                 / 1.5fr 4fr;
+  }
+
+  .header {
+    
+    & .__mainTitle {
+      font-size: 3em;
+    }
+
+    & .__next-task {
+      display: none;
+    }
+
+  }
+
+  .navigation-bar {
+    & .nav-btn {
+      width: 2.5rem;
+      height: 2.5rem;
+    }
+  }
+
+  .task-page {
+    width: 68%;
+  }
+
+  
 }
 
