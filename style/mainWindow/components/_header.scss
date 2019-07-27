@@ -40,11 +40,17 @@
   }
 
   & .__quit-calendar-btn {
+    display: none;
     color: white;
     font-size: 6em;
     height: 100%;
     right: 2rem;
     top: 0.5rem;
+    transition: transform 0.3s;
+
+    &:hover {
+      transform: rotateZ(-20deg);
+    }
   }
     
 } 

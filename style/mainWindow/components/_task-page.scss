@@ -50,6 +50,11 @@
         color: $dark-grey-1;
         border-radius: 0.3rem;
         background-color: white;
+        transition: background-color 0.3s;
+
+        &:hover {
+            background-color: #ECECEC
+        }
     }
 
     & .__info-box {

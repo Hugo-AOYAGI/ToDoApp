@@ -248,11 +248,21 @@
 }
 
 .header .__quit-calendar-btn {
+  display: none;
   color: white;
   font-size: 6em;
   height: 100%;
   right: 2rem;
   top: 0.5rem;
+  -webkit-transition: -webkit-transform 0.3s;
+  transition: -webkit-transform 0.3s;
+  transition: transform 0.3s;
+  transition: transform 0.3s, -webkit-transform 0.3s;
+}
+
+.header .__quit-calendar-btn:hover {
+  -webkit-transform: rotateZ(-20deg);
+          transform: rotateZ(-20deg);
 }
 
 .navigation-bar {
@@ -447,9 +457,8 @@
   z-index: 50;
   background: linear-gradient(10deg, #A5C3F7, #B5C9FF);
   left: -150%;
-  width: calc(100% - 1rem);
-  height: calc(100% - 1rem);
-  padding: 0.5rem;
+  width: 100%;
+  height: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -457,27 +466,29 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-transition: left 1s;
-  transition: left 1s;
+  -webkit-transition: left 0.5s;
+  transition: left 0.5s;
 }
 
 .navigation-bar .__settings .__title {
   color: white;
-  margin-top: 0;
+  margin: 0.5rem;
   font-size: 1.35em;
   text-decoration: underline;
 }
 
 .navigation-bar .__settings .__disclaimer {
   font-size: 1.15em;
-  color: #303030;
   padding: 0.5rem;
+  border-left: none;
+  border-right: none;
+  color: #707070;
   font-weight: 700;
   margin-bottom: 1.5rem;
 }
 
 .navigation-bar .__settings .__input {
-  padding: 0.5rem;
+  margin: 0.5rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -486,7 +497,7 @@
 
 .navigation-bar .__settings .__bug-report {
   position: relative;
-  margin-top: 0.5rem;
+  margin: 0.5rem;
 }
 
 .navigation-bar .__settings .__bug-report span {
@@ -495,7 +506,7 @@
 
 .navigation-bar .__settings .__bug-report img {
   position: absolute;
-  left: 1.5rem;
+  left: 2rem;
   width: 1rem;
   height: 1rem;
 }
@@ -581,7 +592,8 @@
   bottom: 0.5rem;
   width: 1.5rem;
   height: 1.5rem;
-  font-size: 1.7em;
+  font-size: 1.6em;
+  line-height: 1.6em;
   color: white;
   border: 2px solid white;
   background: linear-gradient(30deg, #4F637A, #284880);
@@ -784,6 +796,12 @@
   color: #707070;
   border-radius: 0.3rem;
   background-color: white;
+  -webkit-transition: background-color 0.3s;
+  transition: background-color 0.3s;
+}
+
+.task-page .__edit-btn:hover {
+  background-color: #ECECEC;
 }
 
 .task-page .__info-box {
@@ -938,6 +956,8 @@
       -ms-flex-pack: center;
           justify-content: center;
   font-size: 2.5em;
+  -webkit-transition: background-color 0.3s;
+  transition: background-color 0.3s;
   cursor: pointer;
 }
 
@@ -960,6 +980,10 @@
 
 .calendar .__main-container .__day .__day-box .__today-mark::after {
   content: "TODAY";
+}
+
+.calendar .__main-container .__day .__day-box:hover {
+  background-color: #ECECEC;
 }
 
 .calendar .__footer {
@@ -993,11 +1017,64 @@
   height: 100%;
   color: #5B9CFF;
   font-size: 2.5em;
+  -webkit-transition: font-size 0.3s;
+  transition: font-size 0.3s;
+}
+
+.calendar .__footer .__btn:hover .__icon {
+  -webkit-animation: jiggle 0.5s;
+          animation: jiggle 0.5s;
 }
 
 .calendar .__footer .__prevbutton {
   -webkit-transform: rotateZ(180deg);
           transform: rotateZ(180deg);
+}
+
+@-webkit-keyframes jiggle {
+  0% {
+    -webkit-transform: rotateZ(-10deg);
+            transform: rotateZ(-10deg);
+  }
+  25% {
+    -webkit-transform: rotateZ(10deg);
+            transform: rotateZ(10deg);
+  }
+  50% {
+    -webkit-transform: rotateZ(0deg);
+            transform: rotateZ(0deg);
+  }
+  75% {
+    -webkit-transform: rotateZ(-10deg);
+            transform: rotateZ(-10deg);
+  }
+  100% {
+    -webkit-transform: rotateZ(0deg);
+            transform: rotateZ(0deg);
+  }
+}
+
+@keyframes jiggle {
+  0% {
+    -webkit-transform: rotateZ(-10deg);
+            transform: rotateZ(-10deg);
+  }
+  25% {
+    -webkit-transform: rotateZ(10deg);
+            transform: rotateZ(10deg);
+  }
+  50% {
+    -webkit-transform: rotateZ(0deg);
+            transform: rotateZ(0deg);
+  }
+  75% {
+    -webkit-transform: rotateZ(-10deg);
+            transform: rotateZ(-10deg);
+  }
+  100% {
+    -webkit-transform: rotateZ(0deg);
+            transform: rotateZ(0deg);
+  }
 }
 
 body {

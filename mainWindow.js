@@ -238,7 +238,7 @@ $(document).ready(() => {
     // Changing header
     $(".__next-task").css('display', 'none');
     $(".header").find(".__mainTitle").html("Calendar");
-    $(".header").find(".__quit-calendar-btn").css("C");
+    $(".header").find(".__quit-calendar-btn").css("display", 'unset');
     // Showing calendar
     $calendar.css('display', 'unset');
     // Loading the days
@@ -253,7 +253,7 @@ $(document).ready(() => {
     // Changing header
     $(".__next-task").css('display', 'flex');
     $(".header").find(".__mainTitle").html("Your Week");
-    $(".header").find(".__mainTitle").html("Your Week");
+    $(".header").find(".__quit-calendar-btn").css("display", 'none');
     // Showing calendar
     $calendar.css('display', 'none');
   }

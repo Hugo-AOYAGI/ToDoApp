@@ -22,7 +22,7 @@ app.on("ready", () => {
       nodeIntegration: true
     },
     title: "Insert Title Here",
-    icon: "assets/app-icon.png",
+    icon: path.join(__dirname, "assets/app-icon-dark.png"),
     show: false,
     autoHideMenuBar: true
   });
@@ -39,12 +39,12 @@ app.on("ready", () => {
     slashes: true
   }));
 
-  mainWindow.setOverlayIcon('assets/app-icon.png', 'To Do App');
+  mainWindow.setOverlayIcon(path.join(__dirname, "assets/app-icon-dark.png"), 'To Do App');
 
   mainWindow.maximize();
 
   // Adding window tray
-  tray = new Tray('assets/app-icon.png');
+  tray = new Tray('assets/app-icon-light.png');
   const contextMenu = Menu.buildFromTemplate([
     { label: 'Open', click() {
       mainWindow.setSkipTaskbar(false);
@@ -67,7 +67,7 @@ app.on("ready", () => {
     // Get the setting
     fs.readFile('user-data/save.json', 'utf8', (error, data) => {
       json_object = JSON.parse(data);
-      if (json_object['minimizeWhenClosed'] || !forceClose) {
+      if (json_object['minimizeWhenClosed'] && !forceClose) {
         mainWindow.minimize();
         mainWindow.blur();
         mainWindow.setSkipTaskbar(true);
