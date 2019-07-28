@@ -223,10 +223,14 @@ generateId = (data) => {
 // Adds a task in the json file
 addTaskJSON = (day_id, task_info, repeat_id = false) => {
   fs.readFile(path.join(__dirname, '../../user-data/user-data.json'), 'utf8', (error, json_data) => {
-    if (error) 
+    if (error || !json_data) {
       return 0;
-    // Convert data to object
-    json_object = JSON.parse(json_data);
+    }
+    try {
+      json_object = JSON.parse(json_data);
+    } catch (error) {
+      return 0;
+    }
     // Create the day in the json if it does not exist
     if (json_object[day_id] == undefined)
       json_object[day_id] = []
@@ -272,7 +276,7 @@ removeTaskJSON = (task) => {
       } else {
         json_object[id].splice(index, 1);
         if (json_object[id].length == 0)
-          to_delete.append(id);
+          to_delete.push(id);
       }
     }
     for ( day of to_delete) {

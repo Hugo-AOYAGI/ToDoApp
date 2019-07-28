@@ -153,6 +153,10 @@ $(document).ready(() => {
                     task_start.substring(0,2), task_start.substring(3,5));
   }
 
+  getDateFromId = (day_id) => {
+    return new Date(day_id.substring(4,8), day_id.substring(2,4) - 1, day_id.substring(0,2));
+  }
+
   let next_task_div = $(".__next-task");
 
   // Updates the next task element in the header
@@ -365,16 +369,53 @@ $(document).ready(() => {
     return `${lz(date.getDate())}${lz(date.getMonth() + 1)}${lz(date.getFullYear())}`;
   }
 
-  repeat_setting = ['Daily', 'Weekly', 'Monthly', 'Yearly']
-  repeat_settings_vals = [[0, 0, -1], [0, 0, -7], [0, -1, 0], [-1, 0, 0]];
+  repeat_setting = ['Daily', 'Weekly', 'Monthly', 'Yearly'];
   
   // Manage the task Repeat feature
-  checkTaskRepeat = (day, json_data) => {
-    let id;
-    let days = parseInt(day.substring(0,2));
-    let months = parseInt(day.substring(2,4)) - 1;
-    let years = parseInt(day.substring(4,8));
-    // Daily repeat
+  checkTaskRepeat = (day_to_check, json_data) => {
+    // Loop through all the days
+    for (day of Object.keys(json_data)) {
+      // Check if the day is bigger than the day we want to check, if so, don't go further
+      if (!compareDateIDs(day, day_to_check)) {
+        for (task of json_data[day]) {
+          // Check if the task is repeatable
+          if (task['repeat_id']) {
+            let already_exists = false;
+            // Check if the task already exists in the day to check
+            if (json_data[day_to_check]) {
+              for (task_day_to_check of json_data[day_to_check]) {
+                if (task['repeat_id'] == task_day_to_check['repeat_id']) {
+                  already_exists = true;
+                  break;
+                }
+              }
+            }
+            if (!already_exists) {
+              let toCopy = false;
+              let date = getDateFromId(day);
+              let date_to_check = getDateFromId(day_to_check);
+              switch(task['repeat_setting']) {
+                case 'Daily':
+                  toCopy = true;
+                  break;
+                case 'Weekly':
+                  if ((date - date_to_check)%(7*one_day) == 0) toCopy = true;
+                  break; 
+                case 'Monthly':
+                  if (date.getDay() == date_to_check.getDay()) toCopy = true;
+                  break;
+                case 'Yearly':
+                  if (date.getDay() == date_to_check.getDay() && date.getMonth() == date_to_check.getMonth()) toCopy = true;
+                  break;
+              }
+              if (toCopy) ipcRenderer.send('new-task-window-reply', {'action': 'new_task', 'day_id': day_to_check, 'task_info': task, 'repeat_id': task['repeat_id']})
+            }
+          }
+        }
+      }
+    }
+
+    /*
     for (setting of repeat_settings_vals) {
       id = getDateId(new Date(years + setting[0], months + setting[1], days + setting[2]));
       let day_before = json_data[id];
@@ -395,6 +436,7 @@ $(document).ready(() => {
         }
       }
     }
+    */
   }
 
   notifsettings = {"10 minutes before": 600000, "30 minutes before": 1800000, "One hour before": 3600000, "One day before": 86400000};
@@ -468,6 +510,7 @@ $(document).ready(() => {
 
   let t = setInterval(manageTasks, 60000);
   setTimeout(manageTasks, 100);
+  let cooldown = 0;
 
   refreshCurrDay = () => {
     current_day = new Day(new Date(Date.now() + day_counter*one_day), user_path);
@@ -480,12 +523,23 @@ $(document).ready(() => {
   /* ===Adding footer events listeners=== */
 
   $(".__next-day").on("click", () => {
-    day_counter += 1;
-    refreshCurrDay();
+    if (cooldown == 0) {
+      cooldown = 1;
+      day_counter += 1;
+      refreshCurrDay();
+      setTimeout(() => {
+        cooldown = 0;
+      }, 400);
+    }
   });
   $(".__prev-day").on("click", () => {
-    day_counter -= 1;
-    refreshCurrDay();
+    if (cooldown == 0) {
+      cooldown = 1;
+      day_counter -= 1;
+      refreshCurrDay();
+      setTimeout(() => {
+        cooldown = 0;
+      }, 400);
+    }
   });
-
 });

@@ -8,8 +8,3 @@ Feel free to use it or change it however you want to.
 Please note that any feedback is appreciated, I'm still learning programming   
 and I'd love to know what I could improve on in my code or even on my git hub repo.
 
-Bugs to fix:   
-
-- Prevent changing days if there is a process running  
-- Fix the task repeat  
-

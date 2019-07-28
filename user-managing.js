@@ -70,18 +70,15 @@ class Day {
 
   getTasks = () => {
     // Load the tasks at the date with an ajax request
-    console.log(this, this.path);
     $.ajax({ 
       type: 'GET',
       url: this.path, 
       dataType: "json",
       success: (json_data) => { 
-        console.log("Success ! -> Data => ", json_data);
         this.tasks = Task.fromArray(this, json_data[this.id]);
 
       },
       error: (error) => {
-        console.log("Error => ", error);
       },
       complete: () => {
         // Load tasks and schedule once the request is completed
