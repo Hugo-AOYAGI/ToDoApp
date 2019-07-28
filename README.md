@@ -8,3 +8,5 @@ Feel free to use it or change it however you want to.
 Please note that any feedback is appreciated, I'm still learning programming   
 and I'd love to know what I could improve on in my code or even on my git hub repo.
 
+You'll need to go into the release build to get the actual .exe with all the files that go with it.
+
