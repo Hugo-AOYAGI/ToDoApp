@@ -302,19 +302,20 @@ editTaskJSON = (day_id, new_info, past_info) => {
       return 0;
     // Convert it to an object
     json_object = JSON.parse(data);
+    let index;
     // Find the task to edit with the info before it was edited
     if (past_info['repeat_id'] != false) {
       new_info['repeat_id'] = past_info['repeat_id'];
       for (day of Object.keys(json_object)) {
-        let index = findTaskIndex(past_info, json_object[day]);
+        index = findTaskIndex(past_info, json_object[day]);
         if (index !== false) {
-          json_object[day][i] = new_info;
+          json_object[day][index] = new_info;
         }
       }
     } else {
-      let index = findTaskIndex(past_info, json_object[day]);
+      index = findTaskIndex(past_info, json_object[day_id]);
       if (index !== false) {
-        json_object[day][i] = new_info;
+        json_object[day_id][index] = new_info;
       }
     }
     

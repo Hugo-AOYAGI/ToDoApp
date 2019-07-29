@@ -28,9 +28,10 @@ $(document).ready( () => {
             $(".__title").val(info.title);
             $(".__desc").val(info.desc);
             $(".__start-time").html(info.start);
-            $(".__end-time").html(info.end)
+            $(".__end-time").html(info.end);
             $(".__repeat").val(info.repeat_setting);
             $(".__notification").val(info.notify_setting);
+            if (info.important) $(".__checkbox").addClass("checked");
         }
     });
 
