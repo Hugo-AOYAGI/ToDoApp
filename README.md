@@ -10,3 +10,12 @@ and I'd love to know what I could improve on in my code or even on my git hub re
 
 You'll need to go into the release build to get the actual .exe with all the files that go with it.
 
+Here are a few images of the app :  
+  
+![Task Cards](https://raw.githubusercontent.com/Hugo-AOYAGI/ToDoApp/master/assets/readme-img-1.png)  
+  
+![Task Page](https://raw.githubusercontent.com/Hugo-AOYAGI/ToDoApp/master/assets/readme-img-2.png)  
+  
+![Calendar](https://raw.githubusercontent.com/Hugo-AOYAGI/ToDoApp/master/assets/readme-img-3.png)  
+
+
