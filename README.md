@@ -12,10 +12,10 @@ You'll need to go into the release build to get the actual .exe with all the fil
 
 Here are a few images of the app :  
   
-![Task Cards](https://raw.githubusercontent.com/Hugo-AOYAGI/ToDoApp/master/assets/readme-img-1.png)  
+![Task Cards](https://raw.githubusercontent.com/Hugo-AOYAGI/ToDoApp/master/assets/readme-img-1.PNG)  
   
-![Task Page](https://raw.githubusercontent.com/Hugo-AOYAGI/ToDoApp/master/assets/readme-img-2.png)  
+![Task Page](https://raw.githubusercontent.com/Hugo-AOYAGI/ToDoApp/master/assets/readme-img-2.PNG)  
   
-![Calendar](https://raw.githubusercontent.com/Hugo-AOYAGI/ToDoApp/master/assets/readme-img-3.png)  
+![Calendar](https://raw.githubusercontent.com/Hugo-AOYAGI/ToDoApp/master/assets/readme-img-3.PNG)  
 
 
